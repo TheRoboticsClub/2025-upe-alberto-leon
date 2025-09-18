@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog de Prácticas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #0f171f;
+        }
+        h1 {
+            text-align: center;
+            color: whitesmoke;
+        }
+        h2 {
+            text-align: center;
+            color: whitesmoke;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+        }
+        .header-container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .entry {
+            display: none;
+            background-color: #0f171f;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #0077cc;
+            color: white;
+        }
+        .date {
+            font-weight: bold;
+            color: #bbb;
+        }
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #0077cc;
+            color: white;
+            border-radius: 5px;
+        }
+        .screenshot {
+            display: block;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header-container">
+        <img src="media/logo.png" alt="Logo de JdeRobot">
+        <h1>Blog de Prácticas</h1>
+        <img src="media/perfil.png" alt="Foto de Perfil">
+    </div>
+
+    <h2>Alberto León Luengo - Prácticas JdeRobot</h2>
+    
+    <div class="buttons">
+        <button onclick="showEntry(1)">SEMANA 01</button>
+        <button onclick="showEntry(2)">SEMANA 02</button>
+        <button onclick="showEntry(3)">SEMANA 03</button>
+        <button onclick="showEntry(4)">SEMANA 04</button>
+        <button onclick="showEntry(5)">SEMANA 05</button>
+        <button onclick="showEntry(6)">SEMANA 06</button>
+        <button onclick="showEntry(7)">SEMANA 07</button>
+        <button onclick="showEntry(8)">SEMANA 08</button>
+        <button onclick="showEntry(9)">SEMANA 09</button>
+        <button onclick="showEntry(10)">SEMANA 10</button>
+        <button onclick="showEntry(11)">SEMANA 11</button>
+        <button onclick="showEntry(12)">SEMANA 12</button>
+        <button onclick="showEntry(13)">SEMANA 13</button>
+        <button onclick="showEntry(14)">SEMANA 14</button>
+        <button onclick="showEntry(15)">SEMANA 15</button>
+        <button onclick="showEntry(16)">SEMANA 16</button>
+        <button onclick="showEntry(17)">SEMANA 17</button>
+        <button onclick="showEntry(18)">SEMANA 18</button>
+        <button onclick="showEntry(19)">SEMANA 19</button>
+        <button onclick="showEntry(20)">SEMANA 20</button>
+    </div>
+    
+    <div id="entry-1" class="entry">
+        <p class="date">SEMANA 01: 22-09-2025 al 26-09-2025</p>
+        <p>SEMANA 01: PÁGINA EN DESARROLLO</p>
+    </div>
+    
+    <div id="entry-2" class="entry">
+        <p class="date">SEMANA 02: 29-09-2025 al 03-10-2025</p>
+        <p>SEMANA 02: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-3" class="entry">
+        <p class="date">SEMANA 03: 06-10-2025 al 10-10-2025</p>
+        <p>SEMANA 03: PÁGINA EN DESARROLLO</p>
+    </div>
+    
+    <div id="entry-4" class="entry">
+        <p class="date">SEMANA 04: 13-10-2025 al 17-10-2025</p>
+        <p>SEMANA 04: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-5" class="entry">
+        <p class="date">SEMANA 05: 20-10-2025 al 24-10-2025</p>
+        <p>SEMANA 05: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-6" class="entry">
+        <p class="date">SEMANA 06: 27-10-2025 al 31-10-2025</p>
+        <p>SEMANA 06: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-7" class="entry">
+        <p class="date">SEMANA 07: 03-11-2025 al 07-11-2025</p>
+        <p>SEMANA 07: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-8" class="entry">
+        <p class="date">SEMANA 08: 10-11-2025 al 14-11-2025</p>
+        <p>SEMANA 08: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-9" class="entry">
+        <p class="date">SEMANA 09: 17-11-2025 al 21-11-2025</p>
+        <p>SEMANA 09: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-10" class="entry">
+        <p class="date">SEMANA 10: 24-11-2025 al 28-11-2025</p>
+        <p>SEMANA 10: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-11" class="entry">
+        <p class="date">SEMANA 11: 01-12-2025 al 05-12-2025</p>
+        <p>SEMANA 11: PÁGINA EN DESARROLLO</p>
+    </div>
+    
+    <div id="entry-12" class="entry">
+        <p class="date">SEMANA 12: 08-12-2025 al 12-12-2025</p>
+        <p>SEMANA 12: PÁGINA EN DESARROLLO</p>
+    </div>
+    
+    <div id="entry-13" class="entry">
+        <p class="date">SEMANA 13: 15-12-2025 al 19-12-2025</p>
+        <p>SEMANA 13: PÁGINA EN DESARROLLO</p>
+    </div>
+    
+    <div id="entry-14" class="entry">
+        <p class="date">SEMANA 14: 22-12-2025 al 26-12-2025</p>
+        <p>SEMANA 14: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-15" class="entry">
+        <p class="date">SEMANA 15: 29-12-2025 al 02-01-2026</p>
+        <p>SEMANA 15: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-16" class="entry">
+        <p class="date">SEMANA 16: 05-01-2026 al 09-01-2026</p>
+        <p>SEMANA 16: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-17" class="entry">
+        <p class="date">SEMANA 17: 12-01-2026 al 16-01-2026</p>
+        <p>SEMANA 17: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-18" class="entry">
+        <p class="date">SEMANA 18: 19-01-2026 al 23-01-2026</p>
+        <p>SEMANA 18: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-19" class="entry">
+        <p class="date">SEMANA 19: 26-01-2026 al 30-01-2026</p>
+        <p>SEMANA 19: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <div id="entry-20" class="entry">
+        <p class="date">SEMANA 20: 02-02-2026 al 06-02-2026</p>
+        <p>SEMANA 20: PÁGINA EN DESARROLLO</p>
+    </div>
+
+    <script>
+        function showEntry(week) {
+            let entries = document.querySelectorAll('.entry');
+            entries.forEach(entry => entry.style.display = 'none');
+            document.getElementById('entry-' + week).style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
