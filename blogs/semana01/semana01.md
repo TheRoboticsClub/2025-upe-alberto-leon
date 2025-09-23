@@ -291,3 +291,334 @@ Este método consiste en saber si se ha trabajado hasta ahora en su configuraci�
 Esto importará el directorio local dentro del contenedor de Docker. Si se ha utilizado el comando de ejemplo como el anterior, donde la ubicación donde se ejecuta el comando está montada en la carpeta de inicio dentro del contenedor de Docker, simplemente podrá ver todos los directorios locales montados dentro del `/home` del Robotics Backend.
 
 Para asegurar que el directorio local se haya montado correctamente en la ubicación correcta dentro del Robotics Backend, accede a `http://localhost:1108/vnc.html` después de iniciar un ejercicio (esto implica hacer clic en el botón de inicio de cualquier ejercicio), lo que abrirá una instancia de consola vnc donde se puede verificar la integridad del montaje.
+
+# 3. Guía REAL de instalación de Docker en Ubuntu 24.04
+
+Se abre una terminal por defecto (desde el directorio HOME):
+
+`cd Escritorio/`
+
+`git clone --recurse-submodules https://github.com/JdeRobot/RoboticsAcademy.git`
+
+`cd RoboticsAcademy/`
+
+`./scripts/develop_academy.sh`
+
+Al ejecutar este comando, aparece el siguiente error:
+
+```sh
+...
+./scripts/develop_academy.sh: linea 146: yarn: orden no encontrada
+./scripts/develop_academy.sh: linea 147: yarn: orden no encontrada
+./scripts/develop_academy.sh: linea 166: docker: orden no encontrada
+Cleaning up...
+./scripts/develop_academy.sh: linea 28: docker: orden no encontrada
+```
+
+Una vez visto el error, se siguen ejecutando comandos:
+
+```sh
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+`sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
+
+`sudo systemctl status docker`
+
+`sudo apt install docker-compose`
+
+`docker --version`
+
+`sudo groupadd docker`
+
+`sudo usermod -aG docker $USER`
+
+`newgrp docker`
+
+`sudo ./scripts/develop_academy.sh`
+
+Cuando haya terminado el proceso de instalación, el Docker se queda ejecutando. Para ello, se detiene la ejecución con Ctrl+C para poder seguir con el proceso.
+
+Una vez ejecutados todos estos comandos, hay que entrar en VSCode desde el directorio de RoboticsAcademy e instalar las siguientes extensiones:
+
+IMAGEN DE LA EXTENSIÓN CONTAINER TOOLS
+
+IMAGEN DE LA EXTENSIÓN PROJECT MANAGER
+
+Una vez hecho todo esto, lo más conveniente es reiniciar el ordenador para que todos los cambios queden guardados correctamente. Esto se hace también con el objetivo de que todos los contenedores se carguen correctamente dentro de VSCode.
+
+Ya reiniciado el ordenador, conviene asegurarse de que las imágenes de los contenedores (tanto de robotics-academy como de robotics-database) aparecen dentro del desplegable IMAGES al entrar en la opción Containers.
+
+`cd Escritorio/RoboticsAcademy/`
+
+`code .`
+
+IMAGEN MENÚ DESPLEGABLE CONTAINERS
+
+Y por último, se entra en la opción Project Manager y se hace clic en el directorio RoboticsAcademy. Una vez dentro del directorio, se sigue el siguiente bucle de trabajo:
+
+IMAGEN MENÚ DESPLEGABLE PROJECT MANAGER
+
+PASO 1: Hacer los cambios necesarios en RoboticsInfrastructure.
+
+PASO 2: Subir dichos cambios a una nueva rama (Publish Branch).
+
+PASO 3: Acceder al directorio RADI dentro del directorio scripts.
+
+`cd scripts/RADI/`
+
+PASO 4: Ejecutar el script build.sh dentro de la nueva rama.
+
+`./build.sh -i <branch_name>`
+
+PASO 5: Volver al directorio scripts.
+
+`cd ..`
+
+PASO 6: Cambiar la siguiente línea del fichero compose_cfg/dev_humble_cpu.yaml
+
+```sh
+# ANTES
+image: jderobot/robotics-academy:latest
+
+# DESPUÉS
+image: jderobot/robotics-academy:test
+```
+
+PASO 7: Ejecutar el script de instalación para lanzar el docker con todos los cambios realizados.
+
+`./scripts/develop_academy.sh`
+
+PASO 8: Acceder a la dirección web `http://0.0.0.0:7164/` que aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics en local y verificar que los cambios se han realizado correctamente.
+
+NOTA: En caso de que los cambios se hayan realizado únicamente en el fichero database/universes.sql, sólo sería necesario realizar el último paso (PASO 8).
+
+# 4. Modificaciones a llevar a cabo para migrar de Gazebo 11 a Gazebo Harmonic
+
+Todos los ficheros que se van a ir enumerando a continuación se encuentran en el directorio de GitHub RoboticsInfrastructure dentro del directorio de GitHub RoboticsAcademy (todos ellos dentro de la rama humble-devel):
+
+RoboticsAcademy: https://github.com/JdeRobot/RoboticsAcademy
+
+RoboticsInfrastructure: https://github.com/JdeRobot/RoboticsInfrastructure/tree/humble-devel
+
+A continuación se van a ir enumerando cada uno de los ficheros que habría que modificar para llevar a cabo esta tarea de migración de Gazebo 11 a Gazebo Harmonic, así como los cambios a realizar en cada uno de ellos:
+
+* FICHERO RoboticsInfrastructure/Launchers/<exercise_name>/spawn_robot.launch.py
+
+```sh
+# CAMBIAR EL NOMBRE DEL ROBOT
+model_folder = "<robot_name>"
+```
+
+```sh
+# CAMBIAR EL NOMBRE DEL FICHERO .YAML
+bridge_params = os.path.join(
+    get_package_share_directory("custom_robots"), "params", "<robot_params.yaml>"
+)
+```
+
+```sh
+# AÑADIR / ELIMINAR LAS SIGUIENTES LÍNEAS SI EL ROBOT TIENE / NO TIENE CÁMARA
+start_gazebo_ros_image_bridge_cmd = Node(
+    package="ros_gz_image",
+    executable="image_bridge",
+    arguments=["/<robot_name>/camera/image_raw"],
+    output="screen",
+)
+
+start_gazebo_ros_depth_bridge_cmd = Node(
+    package="ros_gz_image",
+    executable="image_bridge",
+    arguments=["/<robot_name>/camera/depth"],
+    output="screen",
+)
+
+ld.add_action(start_gazebo_ros_image_bridge_cmd)
+ld.add_action(start_gazebo_ros_depth_bridge_cmd)
+```
+
+* FICHERO CMakeLists.txt
+
+```sh
+# AÑADIR LOS DIRECTORIOS CORRESPONDIENTES A LAS NUEVAS MIGRACIONES
+install(
+  DIRECTORY
+    <exercise_name>/models
+    <robot_name>/models
+    <robot_name>/urdf
+    <robot_name>/params
+  DESTINATION share/${PROJECT_NAME})
+```
+
+* FICHERO RoboticsInfrastructure/Launchers/<exercise_name>.launch.py
+
+```sh
+# CAMBIAR RUTAS Y NOMBRES DE LOS FICHEROS CARGADOS
+robot_launch_dir = "/opt/jderobot/Launchers/<exercise_name>"
+robot_model_dir = os.path.join(package_dir, "models/<robot_name>")
+world_file_name = "<exercise_name>.world"
+```
+
+* FICHERO RoboticsInfrastructure/Worlds/<exercise_name>.world
+
+```sh
+# MODIFICAR TODOS LOS APARTADOS CON EL FLAG INCLUDE
+
+# GAZEBO 11
+<include>
+  <uri>model://house_int2</uri>
+  <pose>0 0 0 0 0 0</pose>
+</include>
+
+# GAZEBO HARMONIC
+<include>
+  <name>house_int2</name>
+  <uri>model://Lake house_int2</uri>
+  <pose>0 0 0 0 0 0</pose>
+</include>
+```
+
+* FICHERO RoboticsInfrastructure/CustomRobots/<robot_name>/models/<robot_name>/model.sdf
+
+```sh
+# MODIFICAR TODOS LOS APARTADOS CON EL FLAG SENSOR Y EL FLAG PLUGIN
+
+# GAZEBO 11
+<sensor name='laser' type='ray'>
+  <ray>
+    <scan>
+      <horizontal>
+        <samples>180</samples>
+        <resolution>1.000000</resolution>
+        <min_angle>-1.570000</min_angle>
+        <max_angle>1.570000</max_angle>
+      </horizontal>
+    </scan>
+    <range>
+      <min>0.080000</min>
+      <max>10.000000</max>
+      <resolution>0.010000</resolution>
+    </range>
+  </ray>
+  <update_rate>20.000000</update_rate>
+  <always_on>1</always_on>
+  <visualize>1</visualize>
+  <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so">
+    <ros>
+      <remapping>~/out:=/roombaROS/laser/scan</remapping>
+    </ros>
+    <output_type>sensor_msgs/LaserScan</output_type>
+    <frameName>laser</frameName>
+    <update_rate>20.000000</update_rate>
+  </plugin>
+</sensor>
+
+# GAZEBO HARMONIC
+<sensor name="hls_lfcd_lds" type="gpu_lidar">
+  <always_on>true</always_on>
+  <visualize>true</visualize>
+  <pose>-0.064 0 0.121 0 0 0</pose>
+  <update_rate>5</update_rate>
+  <topic>turtlebot3/laser/scan</topic>
+  <gz_frame_id>base_scan</gz_frame_id>
+  <lidar>
+    <scan>
+      <horizontal>
+        <samples>360</samples>
+        <resolution>1.000000</resolution>
+        <min_angle>0.000000</min_angle>
+        <max_angle>6.280000</max_angle>
+      </horizontal>
+    </scan>
+    <range>
+      <min>0.20000</min>
+      <max>3.5</max>
+            <resolution>0.015000</resolution>
+          </range>
+        </lidar>
+      </sensor>
+
+<plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
+  <odom_frame>odom</odom_frame>
+  <robot_base_frame>base_footprint</robot_base_frame>
+  <odom_publish_frequency>50</odom_publish_frequency>
+  <odom_topic>turtlebot3/odom</odom_topic>
+  <dimensions>3</dimensions>
+</plugin>
+```
+
+* FICHERO RoboticsInfrastructure/CustomRobots/<robot_name>/params/robot_params.yaml
+
+```sh
+# AÑADIR LOS TOPICS DE TODOS LOS SENSORES QUE COMPONEN EL ROBOT
+
+# gz topic published by DiffDrive plugin
+- ros_topic_name: "turtlebot3/odom"
+  gz_topic_name: "turtlebot3/odom"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+
+# gz topic subscribed to by DiffDrive plugin
+- ros_topic_name: "turtlebot3/cmd_vel"
+  gz_topic_name: "turtlebot3/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+
+# gz topic published by Sensors plugin (LIDAR)
+- ros_topic_name: "turtlebot3/laser/scan"
+  gz_topic_name: "turtlebot3/laser/scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+# gz topic published by Sensors plugin (Camera)
+- ros_topic_name: "turtlebot3/camera/camera_info"
+  gz_topic_name: "turtlebot3/camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+```
+
+* FICHERO RoboticsInfrastructure/database/universes.sql
+
+```sh
+# MODIFICAR LOS PARÁMETROS DE LOS MUNDOS
+
+# MUNDO NO MIGRADO (ANTES)
+25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	None	ROS2	gazebo	{1,-1.5,0.6,0,0,0}
+
+# MUNDO MIGRADO (DESPUÉS)
+25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/marker_visual_loc.config"}	ROS2	gz	{1,-1.5,0.6,0,0,0}
+```
+
+# 5. Lanzamiento del RoboticsBackend en local
+
+PASO 1: Para lanzar el RoboticsBackend y poder trabajar en Unibotics en local, se debe ejecutar el siguiente comando en la terminal:
+
+`docker run --rm -it --device /dev/dri -p 6080:6080 -p 1108:1108 -p 7163:7163 jderobot/robotics-backend:latest`
+
+PASO 2: Se deja ejecutando este comando en la terminal y se accede a la página web de Unibotics (https://unibotics.org/).
+
+PASO 3: Una vez dentro de Unibotics, se selecciona el ejercicio en el que se quiera trabajar.
+
+IMPORTANTE: Para que todo funcione correctamente, debe estar seleccionada la opción 'Local ROS2 (RoboticsBackend 4)', que aparece en la esquina superior derecha al hacer clic en el icono del nombre.
+
+IMAGEN OPCIÓN ROBOTICSBACKEND LOCAL
+
+PASO 4: Verificar que, tanto la simulación en Gazebo como la terminal han cargado correctamente.
+
+IMAGEN UNIBOTICS LOCAL
