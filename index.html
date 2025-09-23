@@ -17,21 +17,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #0f171f;
+            background-color: #000000;
         }
-        h1 {
+        h1, h2, h3 {
             text-align: center;
-            color: whitesmoke;
-        }
-        h2 {
-            text-align: center;
-            color: whitesmoke;
+            color: white;
         }
         p {
-            color: whitesmoke;
+            color: white;
+        }
+        pre {
+            background-color: #1e2a35;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        code {
+            color: #ff0000;
+            font-family: monospace;
         }
         .header-container {
             display: flex;
@@ -47,15 +54,15 @@
         }
         .entry {
             display: none;
-            background-color: #0f171f;
+            background-color: #000000;
             padding: 15px;
             margin: 10px 0;
-            border-left: 5px solid #0077cc;
+            border-left: 5px solid #ff0000;
             color: white;
         }
         .date {
             font-weight: bold;
-            color: #bbb;
+            color: white;
         }
         .buttons {
             text-align: center;
@@ -66,7 +73,7 @@
             margin: 5px;
             cursor: pointer;
             border: none;
-            background-color: #0077cc;
+            background-color: #ff0000;
             color: white;
             border-radius: 5px;
         }
@@ -84,12 +91,9 @@
     <!-- Encabezado -->
     <div class="header-container">
         <img src="cover/logo.png" alt="Logo de JdeRobot">
-        <h1>Blog de Prácticas JdeRobot</h1>
+        <h1>BLOG DE PRÁCTICAS EXTERNAS JDEROBOT<br>ALBERTO LEÓN LUENGO</h1>
         <img src="cover/profile_picture.png" alt="Foto de Perfil">
     </div>
-
-    <!-- Subtítulo -->
-    <h2>Alberto León Luengo</h2>
 
     <!-- Párrafo 1 -->
     <p>
@@ -144,9 +148,223 @@
     <!-- Entrada de blog (semana 01) -->
     <div id="entry-1" class="entry">
         <p class="date">SEMANA 01: 22-09-2025 al 26-09-2025</p>
+
+        <h2>
+            Guía de instalación de Docker en Ubuntu 24.04
+        </h2>
+
+        <p>
+            En primer lugar, comenzamos abriendo una terminal por defecto 
+            en el directorio HOME, a través de la cual iremos ejecutando
+            los siguientes pasos:
+        </p>
+
+        <p><strong>
+            PASO 1: Entrar en el escritorio
+        </p></strong>
+        <p>
+            Este comando cambia el directorio actual al Escritorio, directorio
+            en el que se irán guardando todos los proyectos que se vayan haciendo.
+        </p>
+        <pre><code>cd Escritorio/</code></pre>
+
+        <p><strong>
+            PASO 2: Clonación del repositorio de RoboticsAcademy
+        </p></strong>
+        <p>
+            Este comando descarga el repositorio de RoboticsAcademy y sus submódulos,
+            asegurando que todo el código se encuentre disponible en local.
+        </p>
+        <pre><code>git clone --recurse-submodules https://github.com/JdeRobot/RoboticsAcademy.git</code></pre>
+
+        <p><strong>
+            PASO 3: Acceso al repositorio de RoboticsAcademy
+        </p></strong>
+        <pre><code>cd RoboticsAcademy/</code></pre>
+
+        <p><strong>
+            PASO 4: Ejecución del script de preparación
+        </p></strong>
+        <p>
+            Este script intenta configurar el entorno de desarrollo. Sin embargo, al
+            ejecutar este script por primera vez, aparecen varios errores ya que faltan
+            dependencias por instalar (en este caso, yarn y docker).
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+        <pre><code>./scripts/develop_academy.sh: linea 146: yarn: orden no encontrada<br>./scripts/develop_academy.sh: linea 147: yarn: orden no encontrada<br>./scripts/develop_academy.sh: linea 166: docker: orden no encontrada<br>Cleaning up...<br>./scripts/develop_academy.sh: linea 28: docker: orden no encontrada</code></pre>
+    
+        <p><strong>
+            PASO 5: Ejecución de comandos de configuración
+        </p></strong>
+        <p>
+            Todos los comandos que se van a ir ejecutando a continuación se encargan de 
+            actualizar los repositorios de APT, instalar herramientas necesarias (certificados
+            y curl), crear el directorio para las claves de Docker, descargar la clave GPG de 
+            Docker, dar permisos de lectura a dicha clave, añadir el repositorio de Docker a 
+            APT y volver a actualizar la lista de paquetes.
+        </p>
+        <pre><code># Add Docker's official GPG key:<br>sudo apt-get update<br>sudo apt-get install ca-certificates curl<br>sudo install -m 0755 -d /etc/apt/keyrings<br>sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc<br>sudo chmod a+r /etc/apt/keyrings/docker.asc<br><br># Add the repository to Apt sources:<br>echo \<br>  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \<br>  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \<br>  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null<br>sudo apt-get update</code></pre>
+
+        <p><strong>
+            PASO 6: Instalación de Docker y sus componentes
+        </p></strong>
+        <pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
+
+        <p><strong>
+            PASO 7: Comprobación de la activación del Docker
+        </p></strong>
+        <pre><code>sudo systemctl status docker</code></pre>
+
+        <p><strong>
+            PASO 8: Instalación de Docker Compose
+        </p></strong>
+        <pre><code>sudo apt install docker-compose</code></pre>
+
+        <p><strong>
+            PASO 9: Verificación de la versión instalada
+        </p></strong>
+        <pre><code>docker --version</code></pre>
+
+        <p><strong>
+            PASO 10: Creación del grupo de usuarios de Docker
+        </p></strong>
+        <pre><code>sudo groupadd docker</code></pre>
+
+        <p><strong>
+            PASO 11: Adición del usuario actual en el grupo Docker
+        </p></strong>
+        <pre><code>sudo usermod -aG docker $USER</code></pre>
+
+        <p><strong>
+            PASO 12: Cambio de grupo
+        </p></strong>
+        <pre><code>newgrp docker</code></pre>
+
+        <p><strong>
+            PASO 13: Reejecución del script de preparación
+        </p></strong>
+        <p>
+            Al ejecutar el comando con sudo, todo se ejecuta correctamente.
+        </p>
+        <pre><code>sudo ./scripts/develop_academy.sh</code></pre>
+
+        <h2>
+            Configuración y uso del Docker en Visual Studio Code
+        </h2>
+
+        <p><strong>
+            PASO 1: Abrir RoboticsAcademy en Visual Studio Code
+        </p></strong>
+        <pre><code>cd Escritorio/RoboticsAcademy/</code></pre>
+        <pre><code>code .</code></pre>
+
+        <p><strong>
+            PASO 2: Instalar extensiones del Docker
+        </p></strong>
+        <p>
+            Tras instalar ambas extensiones, reinicia el equipo para que Docker
+            y Visual Studio Code se integren correctamente.
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana01/containertools_extension.png" alt="Container Tools Extension" class="screenshot">
+        </div>
+        <div style="place-items: center">
+            <img src="images/semana01/projectmanager_extension.png" alt="Project Manager Extension" class="screenshot">
+        </div>
+    
+        <p><strong>
+            PASO 3: Bucle de trabajo a seguir en Visual Studio Code
+        </p></strong>
+        <p>
+            - Hacer los cambios necesarios dentro de RoboticsInfrastructure.<br>
+            - Hacer commit y push de dichos cambios en una nueva rama (Publish Branch).<br>
+            - Acceder al directorio RADI/ dentro del directorio scripts/.
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <p>
+            - Ejecutar el script build.sh dentro de la nueva rama.
+        </p>
+        <pre><code>./build.sh -i "branch_name"</code></pre>
+        <p>
+            - Volver al directorio principal.
+        </p>
+        <pre><code>cd ../..</code></pre>
+        <p>
+            - Cambiar la siguiente línea del fichero compose_cfg/dev_humble_cpu.yaml.
+        </p>
+        <pre><code># ANTES<br>image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>image: jderobot/robotics-academy:test</code></pre>
+        <p>
+            - Ejecutar el script de preparación (sin sudo) para lanzar el Docker de
+            RoboticsAcademy con todos los cambios realizados.
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+        <p>
+            - Acceder a la dirección web http://0.0.0.0:7164/ que aparece en la terminal al
+            ejecutar el comando anterior para poder entrar a Unibotics en local y verificar
+            que los cambios se han realizado correctamente.
+        </p>
+        <p>
+            IMPORTANTE: En el caso de que los cambios se hayan realizado únicamente en el
+            fichero database/universes.sql, sólo sería necesario realizar el último de todos los
+            pasos que componen este bucle de trabajo.
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <h2>
+            Modificaciones para migrar de Gazebo 11 a Gazebo Harmonic
+        </h2>
+
         <p>
             ...
         </p>
+
+        <h2>
+            Lanzamiento del RoboticsBackend en local
+        </h2>
+
+        <p><strong>
+            PASO 1
+        </p></strong>
+        <p>
+            Para lanzar el RoboticsBackend y poder trabajar en Unibotics en local, se debe 
+            ejecutar el siguiente comando en la terminal:
+        </p>
+        <pre><code>docker run --rm -it --device /dev/dri -p 6080:6080 -p 1108:1108 -p 7163:7163 jderobot/robotics-backend:latest</code></pre>
+    
+        <p><strong>
+            PASO 2
+        </p></strong>
+        <p>
+            Se deja ejecutando el comando anterior en la terminal y se accede a la 
+            <a href="https://unibotics.org/">página web de Unibotics</a>.
+        </p>
+
+        <p><strong>
+            PASO 3
+        </p></strong>
+        <p>
+            Una vez dentro de Unibotics, se selecciona el ejercicio en el que se quiera
+            trabajar.
+        </p>
+        <p>
+            IMPORTANTE: Para que todo funcione correctamente, debe estar seleccionada la 
+            opción 'Local ROS2 (RoboticsBackend 4)', que aparece en la esquina superior 
+            derecha al hacer clic en el icono del nombre.
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana01/roboticsbackend_option.png" alt="Robotics Backend Option" class="screenshot">
+        </div>
+
+        <p><strong>
+            PASO 4
+        </p></strong>
+        <p>
+            Verificar que, tanto la simulación en Gazebo como la terminal han cargado 
+            correctamente.
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana01/roboticsbackend_exercise.png" alt="Robotics Backend Local" class="screenshot">
+        </div>
     </div>
     
     <!-- Entrada de blog (semana 02) -->
