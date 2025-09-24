@@ -545,10 +545,10 @@ world_file_name = "<exercise_name>.world"
     <range>
       <min>0.20000</min>
       <max>3.5</max>
-            <resolution>0.015000</resolution>
-          </range>
-        </lidar>
-      </sensor>
+      <resolution>0.015000</resolution>
+    </range>
+  </lidar>
+</sensor>
 
 <plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
   <odom_frame>odom</odom_frame>

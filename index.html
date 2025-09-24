@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Título de la pestaña del navegador -->
-    <title>Blog Prácticas JdeRobot Alberto León Luengo</title>
+    <title>BLOG DE PRÁCTICAS</title>
 
     <!-- Estilo CSS de la página -->
     <style>
@@ -22,7 +22,7 @@
             padding: 20px;
             background-color: #000000;
         }
-        h1, h2, h3 {
+        h1 {
             text-align: center;
             color: white;
         }
@@ -97,7 +97,7 @@
 
     <!-- Párrafo 1 -->
     <p>
-        ¡Bienvenido! En esta web se encuentran todos el contenido que he ido viendo y aprendiendo
+        ¡Bienvenido! En esta web se encuentra todo el contenido que he ido viendo y aprendiendo
         en mis Prácticas Externas realizadas durante el curso 2025-2026 en el Grado en 
         Ingeniería de Robótica Software.
     </p>
@@ -109,17 +109,13 @@
         20 semanas que ha durado mi periodo de Prácticas Externas.
     </p>
     
-    <!-- Botones de navegación por semana (semanas 01 a 05) -->
+    <!-- Botones de navegación por semana (semanas 01 a 10) -->
     <div class="buttons">
         <button onclick="showEntry(1)">SEMANA 01</button>
         <button onclick="showEntry(2)">SEMANA 02</button>
         <button onclick="showEntry(3)">SEMANA 03</button>
         <button onclick="showEntry(4)">SEMANA 04</button>
         <button onclick="showEntry(5)">SEMANA 05</button>
-    </div>
-
-    <!-- Botones de navegación por semana (semanas 06 a 10) -->
-    <div class="buttons">
         <button onclick="showEntry(6)">SEMANA 06</button>
         <button onclick="showEntry(7)">SEMANA 07</button>
         <button onclick="showEntry(8)">SEMANA 08</button>
@@ -127,31 +123,27 @@
         <button onclick="showEntry(10)">SEMANA 10</button>
     </div>
 
-    <!-- Botones de navegación por semana (semanas 11 a 15) -->
+    <!-- Botones de navegación por semana (semanas 11 a 20) -->
     <div class="buttons">
         <button onclick="showEntry(11)">SEMANA 11</button>
         <button onclick="showEntry(12)">SEMANA 12</button>
         <button onclick="showEntry(13)">SEMANA 13</button>
         <button onclick="showEntry(14)">SEMANA 14</button>
         <button onclick="showEntry(15)">SEMANA 15</button>
-    </div>
-
-    <!-- Botones de navegación por semana (semanas 16 a 20) -->
-    <div class="buttons">
         <button onclick="showEntry(16)">SEMANA 16</button>
         <button onclick="showEntry(17)">SEMANA 17</button>
         <button onclick="showEntry(18)">SEMANA 18</button>
         <button onclick="showEntry(19)">SEMANA 19</button>
         <button onclick="showEntry(20)">SEMANA 20</button>
     </div>
-    
+
     <!-- Entrada de blog (semana 01) -->
     <div id="entry-1" class="entry">
         <p class="date">SEMANA 01: 22-09-2025 al 26-09-2025</p>
 
-        <h2>
-            Guía de instalación de Docker en Ubuntu 24.04
-        </h2>
+        <h1>
+            Instalación de Docker en Ubuntu 24.04
+        </h1>
 
         <p>
             En primer lugar, comenzamos abriendo una terminal por defecto 
@@ -162,19 +154,11 @@
         <p><strong>
             PASO 1: Entrar en el escritorio
         </p></strong>
-        <p>
-            Este comando cambia el directorio actual al Escritorio, directorio
-            en el que se irán guardando todos los proyectos que se vayan haciendo.
-        </p>
         <pre><code>cd Escritorio/</code></pre>
 
         <p><strong>
             PASO 2: Clonación del repositorio de RoboticsAcademy
         </p></strong>
-        <p>
-            Este comando descarga el repositorio de RoboticsAcademy y sus submódulos,
-            asegurando que todo el código se encuentre disponible en local.
-        </p>
         <pre><code>git clone --recurse-submodules https://github.com/JdeRobot/RoboticsAcademy.git</code></pre>
 
         <p><strong>
@@ -187,7 +171,7 @@
         </p></strong>
         <p>
             Este script intenta configurar el entorno de desarrollo. Sin embargo, al
-            ejecutar este script por primera vez, aparecen varios errores ya que faltan
+            ejecutar este script por primera vez, aparecen varios errores, ya que faltan
             dependencias por instalar (en este caso, yarn y docker).
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
@@ -201,7 +185,7 @@
             actualizar los repositorios de APT, instalar herramientas necesarias (certificados
             y curl), crear el directorio para las claves de Docker, descargar la clave GPG de 
             Docker, dar permisos de lectura a dicha clave, añadir el repositorio de Docker a 
-            APT y volver a actualizar la lista de paquetes.
+            APT y volver a actualizar la lista de paquetes, respectivamente.
         </p>
         <pre><code># Add Docker's official GPG key:<br>sudo apt-get update<br>sudo apt-get install ca-certificates curl<br>sudo install -m 0755 -d /etc/apt/keyrings<br>sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc<br>sudo chmod a+r /etc/apt/keyrings/docker.asc<br><br># Add the repository to Apt sources:<br>echo \<br>  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \<br>  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \<br>  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null<br>sudo apt-get update</code></pre>
 
@@ -211,7 +195,7 @@
         <pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
 
         <p><strong>
-            PASO 7: Comprobación de la activación del Docker
+            PASO 7: Comprobación de la activación de Docker
         </p></strong>
         <pre><code>sudo systemctl status docker</code></pre>
 
@@ -231,7 +215,7 @@
         <pre><code>sudo groupadd docker</code></pre>
 
         <p><strong>
-            PASO 11: Adición del usuario actual en el grupo Docker
+            PASO 11: Adición del usuario actual al grupo Docker
         </p></strong>
         <pre><code>sudo usermod -aG docker $USER</code></pre>
 
@@ -248,9 +232,9 @@
         </p>
         <pre><code>sudo ./scripts/develop_academy.sh</code></pre>
 
-        <h2>
+        <h1>
             Configuración y uso del Docker en Visual Studio Code
-        </h2>
+        </h1>
 
         <p><strong>
             PASO 1: Abrir RoboticsAcademy en Visual Studio Code
@@ -259,7 +243,7 @@
         <pre><code>code .</code></pre>
 
         <p><strong>
-            PASO 2: Instalar extensiones del Docker
+            PASO 2: Instalar las extensiones de Docker
         </p></strong>
         <p>
             Tras instalar ambas extensiones, reinicia el equipo para que Docker
@@ -278,13 +262,13 @@
         <p>
             - Hacer los cambios necesarios dentro de RoboticsInfrastructure.<br>
             - Hacer commit y push de dichos cambios en una nueva rama (Publish Branch).<br>
-            - Acceder al directorio RADI/ dentro del directorio scripts/.
+            - Acceder al directorio scripts/RADI/.
         </p>
         <pre><code>cd scripts/RADI/</code></pre>
         <p>
             - Ejecutar el script build.sh dentro de la nueva rama.
         </p>
-        <pre><code>./build.sh -i "branch_name"</code></pre>
+        <pre><code>./build.sh -i &lt;branch_name&gt;</code></pre>
         <p>
             - Volver al directorio principal.
         </p>
@@ -304,23 +288,71 @@
             que los cambios se han realizado correctamente.
         </p>
         <p>
-            IMPORTANTE: En el caso de que los cambios se hayan realizado únicamente en el
-            fichero database/universes.sql, sólo sería necesario realizar el último de todos los
-            pasos que componen este bucle de trabajo.
+            <strong>IMPORTANTE</strong>: En el caso de que los cambios se hayan realizado únicamente en el
+            fichero database/universes.sql, sólo sería necesario realizar el último de todos
+            los pasos que componen este bucle de trabajo, escrito a continuación.
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
 
-        <h2>
+        <h1>
             Modificaciones para migrar de Gazebo 11 a Gazebo Harmonic
-        </h2>
+        </h1>
 
         <p>
-            ...
+            A continuación se van a ir enumerando todos y cada uno de los ficheros que se 
+            van a modificar para poder llevar a cabo una de las tareas principales que voy 
+            a tener que abordar durante mis Prácticas Externas: La migración de 
+            escenarios, robots y otros elementos visuales de Gazebo 11 a Gazebo Harmonic.
+        </p>
+        <p>
+            Todos estos ficheros se encuentran en el repositorio de GitHub 
+            <a href="https://github.com/JdeRobot/RoboticsInfrastructure/tree/humble-devel">RoboticsInfrastructure</a>, 
+            que se encuentra a su vez dentro del repositorio de GitHub 
+            <a href="https://github.com/JdeRobot/RoboticsAcademy">RoboticsAcademy</a> 
+            (en ambos se trabajará desde la rama humble-devel).
         </p>
 
-        <h2>
+        <p><strong>
+            Fichero RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;/spawn_robot.launch.py
+        </p></strong>
+        <pre><code># CAMBIAR EL NOMBRE DEL ROBOT<br>model_folder = &lt;robot_name&gt;</code></pre>
+        <pre><code># CAMBIAR EL NOMBRE DEL FICHERO .YAML<br>bridge_params = os.path.join(<br>    get_package_share_directory("custom_robots"), "params", "robot_params.yaml"<br>)</code></pre>
+        <pre><code># AÑADIR / ELIMINAR LAS SIGUIENTES LÍNEAS SI EL ROBOT TIENE / NO TIENE CÁMARA<br>start_gazebo_ros_image_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/image_raw"],<br>    output="screen",<br>)<br><br>start_gazebo_ros_depth_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/depth"],<br>    output="screen",<br>)<br><br>ld.add_action(start_gazebo_ros_image_bridge_cmd)<br>ld.add_action(start_gazebo_ros_depth_bridge_cmd)</code></pre>
+
+        <p><strong>
+            Fichero CMakeLists.txt
+        </p></strong>
+        <pre><code># AÑADIR LOS DIRECTORIOS CORRESPONDIENTES A LAS NUEVAS MIGRACIONES<br>install(<br>  DIRECTORY<br>    &lt;exercise_name&gt;/models<br>    &lt;robot_name&gt;/models<br>    &lt;robot_name&gt;/urdf<br>    &lt;robot_name&gt;/params<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;.launch.py
+        </p></strong>
+        <pre><code># CAMBIAR RUTAS Y NOMBRES DE LOS FICHEROS CARGADOS<br>robot_launch_dir = "/opt/jderobot/Launchers/&lt;exercise_name&gt;"<br>robot_model_dir = os.path.join(package_dir, "models/&lt;robot_name&gt;")<br>world_file_name = "&lt;exercise_name&gt;.world"</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Worlds/&lt;exercise_name&gt;.world
+        </p></strong>
+        <pre><code># MODIFICAR TODOS LOS APARTADOS CON EL FLAG INCLUDE<br><br># GAZEBO 11<br>&lt;include&gt;<br>  &lt;uri&gt;model://house_int2&lt;/uri&gt;<br>  &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br></include><br><br># GAZEBO HARMONIC<br>&lt;include&gt;<br>  &lt;name&gt;house_int2&lt;/name&gt;<br>  &lt;uri&gt;model://Lake house_int2&lt;/uri&gt;<br>  &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>&lt;/include&gt;</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_name&gt;/model.sdf
+        </p></strong>
+        <pre><code># MODIFICAR TODOS LOS APARTADOS CON EL FLAG SENSOR Y EL FLAG PLUGIN<br><br># GAZEBO 11<br>&lt;sensor name='laser' type='ray'&gt;<br>  &lt;ray&gt;<br>    &lt;scan&gt;<br>      &lt;horizontal&gt;<br>        &lt;samples&gt;180&lt;/samples&gt;<br>        &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>        &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>        &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>      &lt;/horizontal&gt;<br>    &lt;/scan&gt;<br>    &lt;range&gt;<br>      &lt;min&gt;0.080000&lt;/min&gt;<br>      &lt;max&gt;10.000000&lt;/max&gt;<br>      &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>    &lt;/range&gt;<br>  &lt;/ray&gt;<br>  &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>  &lt;always_on&gt;1&lt;/always_on&gt;<br>  &lt;visualize&gt;1&lt;/visualize&gt;<br>  &lt;plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so"&gt;<br>    &lt;ros&gt;<br>      &lt;remapping&gt;~/out:=/roombaROS/laser/scan&lt;/remapping&gt;<br>    &lt;/ros&gt;<br>    &lt;output_type&gt;sensor_msgs/LaserScan&lt;/output_type&gt;<br>    &lt;frameName&gt;laser&lt;/frameName&gt;<br>    &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>  &lt;/plugin&gt;<br>&lt;/sensor&gt;</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>&lt;sensor name="hls_lfcd_lds" type="gpu_lidar"&gt;<br>  &lt;always_on&gt;true&lt;/always_on&gt;<br>  &lt;visualize&gt;true&lt;/visualize&gt;<br>  &lt;pose&gt;-0.064 0 0.121 0 0 0&lt;/pose&gt;<br>  &lt;update_rate&gt;5&lt;/update_rate&gt;<br>  &lt;topic&gt;turtlebot3/laser/scan&lt;/topic&gt;<br>  &lt;gz_frame_id&gt;base_scan&lt;/gz_frame_id&gt;<br>  &lt;lidar&gt;<br>    &lt;scan&gt;<br>      &lt;horizontal&gt;<br>        &lt;samples&gt;360&lt;/samples&gt;<br>        &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>        &lt;min_angle&gt;0.000000&lt;/min_angle&gt;<br>        &lt;max_angle&gt;6.280000&lt;/max_angle&gt;<br>      &lt;/horizontal&gt;<br>    &lt;/scan&gt;<br>    &lt;range&gt;<br>      &lt;min&gt;0.20000&lt;/min&gt;<br>      &lt;max&gt;3.5&lt;/max&gt;<br>      &lt;resolution&gt;0.015000&lt;/resolution&gt;<br>    &lt;/range&gt;<br>  &lt;/lidar&gt;<br>&lt;/sensor&gt;<br><br>&lt;plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher"&gt;<br>  &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>  &lt;robot_base_frame&gt;base_footprint&lt;/robot_base_frame&gt;<br>  &lt;odom_publish_frequency&gt;50&lt;/odom_publish_frequency&gt;<br>  &lt;odom_topic&gt;turtlebot3/odom&lt;/odom_topic&gt;<br>  &lt;dimensions&gt;3&lt;/dimensions&gt;<br>&lt;/plugin&gt;</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/robot_params.yaml
+        </p></strong>
+        <pre><code># AÑADIR LOS TOPICS DE TODOS LOS SENSORES QUE COMPONEN EL ROBOT<br><br># gz topic published by DiffDrive plugin<br>- ros_topic_name: "&lt;robot_name&gt;/odom"<br>  gz_topic_name: "&lt;robot_name&gt;/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "&lt;robot_name&gt;/cmd_vel"<br>  gz_topic_name: "&lt;robot_name&gt;/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "&lt;robot_name&gt;/laser/scan"<br>  gz_topic_name: "&lt;robot_name&gt;/laser/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br># gz topic published by Sensors plugin (Camera)<br>- ros_topic_name: "&lt;robot_name&gt;/camera/camera_info"<br>  gz_topic_name: "&lt;robot_name&gt;/camera/camera_info"<br>  ros_type_name: "sensor_msgs/msg/CameraInfo"<br>  gz_type_name: "gz.msgs.CameraInfo"<br>  direction: GZ_TO_ROS</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/database/universes.sql
+        </p></strong>
+        <pre><code># MODIFICAR LOS PARÁMETROS DE LOS MUNDOS<br><br># MUNDO NO MIGRADO (ANTES)<br>25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	None	ROS2	gazebo	{1,-1.5,0.6,0,0,0}<br><br># MUNDO MIGRADO (DESPUÉS)<br>25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/marker_visual_loc.config"}	ROS2	gz	{1,-1.5,0.6,0,0,0}</code></pre>
+
+        <h1>
             Lanzamiento del RoboticsBackend en local
-        </h2>
+        </h1>
 
         <p><strong>
             PASO 1
@@ -347,8 +379,8 @@
             trabajar.
         </p>
         <p>
-            IMPORTANTE: Para que todo funcione correctamente, debe estar seleccionada la 
-            opción 'Local ROS2 (RoboticsBackend 4)', que aparece en la esquina superior 
+            <strong>IMPORTANTE</strong>: Para que todo funcione correctamente, debe estar seleccionada 
+            la opción 'Local ROS2 (RoboticsBackend 4)', que aparece en la esquina superior 
             derecha al hacer clic en el icono del nombre.
         </p>
         <div style="place-items: center">
