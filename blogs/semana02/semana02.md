@@ -24,7 +24,7 @@ En mi caso, he seleccionado los mundos correspondientes a los ejercicios de "Las
 
 El resultado final de este ejercicio visualizará el almacén del "Laser Mapping" en la ventana de Gazebo del ejercicio "Marker Based Visual Loc".
 
-A continuación se muestra cómo se ve inicialmente el ejercicio "Marker Based Visual Loc" al lanzar el Docker de RoboticsAcademy antes de realizar cualquier cambio en el código.
+A continuación se muestra cómo se ve inicialmente el ejercicio "Marker Based Visual Loc" al lanzar el Docker de RoboticsAcademy antes de realizar cualquier cambio en el código:
 
 IMAGEN EJERCICIO MARKER BASED VISUAL LOC ORIGINAL
 
@@ -75,6 +75,6 @@ Con este cambio ya realizado, ya se puede lanzar el script develop_academy.sh:
 
 Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics en local y verificar que los cambios se han realizado correctamente.
 
-A continuación se muestra cómo se ve el ejercicio "Marker Based Visual Loc" al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados en el código.
+A continuación se muestra cómo se ve el ejercicio "Marker Based Visual Loc" al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados en el código:
 
 IMAGEN EJERCICIO MARKER BASED VISUAL LOC MODIFICADO
