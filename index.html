@@ -397,6 +397,52 @@
         <div style="place-items: center">
             <img src="images/semana01/roboticsbackend_exercise.png" alt="Robotics Backend Local" class="screenshot">
         </div>
+
+        <h1>
+            Lanzamiento del RoboticsDatabase junto a RoboticsAcademy en local
+        </h1>
+
+        <p>
+            Para poder lanzar RoboticsDatabase junto a RoboticsAcademy, 
+            se debe ejecutar el siguiente comando en la terminal:
+        </p>
+        <pre><code>docker run --hostname my-postgres --name academy_db -d\<br>    -e POSTGRES_DB=academy_db \<br>    -e POSTGRES_USER=user-dev \<br>    -e POSTGRES_PASSWORD=robotics-academy-dev \<br>    -e POSTGRES_PORT=5432 \<br>    -d -p 5432:5432 \<br>    jderobot/robotics-database:latest</code></pre>
+
+        <p>
+            Una vez ejecutado este comando por primera vez, ya no será necesario ejecutarlo
+            más veces, ya que lo que ha hecho este comando es crear un nuevo contenedor para 
+            RoboticsDatabase, al cual se llamará con el flag --link cuando se vaya a lanzar 
+            RoboticsAcademy. A continuación se muestran 3 formas diferentes de lanzar 
+            RoboticsDatabase junto a RoboticsAcademy:
+        </p>
+
+        <p><strong>
+            Lanzamiento de RoboticsDatabase + RoboticsAcademy (NVIDIA + GPU)
+        </strong></p>
+        <pre><code>docker run --rm -it $(nvidia-smi >/dev/null 2>&1 && echo "--gpus all" || echo "") --device /dev/dri -p 6080:6080 -p 6081:6081 -p 1108:1108 -p 7163:7163 -p 7164:7164 --link academy_db jderobot/robotics-academy:latest</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Para que este comando funcione, es necesario tener
+            instalados los drivers de NVIDIA en Linux.
+        </p>
+
+        <p><strong>
+            Lanzamiento de RoboticsDatabase + RoboticsAcademy (GPU)
+        </strong></p>
+        <pre><code>docker run --rm -it --device /dev/dri -p 6080:6080 -p 6081:6081 -p 1108:1108 -p 7163:7163 -p 7164:7164 --link academy_db jderobot/robotics-academy:latest</code></pre>
+
+        <p><strong>
+            Lanzamiento de RoboticsDatabase + RoboticsAcademy (CPU)
+        </strong></p>
+        <pre><code>docker run --rm -it -p 6080:6080 -p 6081:6081 -p 1108:1108 -p 7163:7163 -p 7164:7164 --link academy_db jderobot/robotics-academy:latest</code></pre>
+
+        <p>
+            Por último, para comprobar que todos los Dockers que se van a utilizar se han 
+            descargado y configurado correctamente, se debe ejecutar el siguiente comando
+            en la terminal:
+        </p>
+        <pre><code>sudo docker images</code></pre>
+        <p>Cuyo resultado debe ser el siguiente:</p>
+        <pre><code>REPOSITORY                   TAG       IMAGE ID       CREATED       SIZE<br>jderobot/robotics-backend    latest    0e2a10ccfaf4   5 days ago    27.2GB<br>jderobot/robotics-academy    latest    1c67a50c79c2   13 days ago   28.5GB<br>jderobot/robotics-database   latest    3a1d0407347e   13 days ago   483MB</code></pre>
     </div>
     
     <!-- Entrada de blog (semana 02) -->
