@@ -275,7 +275,7 @@
         <p>
             - Cambiar la siguiente línea del fichero compose_cfg/dev_humble_cpu.yaml.
         </p>
-        <pre><code># ANTES<br>image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>image: jderobot/robotics-academy:test</code></pre>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
         <p>
             - Ejecutar el script de preparación (sin sudo) para lanzar el Docker de
             RoboticsAcademy con todos los cambios realizados.
@@ -319,7 +319,7 @@
         <pre><code># AÑADIR / ELIMINAR LAS SIGUIENTES LÍNEAS SI EL ROBOT TIENE / NO TIENE CÁMARA<br>start_gazebo_ros_image_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/image_raw"],<br>    output="screen",<br>)<br><br>start_gazebo_ros_depth_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/depth"],<br>    output="screen",<br>)<br><br>ld.add_action(start_gazebo_ros_image_bridge_cmd)<br>ld.add_action(start_gazebo_ros_depth_bridge_cmd)</code></pre>
 
         <p><strong>
-            Fichero CMakeLists.txt
+            Fichero RoboticsInfrastructure/CustomRobots/CMakeLists.txt
         </p></strong>
         <pre><code># AÑADIR LOS DIRECTORIOS CORRESPONDIENTES A LAS NUEVAS MIGRACIONES<br>install(<br>  DIRECTORY<br>    &lt;exercise_name&gt;/models<br>    &lt;robot_name&gt;/models<br>    &lt;robot_name&gt;/urdf<br>    &lt;robot_name&gt;/params<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
