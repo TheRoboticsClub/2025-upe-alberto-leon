@@ -560,6 +560,93 @@
         <div style="place-items: center">
             <img src="images/semana02/markervisualloc_new_world.png" alt="New World" class="screenshot">
         </div>
+
+        <h1>
+            Migración del ejercicio "Obstacle Avoidance" a Gazebo Harmonic
+        </h1>
+
+        <p>
+            Una vez realizado este primer ejercicio de calentamiento para irme familiarizando
+            con el código de RoboticsInfrastructure, se me ha pedido realizar la migración 
+            completa de Gazebo 11 a Gazebo Harmonic del ejercicio "Obstacle Avoidance", que 
+            introduce de forma práctica la navegación local mediante el uso de campos de 
+            fuerza virtuales (VFF, Virtual Force Fields).
+        </p>
+
+        <div style="place-items: center">
+            <img src="images/semana02/obstacle_avoidance_exercise.png" alt="Obstacle Avoidance Exercise" class="screenshot">
+        </div>
+        <p><strong>ENLACE AL ENUNCIADO DEL EJERCICIO</strong>: <a href="https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/obstacle_avoidance">https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/obstacle_avoidance</a></p>
+
+        <p>
+            A continuación, se encuentran todos los ficheros que se han modificado (y de qué 
+            forma) para poder llevar a cabo la migración completa de este ejercicio
+            de Gazebo 11 a Gazebo Harmonic:
+        </p>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/CustomRobots/f1/models/f1_result_laser_no_cam/model.sdf
+        </strong></p>
+        <p>
+            FICHERO YA EXISTENTE MODIFICADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/CustomRobots/f1/params/f1_result_laser_no_cam.yaml
+        </strong></p>
+        <p>
+            FICHERO NUEVO CREADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+        </strong></p>
+        <p>
+            FICHERO YA EXISTENTE MODIFICADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Launchers/obstacle_avoidance/spawn_robot.launch.py
+        </strong></p>
+        <p>
+            FICHERO NUEVO CREADO Y REPOSITORIO NUEVO CREADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Launchers/visualization/simple_circuit_obstacles_followingcam.config
+        </strong></p>
+        <p>
+            FICHERO NUEVO CREADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Launchers/simple_circuit_obstacles_followingcam.launch.py
+        </strong></p>
+        <p>
+            FICHERO YA EXISTENTE MODIFICADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/Worlds/simple_circuit_obstacles_followingcam.world
+        </strong></p>
+        <p>
+            FICHERO YA EXISTENTE MODIFICADO
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            Fichero RoboticsInfrastructure/database/universes.sql
+        </strong></p>
+        <p>
+            FICHERO YA EXISTENTE MODIFICADO
+        </p>
+        <pre><code>CODE</code></pre>
     </div>
 
     <!-- Entrada de blog (semana 03) -->
