@@ -579,8 +579,8 @@
         <p><strong>ENLACE AL ENUNCIADO DEL EJERCICIO</strong>: <a href="https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/obstacle_avoidance">https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/obstacle_avoidance</a></p>
 
         <p>
-            A continuación, se encuentran todos los ficheros que se han modificado (y de qué 
-            forma) para poder llevar a cabo la migración completa de este ejercicio
+            A continuación, se encuentran todos los ficheros que se han modificado y/o creado
+            (y de qué forma) para poder llevar a cabo la migración completa de este ejercicio
             de Gazebo 11 a Gazebo Harmonic:
         </p>
 
@@ -588,65 +588,159 @@
             Fichero RoboticsInfrastructure/CustomRobots/f1/models/f1_result_laser_no_cam/model.sdf
         </strong></p>
         <p>
-            FICHERO YA EXISTENTE MODIFICADO
+            En este fichero se ha modificado las partes correspondientes a las etiquetas
+            &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
+            del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
+            versión los plugins correspondientes al "diff-drive-system" y al 
+            "odometry-publisher-system":
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br><br>    &lt;sensor name='laser' type='ray'&gt;<br>      &lt;ray&gt;<br>        &lt;scan&gt;<br>          &lt;horizontal&gt;<br>            &lt;samples&gt;180&lt;/samples&gt;<br>            &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>            &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>            &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>          &lt;/horizontal&gt;<br>        &lt;/scan&gt;<br>        &lt;range&gt;<br>          &lt;min&gt;0.080000&lt;/min&gt;<br>          &lt;max&gt;10.000000&lt;/max&gt;<br>          &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>        &lt;/range&gt;<br>      &lt;/ray&gt;<br>      &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>      &lt;plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so"&gt;<br>          &lt;ros&gt;<br>              &lt;namespace&gt;/f1&lt;/namespace&gt;<br>              &lt;remapping&gt;~/out:=laser/scan&lt;/remapping&gt;<br>          &lt;/ros&gt;<br>          &lt;output_type&gt;sensor_msgs/LaserScan&lt;/output_type&gt;<br>          &lt;frame_name&gt;base_scan&lt;/frame_name&gt;<br>      &lt;/plugin&gt;<br>      &lt;always_on&gt;1&lt;/always_on&gt;<br>      &lt;visualize&gt;1&lt;/visualize&gt;<br>    &lt;/sensor&gt;<br><br>  # ESTE PLUGIN SE INTEGRA DENTRO DE &lt;SENSOR&gt; AL PASAR A GAZEBO HARMONIC<br>  &lt;plugin name="object_controller" filename="libgazebo_ros_planar_move.so"&gt;<br>      &lt;commandTopic&gt;F1ROS/cmd_vel&lt;/commandTopic&gt;<br>      &lt;odometryTopic&gt;F1ROS/odom&lt;/odometryTopic&gt;<br>      &lt;odometryFrame&gt;odom&lt;/odometryFrame&gt;<br>      &lt;odometryRate&gt;20.0&lt;/odometryRate&gt;<br>      &lt;robotBaseFrame&gt;xf1&lt;/robotBaseFrame&gt;<br>  &lt;/plugin&gt;</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>    &lt;sensor name="laser" type="gpu_lidar"&gt;<br>      &lt;always_on&gt;1&lt;/always_on&gt;<br>      &lt;visualize&gt;1&lt;/visualize&gt;<br>      &lt;pose&gt;0.500000 0.000000 0.072000 0.000000 0.000000 0.00000&lt;/pose&gt;<br>      &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>      &lt;topic&gt;f1/laser/scan&lt;/topic&gt;<br>      &lt;gz_frame_id&gt;base_scan&lt;/gz_frame_id&gt;<br>      &lt;lidar&gt;<br>        &lt;scan&gt;<br>          &lt;horizontal&gt;<br>            &lt;samples&gt;180&lt;/samples&gt;<br>            &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>            &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>            &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>          &lt;/horizontal&gt;<br>        &lt;/scan&gt;<br>        &lt;range&gt;<br>          &lt;min&gt;0.080000&lt;/min&gt;<br>          &lt;max&gt;10.000000&lt;/max&gt;<br>          &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>        &lt;/range&gt;<br>      &lt;/lidar&gt;<br>    &lt;/sensor&gt;<br><br>    # AÑADIR ESTE PLUGIN AL FINAL DEL FICHERO<br>    &lt;plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive"&gt;<br>      &lt;!-- wheels --&gt;<br>      &lt;left_joint&gt;wheel_left_joint&lt;/left_joint&gt;<br>      &lt;right_joint&gt;wheel_right_joint&lt;/right_joint&gt;<br>      &lt;!-- kinematics --&gt;<br>      &lt;wheel_separation&gt;0.287&lt;/wheel_separation&gt;<br>      &lt;wheel_radius&gt;0.033&lt;/wheel_radius&gt;<br>      &lt;!-- limits --&gt;<br>      &lt;max_linear_acceleration&gt;1.0&lt;/max_linear_acceleration&gt;<br>      &lt;topic&gt;F1ROS/cmd_vel&lt;/topic&gt;<br>      &lt;frame_id&gt;odom&lt;/frame_id&gt;<br>      &lt;!-- &lt;tf_topic&gt;/tf&lt;/tf_topic&gt; --&gt;<br>      &lt;odom_publisher_frequency&gt;20.0&lt;/odom_publisher_frequency&gt;<br>      &lt;child_frame_id&gt;xf1&lt;/child_frame_id&gt;<br>    &lt;/plugin&gt;<br><br>    # AÑADIR ESTE PLUGIN AL FINAL DEL FICHERO<br>    &lt;plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher"&gt;<br>      &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>      &lt;robot_base_frame&gt;xf1&lt;/robot_base_frame&gt;<br>      &lt;odom_publish_frequency&gt;20.0&lt;/odom_publish_frequency&gt;<br>      &lt;odom_topic&gt;F1ROS/odom&lt;/odom_topic&gt;<br>      &lt;dimensions&gt;3&lt;/dimensions&gt;<br>    &lt;/plugin&gt;</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/CustomRobots/f1/params/f1_result_laser_no_cam.yaml
         </strong></p>
         <p>
-            FICHERO NUEVO CREADO
+            Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
+            cualquier fichero del tipo "robot_params.yaml" como referencia. En este caso, 
+            sólo se añaden los topics correspondientes al publicador y al subscriptor del plugin
+            del diff-drive-system y aquellos relativos al publicador del plugin del láser:
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># gz topic published by DiffDrive plugin<br>- ros_topic_name: "F1ROS/odom"<br>  gz_topic_name: "F1ROS/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "F1ROS/cmd_vel"<br>  gz_topic_name: "F1ROS/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "F1ROS/laser/scan"<br>  gz_topic_name: "F1ROS/laser/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/CustomRobots/CMakeLists.txt
         </strong></p>
         <p>
-            FICHERO YA EXISTENTE MODIFICADO
+            En este caso, la única modificación que habría que realizar en este fichero es la 
+            adición de la línea f1/params para que el fichero que se acaba de crear 
+            (f1_result_laser_no_cam.yaml) se tenga en cuenta a la hora de lanzar el Docker:
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # F1<br>    f1/models<br>    f1/launch<br>    f1/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # F1<br>    f1/models<br>    f1/launch<br>    f1/worlds<br>    f1/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/Launchers/obstacle_avoidance/spawn_robot.launch.py
         </strong></p>
         <p>
-            FICHERO NUEVO CREADO Y REPOSITORIO NUEVO CREADO
+            Una vez creado el directorio "obstacle_avoidance/", y a su vez dentro de él el 
+            fichero "spawn_robot.launch.py", lo único que habría que hacer es coger cualquier 
+            fichero con el mismo nombre de otro ejercicio que ya esté migrado en Gazebo 
+            Harmonic, copiar su contenido y sólamente habría que comentar todo lo relativo a las 
+            variables "start_gazebo_ros_image_bridge_cmd" y "start_gazebo_ros_depth_bridge_cmd",
+            y lo más importante, modificar el nombre del fichero que se le pasa como 
+            argumento a bridge_params (en este caso, "f1_renault_laser_no_cam.yaml"):
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "robot_params.yaml"<br>    )</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "f1_renault_laser_no_cam.yaml"<br>    )</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/Launchers/visualization/simple_circuit_obstacles_followingcam.config
         </strong></p>
         <p>
-            FICHERO NUEVO CREADO
+            El contenido de este fichero es idéntico al del resto de ficheros con el mismo 
+            formato de nombre (&lt;universe_name&gt;.config), por lo que lo único que habría que 
+            hacer es crear este nuevo fichero y rellenar su contenido con un simple Ctrl+C Ctrl+V 
+            de otro fichero que se encuentre en el mismo directorio con el mismo formato de 
+            nombre.
         </p>
-        <pre><code>CODE</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/Launchers/simple_circuit_obstacles_followingcam.launch.py
         </strong></p>
         <p>
-            FICHERO YA EXISTENTE MODIFICADO
+            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y modificar únicamente las líneas correspondientes a las 
+            variables "robot_launch_dir" y "world_file_name", correspondientes a las rutas en 
+            las que se encuentran el directorio que almacena el fichero "spawn_robot.launch.py" 
+            y el fichero del mundo que utiliza este ejercicio.
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code>robot_launch_dir = "/opt/jderobot/Launchers/obstacle_avoidance"<br>world_file_name = "simple_circuit_obstacles_followingcam.world"</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
+            "obstacle_avoidance/" el fichero "robot_state_publisher.launch.py", es obligatorio 
+            comentar y/o eliminar del código todo lo relacionado con la variable 
+            "robot_state_publisher_cmd".
+        </p>
 
         <p><strong>
             Fichero RoboticsInfrastructure/Worlds/simple_circuit_obstacles_followingcam.world
         </strong></p>
         <p>
-            FICHERO YA EXISTENTE MODIFICADO
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
+            aquellos que aparezcan en la versión nueva.
         </p>
-        <pre><code>CODE</code></pre>
 
         <p><strong>
             Fichero RoboticsInfrastructure/database/universes.sql
         </strong></p>
         <p>
-            FICHERO YA EXISTENTE MODIFICADO
+            Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
+            Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
+            Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y tener en cuenta lo 
+            siguiente: Cambiar el valor de la columna "type" de "gazebo" a "gz", y el campo de 
+            la tercera columna, en el que inicialmente aparece None, sustituirlo por la ruta al 
+            fichero "simple_circuit_obstacles_followingcam.config" creado anteriormente:
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/simple_circuit_obstacles_followingcam.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+
+        <p>
+            Una vez realizados todos estos cambios en todos los ficheros mencionados, 
+            he hecho commit y push en una nueva rama que he creado y publicado llamada 
+            "obstacle-avoidance-harmonic". Es importante hacer esto siempre para así 
+            evitar cualquier tipo de conflicto con la rama principal.
+        </p>
+
+        <p>
+            Como todos los cambios se han realizado en ficheros que se encuentran dentro de 
+            RoboticsInfrastructure, es obligatorio generar un nuevo RADI. Para ello, se deben 
+            ejecutar los siguientes comandos en la terminal:
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <pre><code>./build.sh -i obstacle-avoidance-harmonic</code></pre>
+
+        <p>
+            Una vez finalizada la ejecución del script build.sh, se debe regresar al repositorio
+            principal:
+        </p>
+        <pre><code>cd ../..</code></pre>
+
+        <p>
+            Pero antes de ejecutar el script develop_academy.sh, hay que modificar la siguiente 
+            línea del fichero RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml:
+        </p>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
+
+        <p>
+            Con este cambio ya realizado, ya se puede lanzar el script develop_academy.sh:
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <p>
+            Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que 
+            aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics 
+            en local y verificar que los cambios se han realizado correctamente.
+        </p>
+
+        <p>
+            A continuación se muestra cómo se ve el ejercicio "Obstacle Avoidance" al 
+            lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+        </p>
+        <p>
+            IMAGEN UNIBOTICS GAZEBO OBSTACLE AVOIDANCE
+        </p>
+        <p>
+            Además, para verificar que tanto el escenario como el coche han sido migrados 
+            correctamente, se muestra una pequeña animación del coche moviéndose en línea 
+            recta para verificar que todo el proceso se ha realizado correctamente:
+        </p>
+        <p>
+            VÍDEO / GIF COCHE MOVIÉNDOSE POR EL ESCENARIO
+        </p>
     </div>
 
     <!-- Entrada de blog (semana 03) -->
