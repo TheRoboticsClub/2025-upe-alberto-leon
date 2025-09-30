@@ -97,15 +97,15 @@
 
     <!-- Párrafo 1 -->
     <p>
-        ¡Bienvenido! En esta web se encuentra todo el contenido que he ido viendo y aprendiendo
-        en mis Prácticas Externas realizadas con la empresa JdeRobot durante el curso 2025-2026 
+        ¡Bienvenido! En esta web se encuentra todo el contenido visto y aprendido en mis 
+        Prácticas Externas realizadas con la empresa JdeRobot durante el curso 2025-2026 
         en el Grado en Ingeniería de Robótica Software.
     </p>
 
     <!-- Párrafo 2 -->
     <p>
-        A continuación se encuentran todas las entradas correspondientes a los blogs de prácticas
-        que he ido realizando durante el transcurso de las mismas, cuyo contenido se divide en las 
+        A continuación, se muestran todas las entradas correspondientes a los blogs de prácticas
+        realizados durante el transcurso de las mismas, cuyo contenido se divide en las 
         20 semanas que ha durado mi periodo de Prácticas Externas.
     </p>
     
@@ -147,7 +147,8 @@
 
         <p>
             En primer lugar, se abre una terminal por defecto en el directorio 
-            HOME, a través de la cual iremos ejecutando los siguientes comandos:
+            <strong>/home/user</strong>, a través de la cual se irán ejecutando los siguientes 
+            comandos:
         </p>
 
         <p><strong>
@@ -169,9 +170,9 @@
             PASO 4: Ejecución del script de preparación
         </p></strong>
         <p>
-            Este script intenta configurar el entorno de desarrollo. Sin embargo, al
-            ejecutar este script por primera vez, aparecen varios errores, ya que faltan
-            dependencias por instalar (en este caso, yarn y docker).
+            Este script intenta configurar el entorno de desarrollo. Al ejecutar este script por
+            primera vez, aparecen varios errores, ya que faltan dependencias por instalar 
+            (yarn y docker).
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
         <pre><code>./scripts/develop_academy.sh: linea 146: yarn: orden no encontrada<br>./scripts/develop_academy.sh: linea 147: yarn: orden no encontrada<br>./scripts/develop_academy.sh: linea 166: docker: orden no encontrada<br>Cleaning up...<br>./scripts/develop_academy.sh: linea 28: docker: orden no encontrada</code></pre>
@@ -180,16 +181,16 @@
             PASO 5: Ejecución de comandos de configuración
         </p></strong>
         <p>
-            Todos los comandos que se van a ir ejecutando a continuación se encargan de 
-            actualizar los repositorios de APT, instalar herramientas necesarias (certificados
-            y curl), crear el directorio para las claves de Docker, descargar la clave GPG de 
+            Todos los comandos que se ejecutan a continuación se encargan de actualizar los 
+            repositorios de APT, instalar las herramientas necesarias (certificados y curl), 
+            crear el directorio para las claves de Docker, descargar la clave GPG de 
             Docker, dar permisos de lectura a dicha clave, añadir el repositorio de Docker a 
-            APT y volver a actualizar la lista de paquetes, respectivamente.
+            APT y volver a actualizar la lista de paquetes.
         </p>
         <pre><code># Add Docker's official GPG key:<br>sudo apt-get update<br>sudo apt-get install ca-certificates curl<br>sudo install -m 0755 -d /etc/apt/keyrings<br>sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc<br>sudo chmod a+r /etc/apt/keyrings/docker.asc<br><br># Add the repository to Apt sources:<br>echo \<br>  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \<br>  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \<br>  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null<br>sudo apt-get update</code></pre>
 
         <p><strong>
-            PASO 6: Instalación de Docker y sus componentes
+            PASO 6: Instalación de Docker y todos sus componentes
         </p></strong>
         <pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
 
@@ -226,23 +227,24 @@
         <p><strong>
             PASO 13: Reejecución del script de preparación
         </p></strong>
-        <p>
-            Al ejecutar el comando con sudo, todo se ejecuta correctamente.
-        </p>
         <pre><code>sudo ./scripts/develop_academy.sh</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Al ejecutar el comando con sudo, todo se ejecuta 
+            correctamente.
+        </p>
 
         <h1>
             Configuración y uso del Docker en Visual Studio Code
         </h1>
 
         <p><strong>
-            PASO 1: Abrir RoboticsAcademy en Visual Studio Code
+            PASO 1: Apertura de RoboticsAcademy en Visual Studio Code
         </p></strong>
         <pre><code>cd Escritorio/RoboticsAcademy/</code></pre>
         <pre><code>code .</code></pre>
 
         <p><strong>
-            PASO 2: Instalar las extensiones de Docker
+            PASO 2: Instalación de las extensiones de Docker
         </p></strong>
         <p>
             Tras instalar ambas extensiones, es necesario reiniciar el equipo para que 
@@ -259,13 +261,14 @@
             PASO 3: Bucle de trabajo a seguir en Visual Studio Code
         </p></strong>
         <p>
-            - Hacer los cambios necesarios dentro de RoboticsInfrastructure.<br>
+            - Hacer los cambios necesarios dentro del directorio 
+            <strong>RoboticsInfrastructure/</strong>.<br>
             - Hacer commit y push de dichos cambios en una nueva rama (Publish Branch).<br>
-            - Acceder al directorio RoboticsAcademy/scripts/RADI/.
+            - Acceder al directorio <strong>RoboticsAcademy/scripts/RADI/</strong>.
         </p>
         <pre><code>cd scripts/RADI/</code></pre>
         <p>
-            - Ejecutar el script build.sh dentro de la nueva rama.
+            - Ejecutar el script <strong>build.sh</strong> dentro de la nueva rama.
         </p>
         <pre><code>./build.sh -i &lt;branch_name&gt;</code></pre>
         <p>
@@ -273,7 +276,8 @@
         </p>
         <pre><code>cd ../..</code></pre>
         <p>
-            - Cambiar la siguiente línea del fichero compose_cfg/dev_humble_cpu.yaml.
+            - Cambiar la siguiente línea del fichero 
+            <strong>compose_cfg/dev_humble_cpu.yaml</strong>.
         </p>
         <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
         <p>
@@ -288,8 +292,9 @@
         </p>
         <p>
             <strong>IMPORTANTE</strong>: En el caso de que los cambios se hayan realizado 
-            únicamente en el fichero database/universes.sql, sólo sería necesario realizar el 
-            último de todos los pasos que componen este bucle de trabajo, escrito a continuación.
+            únicamente en el fichero <strong>database/universes.sql</strong>, sólo sería 
+            necesario realizar el último de todos los pasos que componen este bucle de trabajo, 
+            escrito a continuación.
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
 
@@ -298,10 +303,10 @@
         </h1>
 
         <p>
-            A continuación se van a ir enumerando todos y cada uno de los ficheros que se 
-            van a modificar para poder llevar a cabo cada una de las tareas principales que se
-            van a abordar durante las Prácticas: La migración de escenarios, robots y otros 
-            elementos visuales de Gazebo 11 a Gazebo Harmonic.
+            A continuación se enumeran todos y cada uno de los ficheros que se van a modificar 
+            para poder llevar a cabo cada una de las tareas principales que se van a abordar 
+            durante las Prácticas: La migración de escenarios, robots y otros elementos visuales 
+            de Gazebo 11 a Gazebo Harmonic.
         </p>
         <p>
             Todos estos ficheros se encuentran en el repositorio de GitHub 
@@ -312,40 +317,40 @@
         </p>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;/spawn_robot.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;/spawn_robot.launch.py
         </p></strong>
         <pre><code># CAMBIAR EL NOMBRE DEL ROBOT<br>model_folder = &lt;robot_name&gt;</code></pre>
         <pre><code># CAMBIAR EL NOMBRE DEL FICHERO .YAML<br>bridge_params = os.path.join(<br>    get_package_share_directory("custom_robots"), "params", "robot_params.yaml"<br>)</code></pre>
         <pre><code># AÑADIR / ELIMINAR LAS SIGUIENTES LÍNEAS SI EL ROBOT TIENE / NO TIENE CÁMARA<br>start_gazebo_ros_image_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/image_raw"],<br>    output="screen",<br>)<br><br>start_gazebo_ros_depth_bridge_cmd = Node(<br>    package="ros_gz_image",<br>    executable="image_bridge",<br>    arguments=["/&lt;robot_name&gt;/camera/depth"],<br>    output="screen",<br>)<br><br>ld.add_action(start_gazebo_ros_image_bridge_cmd)<br>ld.add_action(start_gazebo_ros_depth_bridge_cmd)</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
         </p></strong>
         <pre><code># AÑADIR LOS DIRECTORIOS CORRESPONDIENTES A LAS NUEVAS MIGRACIONES<br>install(<br>  DIRECTORY<br>    &lt;exercise_name&gt;/models<br>    &lt;robot_name&gt;/models<br>    &lt;robot_name&gt;/urdf<br>    &lt;robot_name&gt;/params<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;.launch.py
         </p></strong>
         <pre><code># CAMBIAR RUTAS Y NOMBRES DE LOS FICHEROS CARGADOS<br>robot_launch_dir = "/opt/jderobot/Launchers/&lt;exercise_name&gt;"<br>robot_model_dir = os.path.join(package_dir, "models/&lt;robot_name&gt;")<br>world_file_name = "&lt;exercise_name&gt;.world"</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Worlds/&lt;exercise_name&gt;.world
+            FICHERO RoboticsInfrastructure/Worlds/&lt;exercise_name&gt;.world
         </p></strong>
         <pre><code># MODIFICAR TODOS LOS APARTADOS CON EL FLAG INCLUDE<br><br># GAZEBO 11<br>&lt;include&gt;<br>  &lt;uri&gt;model://house_int2&lt;/uri&gt;<br>  &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br></include><br><br># GAZEBO HARMONIC<br>&lt;include&gt;<br>  &lt;name&gt;house_int2&lt;/name&gt;<br>  &lt;uri&gt;model://house_int2&lt;/uri&gt;<br>  &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>&lt;/include&gt;</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_name&gt;/model.sdf
         </p></strong>
         <pre><code># MODIFICAR TODOS LOS APARTADOS CON EL FLAG SENSOR Y EL FLAG PLUGIN<br><br># GAZEBO 11<br>&lt;sensor name='laser' type='ray'&gt;<br>  &lt;ray&gt;<br>    &lt;scan&gt;<br>      &lt;horizontal&gt;<br>        &lt;samples&gt;180&lt;/samples&gt;<br>        &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>        &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>        &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>      &lt;/horizontal&gt;<br>    &lt;/scan&gt;<br>    &lt;range&gt;<br>      &lt;min&gt;0.080000&lt;/min&gt;<br>      &lt;max&gt;10.000000&lt;/max&gt;<br>      &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>    &lt;/range&gt;<br>  &lt;/ray&gt;<br>  &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>  &lt;always_on&gt;1&lt;/always_on&gt;<br>  &lt;visualize&gt;1&lt;/visualize&gt;<br>  &lt;plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so"&gt;<br>    &lt;ros&gt;<br>      &lt;remapping&gt;~/out:=/roombaROS/laser/scan&lt;/remapping&gt;<br>    &lt;/ros&gt;<br>    &lt;output_type&gt;sensor_msgs/LaserScan&lt;/output_type&gt;<br>    &lt;frameName&gt;laser&lt;/frameName&gt;<br>    &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>  &lt;/plugin&gt;<br>&lt;/sensor&gt;</code></pre>
         <pre><code># GAZEBO HARMONIC<br>&lt;sensor name="hls_lfcd_lds" type="gpu_lidar"&gt;<br>  &lt;always_on&gt;true&lt;/always_on&gt;<br>  &lt;visualize&gt;true&lt;/visualize&gt;<br>  &lt;pose&gt;-0.064 0 0.121 0 0 0&lt;/pose&gt;<br>  &lt;update_rate&gt;5&lt;/update_rate&gt;<br>  &lt;topic&gt;turtlebot3/laser/scan&lt;/topic&gt;<br>  &lt;gz_frame_id&gt;base_scan&lt;/gz_frame_id&gt;<br>  &lt;lidar&gt;<br>    &lt;scan&gt;<br>      &lt;horizontal&gt;<br>        &lt;samples&gt;360&lt;/samples&gt;<br>        &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>        &lt;min_angle&gt;0.000000&lt;/min_angle&gt;<br>        &lt;max_angle&gt;6.280000&lt;/max_angle&gt;<br>      &lt;/horizontal&gt;<br>    &lt;/scan&gt;<br>    &lt;range&gt;<br>      &lt;min&gt;0.20000&lt;/min&gt;<br>      &lt;max&gt;3.5&lt;/max&gt;<br>      &lt;resolution&gt;0.015000&lt;/resolution&gt;<br>    &lt;/range&gt;<br>  &lt;/lidar&gt;<br>&lt;/sensor&gt;<br><br>&lt;plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher"&gt;<br>  &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>  &lt;robot_base_frame&gt;base_footprint&lt;/robot_base_frame&gt;<br>  &lt;odom_publish_frequency&gt;50&lt;/odom_publish_frequency&gt;<br>  &lt;odom_topic&gt;turtlebot3/odom&lt;/odom_topic&gt;<br>  &lt;dimensions&gt;3&lt;/dimensions&gt;<br>&lt;/plugin&gt;</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/robot_params.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/robot_params.yaml
         </p></strong>
         <pre><code># AÑADIR LOS TOPICS DE TODOS LOS SENSORES QUE COMPONEN EL ROBOT<br><br># gz topic published by DiffDrive plugin<br>- ros_topic_name: "&lt;robot_name&gt;/odom"<br>  gz_topic_name: "&lt;robot_name&gt;/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "&lt;robot_name&gt;/cmd_vel"<br>  gz_topic_name: "&lt;robot_name&gt;/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "&lt;robot_name&gt;/laser/scan"<br>  gz_topic_name: "&lt;robot_name&gt;/laser/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br># gz topic published by Sensors plugin (Camera)<br>- ros_topic_name: "&lt;robot_name&gt;/camera/camera_info"<br>  gz_topic_name: "&lt;robot_name&gt;/camera/camera_info"<br>  ros_type_name: "sensor_msgs/msg/CameraInfo"<br>  gz_type_name: "gz.msgs.CameraInfo"<br>  direction: GZ_TO_ROS</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/database/universes.sql
+            FICHERO RoboticsInfrastructure/database/universes.sql
         </p></strong>
         <pre><code># MODIFICAR LOS PARÁMETROS DE LOS MUNDOS<br><br># MUNDO NO MIGRADO (ANTES)<br>25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	None	ROS2	gazebo	{1,-1.5,0.6,0,0,0}<br><br># MUNDO MIGRADO (DESPUÉS)<br>25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/marker_visual_loc.config"}	ROS2	gz	{1,-1.5,0.6,0,0,0}</code></pre>
 
@@ -405,16 +410,20 @@
             PASO 1
         </strong></p>
         <p>
-            Para poder lanzar RoboticsDatabase junto a RoboticsAcademy, se debe ejecutar 
-            el siguiente comando en la terminal:
+            Para poder lanzar RoboticsDatabase junto a RoboticsAcademy, se debe ejecutar el 
+            siguiente comando en la terminal:
         </p>
         <pre><code>docker run --hostname my-postgres --name academy_db -d\<br>    -e POSTGRES_DB=academy_db \<br>    -e POSTGRES_USER=user-dev \<br>    -e POSTGRES_PASSWORD=robotics-academy-dev \<br>    -e POSTGRES_PORT=5432 \<br>    -d -p 5432:5432 \<br>    jderobot/robotics-database:latest</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Este comando se ejecuta ÚNICAMENTE la primera vez que 
+            se lance el RoboticsDatabase junto a RoboticsAcademy.
+        </p>
 
         <p><strong>
             PASO 2
         </strong></p>
         <p>
-            Una vez ejecutado este comando por primera vez, ya no será necesario ejecutarlo
+            Una vez ejecutado el comando anterior, ya no será necesario ejecutarlo
             más veces, ya que lo que ha hecho este comando es crear un nuevo contenedor para 
             RoboticsDatabase, al cual se llamará con el flag --link cuando se vaya a lanzar 
             RoboticsAcademy. A continuación se muestran 3 formas diferentes de lanzar 
@@ -455,49 +464,54 @@
         <p class="date">SEMANA 02: 29-09-2025 al 03-10-2025</p>
 
         <h1>
-            Ejercicio de calentamiento: Cambiar mundo
+            Ejercicio de calentamiento: Cambiar el mundo a un ejercicio
         </h1>
 
         <p>
             Para ir familiarizándonos con el software de RoboticsInfrastructure, se me ha 
             pedido como primer ejercicio cambiar el mundo de Gazebo de uno de los ejercicios 
-            que ya se han migrado a Gazebo Harmonic.
+            que ya se haya migrado a Gazebo Harmonic.
         </p>
 
         <p>
-            En primer lugar, he accedido al fichero RoboticsInfrastructure/database/universes.sql
-            para localizar aquellos mundos ya migrados a Gazebo Harmonic.
+            En primer lugar, he accedido al fichero 
+            <strong>RoboticsInfrastructure/database/universes.sql</strong> para localizar 
+            aquellos mundos ya migrados a Gazebo Harmonic.
         </p>
         <p>
             <strong>IMPORTANTE</strong>: La forma más sencilla de identificar los mundos migrados
-            a Gazebo Harmonic, es mirando si en su columna "type" aparece escrito "gazebo" o 
-            "gz". En caso de que aparezca escrito "gazebo", significa que ese mundo todavía se 
-            encuentra en Gazebo 11 y no se ha migrado. Pero si aparece escrito "gz", 
-            significa que ese mundo ya se ha migrado a Gazebo Harmonic.
+            a Gazebo Harmonic, es mirando si en su columna <strong>type</strong> aparece escrito 
+            <strong>gazebo</strong> o <strong>gz</strong>. En caso de que aparezca escrito 
+            <strong>gazebo</strong>, significa que ese mundo todavía se encuentra en Gazebo 11 
+            y no se ha migrado. Pero si aparece escrito <strong>gz</strong>, significa que ese 
+            mundo ya se ha migrado a Gazebo Harmonic.
         </p>
 
         <p>
-            A continuación se listan todos los mundos que tienen escrito "gz" en su columna 
-            "type", y que podrían utilizarse para llevar a cabo este ejercicio:
+            A continuación se listan todos los mundos que tienen escrito <strong>gz</strong> 
+            en su columna <strong>type</strong>, y que podrían utilizarse para llevar a cabo 
+            este ejercicio:
         </p>
         <pre><code>12	Laser Mapping Warehouse	/opt/jderobot/Launchers/laser_mapping.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/laser_mapping.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>25	Vacuums House Markers	/opt/jderobot/Launchers/marker_visual_loc.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/marker_visual_loc.config"}	ROS2	gz	{1,-1.5,0.6,0,0,0}<br>31	Rescue People Harmonic	/opt/jderobot/Launchers/rescue_people.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/rescue_people.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>32	Follow Road Harmonic	/opt/jderobot/Launchers/follow_road.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/follow_road.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>33	Small Laser Mapping Warehouse	/opt/jderobot/Launchers/small_laser_mapping.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/small_laser_mapping.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>34	Pick And Place Arm	/home/dev_ws/src/IndustrialRobots/ros2_SimRealRobotControl/ros2srrc_launch/moveit2/moveit2.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}<br>35	Car Junction	/opt/jderobot/Launchers/car_junction.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/car_junction.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>36	Drone Gymkhana Harmonic	/opt/jderobot/Launchers/drone_gymkhana.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>37	Tower Inspection Harmonic	/opt/jderobot/Launchers/power_tower_inspection.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
 
         <p>
             En mi caso, he seleccionado los mundos correspondientes a los ejercicios de 
-            "Laser Mapping" (número 12) y "Marker Based Visual Loc" (número 25). El mundo del 
-            "Laser Mapping" es un almacén tipo Amazon, mientras que el mundo del "Marker Based 
-            Visual Loc" es una casa de dos plantas.
+            <strong>Laser Mapping</strong> (número 12) y <strong>Marker Based Visual Loc</strong>
+            (número 25). El mundo del <strong>Laser Mapping</strong> es un almacén tipo Amazon, 
+            mientras que el mundo del <strong>Marker Based Visual Loc </strong>es una casa de 
+            dos plantas.
         </p>
 
         <p>
-            El resultado final de este ejercicio visualizará el almacén del "Laser Mapping" en 
-            la ventana de Gazebo del ejercicio "Marker Based Visual Loc".
+            El resultado final de este ejercicio visualizará el almacén del ejercicio
+            <strong>Laser Mapping</strong> en la ventana de Gazebo del ejercicio 
+            <strong>Marker Based Visual Loc</strong>.
         </p>
 
         <p>
-            A continuación se muestra cómo se ve inicialmente el ejercicio "Marker Based Visual 
-            Loc" al lanzar el Docker de RoboticsAcademy antes de realizar cualquier cambio en el 
-            código:
+            A continuación se muestra cómo se ve inicialmente el ejercicio 
+            <strong>Marker Based Visual Loc</strong> al lanzar el Docker de RoboticsAcademy 
+            antes de realizar cualquier cambio en el código:
         </p>
         <div style="place-items: center">
             <img src="images/semana02/markervisualloc_original_world.png" alt="Original World" class="screenshot">
@@ -505,14 +519,15 @@
 
         <p>
             El único cambio que he realizado ha sido en el fichero 
-            RoboticsInfrastructure/Launchers/marker_visual_loc.launch.py en la siguiente línea:
+            <strong>RoboticsInfrastructure/Launchers/marker_visual_loc.launch.py</strong> 
+            en la siguiente línea:
         </p>
         <pre><code># ANTES (MUNDO ORIGINAL)<br>world_file_name = "marker_visual_loc.world"<br><br># DESPUÉS (MUNDO NUEVO)<br>world_file_name = "laser_mapping.world"</code></pre>
 
         <p>
             Una vez realizado este cambio, he hecho commit y push en una nueva rama que he creado
-            y publicado llamada "test-aleon2020". Es importante hacer esto siempre para así 
-            evitar cualquier tipo de conflicto con la rama principal.
+            y publicado llamada <strong>test-aleon2020</strong>. Es importante hacer esto 
+            siempre para evitar así cualquier tipo de conflicto con la rama principal.
         </p>
 
         <p>
@@ -527,23 +542,25 @@
             <strong>IMPORTANTE</strong>: Si es la primera vez que se ejecuta este script, el 
             tiempo que tardará en ejecutarse por completo será considerablemente largo, ya que 
             debe configurar todo el entorno. Si es la primera vez que se ejecuta tardará unos 
-            35-45 minutos, de lo contrario, tardará unos 3-4 minutos.
+            35-45 minutos, de lo contrario, tardará unos 2-3 minutos.
         </p>
 
         <p>
-            Una vez finalizada la ejecución del script build.sh, se debe regresar al repositorio
-            principal:
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
         </p>
         <pre><code>cd ../..</code></pre>
 
         <p>
-            Pero antes de ejecutar el script develop_academy.sh, hay que modificar la siguiente 
-            línea del fichero RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml:
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
         </p>
         <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
 
         <p>
-            Con este cambio ya realizado, ya se puede lanzar el script develop_academy.sh:
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
 
@@ -554,23 +571,24 @@
         </p>
 
         <p>
-            A continuación se muestra cómo se ve el ejercicio "Marker Based Visual Loc" al 
-            lanzar el Docker de RoboticsAcademy con todos estos cambios realizados en el código:
+            A continuación se muestra cómo se ve el ejercicio 
+            <strong>Marker Based Visual Loc</strong> al lanzar el Docker de RoboticsAcademy 
+            con todos estos cambios realizados en el código:
         </p>
         <div style="place-items: center">
             <img src="images/semana02/markervisualloc_new_world.png" alt="New World" class="screenshot">
         </div>
 
         <h1>
-            Migración del ejercicio "Obstacle Avoidance" a Gazebo Harmonic
+            Migración del ejercicio Obstacle Avoidance a Gazebo Harmonic
         </h1>
 
         <p>
             Una vez realizado este primer ejercicio de calentamiento para irme familiarizando
             con el código de RoboticsInfrastructure, se me ha pedido realizar la migración 
-            completa de Gazebo 11 a Gazebo Harmonic del ejercicio "Obstacle Avoidance", que 
-            introduce de forma práctica la navegación local mediante el uso de campos de 
-            fuerza virtuales (VFF, Virtual Force Fields).
+            completa de Gazebo 11 a Gazebo Harmonic del ejercicio 
+            <strong>Obstacle Avoidance</strong>, que introduce de forma práctica la navegación 
+            local mediante el uso de campos de fuerza virtuales (VFF, Virtual Force Fields).
         </p>
 
         <div style="place-items: center">
@@ -585,57 +603,60 @@
         </p>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/f1/models/f1_result_laser_no_cam/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/f1/models/f1_result_laser_no_cam/model.sdf
         </strong></p>
         <p>
-            En este fichero se ha modificado las partes correspondientes a las etiquetas
+            En este fichero se han modificado las partes correspondientes a las etiquetas
             &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
             del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
-            versión los plugins correspondientes al "diff-drive-system" y al 
-            "odometry-publisher-system":
+            versión los plugins correspondientes al <strong>diff-drive-system</strong> y al 
+            <strong>odometry-publisher-system</strong>:
         </p>
         <pre><code># GAZEBO 11<br><br>    &lt;sensor name='laser' type='ray'&gt;<br>      &lt;ray&gt;<br>        &lt;scan&gt;<br>          &lt;horizontal&gt;<br>            &lt;samples&gt;180&lt;/samples&gt;<br>            &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>            &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>            &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>          &lt;/horizontal&gt;<br>        &lt;/scan&gt;<br>        &lt;range&gt;<br>          &lt;min&gt;0.080000&lt;/min&gt;<br>          &lt;max&gt;10.000000&lt;/max&gt;<br>          &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>        &lt;/range&gt;<br>      &lt;/ray&gt;<br>      &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>      &lt;plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_ray_sensor.so"&gt;<br>          &lt;ros&gt;<br>              &lt;namespace&gt;/f1&lt;/namespace&gt;<br>              &lt;remapping&gt;~/out:=laser/scan&lt;/remapping&gt;<br>          &lt;/ros&gt;<br>          &lt;output_type&gt;sensor_msgs/LaserScan&lt;/output_type&gt;<br>          &lt;frame_name&gt;base_scan&lt;/frame_name&gt;<br>      &lt;/plugin&gt;<br>      &lt;always_on&gt;1&lt;/always_on&gt;<br>      &lt;visualize&gt;1&lt;/visualize&gt;<br>    &lt;/sensor&gt;<br><br>  # ESTE PLUGIN SE INTEGRA DENTRO DE &lt;SENSOR&gt; AL PASAR A GAZEBO HARMONIC<br>  &lt;plugin name="object_controller" filename="libgazebo_ros_planar_move.so"&gt;<br>      &lt;commandTopic&gt;F1ROS/cmd_vel&lt;/commandTopic&gt;<br>      &lt;odometryTopic&gt;F1ROS/odom&lt;/odometryTopic&gt;<br>      &lt;odometryFrame&gt;odom&lt;/odometryFrame&gt;<br>      &lt;odometryRate&gt;20.0&lt;/odometryRate&gt;<br>      &lt;robotBaseFrame&gt;xf1&lt;/robotBaseFrame&gt;<br>  &lt;/plugin&gt;</code></pre>
         <pre><code># GAZEBO HARMONIC<br><br>    &lt;sensor name="laser" type="gpu_lidar"&gt;<br>      &lt;always_on&gt;1&lt;/always_on&gt;<br>      &lt;visualize&gt;1&lt;/visualize&gt;<br>      &lt;pose&gt;0.500000 0.000000 0.072000 0.000000 0.000000 0.00000&lt;/pose&gt;<br>      &lt;update_rate&gt;20.000000&lt;/update_rate&gt;<br>      &lt;topic&gt;f1/laser/scan&lt;/topic&gt;<br>      &lt;gz_frame_id&gt;base_scan&lt;/gz_frame_id&gt;<br>      &lt;lidar&gt;<br>        &lt;scan&gt;<br>          &lt;horizontal&gt;<br>            &lt;samples&gt;180&lt;/samples&gt;<br>            &lt;resolution&gt;1.000000&lt;/resolution&gt;<br>            &lt;min_angle&gt;-1.570000&lt;/min_angle&gt;<br>            &lt;max_angle&gt;1.570000&lt;/max_angle&gt;<br>          &lt;/horizontal&gt;<br>        &lt;/scan&gt;<br>        &lt;range&gt;<br>          &lt;min&gt;0.080000&lt;/min&gt;<br>          &lt;max&gt;10.000000&lt;/max&gt;<br>          &lt;resolution&gt;0.010000&lt;/resolution&gt;<br>        &lt;/range&gt;<br>      &lt;/lidar&gt;<br>    &lt;/sensor&gt;<br><br>    # AÑADIR ESTE PLUGIN AL FINAL DEL FICHERO<br>    &lt;plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive"&gt;<br>      &lt;!-- wheels --&gt;<br>      &lt;left_joint&gt;wheel_left_joint&lt;/left_joint&gt;<br>      &lt;right_joint&gt;wheel_right_joint&lt;/right_joint&gt;<br>      &lt;!-- kinematics --&gt;<br>      &lt;wheel_separation&gt;0.287&lt;/wheel_separation&gt;<br>      &lt;wheel_radius&gt;0.033&lt;/wheel_radius&gt;<br>      &lt;!-- limits --&gt;<br>      &lt;max_linear_acceleration&gt;1.0&lt;/max_linear_acceleration&gt;<br>      &lt;topic&gt;F1ROS/cmd_vel&lt;/topic&gt;<br>      &lt;frame_id&gt;odom&lt;/frame_id&gt;<br>      &lt;!-- &lt;tf_topic&gt;/tf&lt;/tf_topic&gt; --&gt;<br>      &lt;odom_publisher_frequency&gt;20.0&lt;/odom_publisher_frequency&gt;<br>      &lt;child_frame_id&gt;xf1&lt;/child_frame_id&gt;<br>    &lt;/plugin&gt;<br><br>    # AÑADIR ESTE PLUGIN AL FINAL DEL FICHERO<br>    &lt;plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher"&gt;<br>      &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>      &lt;robot_base_frame&gt;xf1&lt;/robot_base_frame&gt;<br>      &lt;odom_publish_frequency&gt;20.0&lt;/odom_publish_frequency&gt;<br>      &lt;odom_topic&gt;F1ROS/odom&lt;/odom_topic&gt;<br>      &lt;dimensions&gt;3&lt;/dimensions&gt;<br>    &lt;/plugin&gt;</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/f1/params/f1_result_laser_no_cam.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/f1/params/f1_result_laser_no_cam.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
-            cualquier fichero del tipo "robot_params.yaml" como referencia. En este caso, 
-            sólo se añaden los topics correspondientes al publicador y al subscriptor del plugin
-            del diff-drive-system y aquellos relativos al publicador del plugin del láser:
+            cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
+            En este caso, sólo se añaden los topics correspondientes al publicador y al 
+            subscriptor del plugin del diff-drive-system y aquellos relativos al publicador 
+            del plugin del láser:
         </p>
         <pre><code># gz topic published by DiffDrive plugin<br>- ros_topic_name: "F1ROS/odom"<br>  gz_topic_name: "F1ROS/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "F1ROS/cmd_vel"<br>  gz_topic_name: "F1ROS/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "F1ROS/laser/scan"<br>  gz_topic_name: "F1ROS/laser/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
         </strong></p>
         <p>
-            En este caso, la única modificación que habría que realizar en este fichero es la 
-            adición de la línea f1/params para que el fichero que se acaba de crear 
-            (f1_result_laser_no_cam.yaml) se tenga en cuenta a la hora de lanzar el Docker:
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea <strong>f1/params</strong> para que el fichero que se acaba de 
+            crear (<strong>f1_result_laser_no_cam.yaml</strong>) se tenga en cuenta a la hora de 
+            lanzar el Docker:
         </p>
         <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # F1<br>    f1/models<br>    f1/launch<br>    f1/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
         <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # F1<br>    f1/models<br>    f1/launch<br>    f1/worlds<br>    f1/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Launchers/obstacle_avoidance/spawn_robot.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/obstacle_avoidance/spawn_robot.launch.py
         </strong></p>
         <p>
-            Una vez creado el directorio "obstacle_avoidance/", y a su vez dentro de él el 
-            fichero "spawn_robot.launch.py", lo único que habría que hacer es coger cualquier 
-            fichero con el mismo nombre de otro ejercicio que ya esté migrado en Gazebo 
-            Harmonic, copiar su contenido y sólamente habría que comentar todo lo relativo a las 
-            variables "start_gazebo_ros_image_bridge_cmd" y "start_gazebo_ros_depth_bridge_cmd",
-            y lo más importante, modificar el nombre del fichero que se le pasa como 
-            argumento a bridge_params (en este caso, "f1_renault_laser_no_cam.yaml"):
+            Una vez creado el directorio <strong>obstacle_avoidance/</strong>, y a su vez dentro 
+            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
+            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
+            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
+            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
+            el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
+            <strong>f1_renault_laser_no_cam.yaml</strong>):
         </p>
         <pre><code># GAZEBO 11<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "robot_params.yaml"<br>    )</code></pre>
         <pre><code># GAZEBO HARMONIC<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "f1_renault_laser_no_cam.yaml"<br>    )</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Launchers/visualization/simple_circuit_obstacles_followingcam.config
+            FICHERO RoboticsInfrastructure/Launchers/visualization/simple_circuit_obstacles_followingcam.config
         </strong></p>
         <p>
             El contenido de este fichero es idéntico al del resto de ficheros con el mismo 
@@ -644,29 +665,31 @@
             de otro fichero que se encuentre en el mismo directorio con el mismo formato de 
             nombre.
         </p>
-        <pre><code><?xml version="1.0"?><br><br><!-- Quick start dialog --><br><dialog name="quick_start" show_again="false"/><br><br><!-- Window --><br><window><br>    <width>1024</width><br>    <height>768</height><br>    <style material_theme="Light" material_primary="DeepOrange" material_accent="LightBlue" toolbar_color_light="#f3f3f3" toolbar_text_color_light="#111111" toolbar_color_dark="#414141" toolbar_text_color_dark="#f3f3f3" plugin_toolbar_color_light="#bbdefb" plugin_toolbar_text_color_light="#111111" plugin_toolbar_color_dark="#607d8b" plugin_toolbar_text_color_dark="#eeeeee"/><br>    <menus><br>        <drawer visible="false"><br>        </drawer><br>        <plugins visible="false"><br>        </plugins><br>    </menus><br>    <dialog_on_exit>false</dialog_on_exit><br></window><br><br><!-- GUI plugins --><br><br><!-- 3D scene --><br><plugin filename="MinimalScene" name="3D View"><br>    <gz-gui><br>        <title>3D View</title><br>        <property type="bool" key="showTitleBar">false</property><br>        <property type="string" key="state">docked</property><br>    </gz-gui><br>    <engine>ogre2</engine><br>    <scene>scene</scene><br>    <ambient_light>0.4 0.4 0.4</ambient_light><br>    <background_color>0.8 0.8 0.8</background_color><br>    <camera_pose>-6 0 6 0 0.5 0</camera_pose><br></plugin><br><br><plugin filename="CameraTracking" name="Camera tracking"><br>    <gz-gui><br>        <property key="resizable" type="bool">false</property><br>        <property key="width" type="double">5</property><br>        <property key="height" type="double">5</property><br>        <property key="state" type="string">floating</property><br>        <property key="showTitleBar" type="bool">false</property><br>    </gz-gui><br>    <follow_target>drone0</follow_target><br>    <follow_offset>-2 0 2</follow_offset><br>    <follow_pgain>0.4</follow_pgain><br></plugin><br><br><!-- Plugins that add functionality to the scene --><br><plugin filename="GzSceneManager" name="Scene Manager"><br>    <gz-gui><br>        <property key="resizable" type="bool">false</property><br>        <property key="width" type="double">5</property><br>        <property key="height" type="double">5</property><br>        <property key="state" type="string">floating</property><br>        <property key="showTitleBar" type="bool">false</property><br>    </gz-gui><br></plugin><br><br><plugin filename="InteractiveViewControl" name="Interactive view control"><br>    <gz-gui><br>        <property key="resizable" type="bool">false</property><br>        <property key="width" type="double">5</property><br>        <property key="height" type="double">5</property><br>        <property key="state" type="string">floating</property><br>        <property key="showTitleBar" type="bool">false</property><br>    </gz-gui><br></plugin><br><br><plugin filename="WorldStats" name="World stats"><br>    <gz-gui><br>        <title>World stats</title><br>        <property type="bool" key="showTitleBar">false</property><br>        <property type="bool" key="resizable">false</property><br>        <property type="double" key="height">110</property><br>        <property type="double" key="width">290</property><br>        <property type="double" key="z">1</property><br>        <property type="string" key="state">floating</property><br>        <anchors target="3D View"><br>        <line own="right" target="right"/><br>        <line own="bottom" target="bottom"/><br>        </anchors><br>    </gz-gui><br>    <sim_time>true</sim_time><br>    <real_time>true</real_time><br>    <real_time_factor>true</real_time_factor><br>    <iterations>true</iterations><br>    <topic>/world/world_demo/stats</topic><br></plugin></code></pre>
+        <pre><code>&lt;?xml version="1.0"?&gt;<br><br>&lt;!-- Quick start dialog --&gt;<br>&lt;dialog name="quick_start" show_again="false"/&gt;<br><br>&lt;!-- Window --&gt;<br>&lt;window&gt;<br>    &lt;width&gt;1024&lt;/width&gt;<br>    &lt;height&gt;768&lt;/height&gt;<br>    &lt;style material_theme="Light" material_primary="DeepOrange" material_accent="LightBlue" toolbar_color_light="#f3f3f3" toolbar_text_color_light="#111111" toolbar_color_dark="#414141" toolbar_text_color_dark="#f3f3f3" plugin_toolbar_color_light="#bbdefb" plugin_toolbar_text_color_light="#111111" plugin_toolbar_color_dark="#607d8b" plugin_toolbar_text_color_dark="#eeeeee"/&gt;<br>    &lt;menus&gt;<br>        &lt;drawer visible="false"&gt;<br>        &lt;/drawer&gt;<br>        &lt;plugins visible="false"&gt;<br>        &lt;/plugins&gt;<br>    &lt;/menus&gt;<br>    &lt;dialog_on_exit&gt;false&lt;/dialog_on_exit&gt;<br>&lt;/window&gt;<br><br>&lt;!-- GUI plugins --&gt;<br><br>&lt;!-- 3D scene --&gt;<br>&lt;plugin filename="MinimalScene" name="3D View"&gt;<br>    &lt;gz-gui&gt;<br>        &lt;title&gt;3D View&lt;/title&gt;<br>        &lt;property type="bool" key="showTitleBar"&gt;false&lt;/property&gt;<br>        &lt;property type="string" key="state"&gt;docked&lt;/property&gt;<br>    &lt;/gz-gui&gt;<br>    &lt;engine&gt;ogre2&lt;/engine&gt;<br>    &lt;scene&gt;scene&lt;/scene&gt;<br>    &lt;ambient_light&gt;0.4 0.4 0.4&lt;/ambient_light&gt;<br>    &lt;background_color&gt;0.8 0.8 0.8&lt;/background_color&gt;<br>    &lt;camera_pose&gt;-6 0 6 0 0.5 0&lt;/camera_pose&gt;<br>&lt;/plugin&gt;<br><br>&lt;plugin filename="CameraTracking" name="Camera tracking"&gt;<br>    &lt;gz-gui&gt;<br>        &lt;property key="resizable" type="bool"&gt;false&lt;/property&gt;<br>        &lt;property key="width" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="height" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="state" type="string"&gt;floating&lt;/property&gt;<br>        &lt;property key="showTitleBar" type="bool"&gt;false&lt;/property&gt;<br>    &lt;/gz-gui&gt;<br>    &lt;follow_target&gt;drone0&lt;/follow_target&gt;<br>    &lt;follow_offset&gt;-2 0 2&lt;/follow_offset&gt;<br>    &lt;follow_pgain&gt;0.4&lt;/follow_pgain&gt;<br></plugin><br><br>&lt;!-- Plugins that add functionality to the scene --&gt;<br>&lt;plugin filename="GzSceneManager" name="Scene Manager"&gt;<br>    &lt;gz-gui&gt;<br>        &lt;property key="resizable" type="bool"&gt;false&lt;/property&gt;<br>        &lt;property key="width" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="height" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="state" type="string"&gt;floating&lt;/property&gt;<br>        &lt;property key="showTitleBar" type="bool"&gt;false&lt;/property&gt;<br>    &lt;/gz-gui&gt;<br>&lt;/plugin&gt;<br><br>&lt;plugin filename="InteractiveViewControl" name="Interactive view control"&gt;<br>    &lt;gz-gui&gt;<br>        &lt;property key="resizable" type="bool"&gt;false&lt;/property&gt;<br>        &lt;property key="width" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="height" type="double"&gt;5&lt;/property&gt;<br>        &lt;property key="state" type="string"&gt;floating&lt;/property&gt;<br>        &lt;property key="showTitleBar" type="bool"&gt;false&lt;/property&gt;<br>    &lt;/gz-gui&gt;<br>&lt;/plugin&gt;<br><br>&lt;plugin filename="WorldStats" name="World stats"&gt;<br>    &lt;gz-gui&gt;<br>        &lt;title&gt;World stats&lt;/title&gt;<br>        &lt;property type="bool" key="showTitleBar"&gt;false&lt;/property&gt;<br>        &lt;property type="bool" key="resizable"&gt;false&lt;/property&gt;<br>        &lt;property type="double" key="height"&gt;110&lt;/property&gt;<br>        &lt;property type="double" key="width"&gt;290&lt;/property&gt;<br>        &lt;property type="double" key="z"&gt;1&lt;/property&gt;<br>        &lt;property type="string" key="state"&gt;floating&lt;/property&gt;<br>        &lt;anchors target="3D View"&gt;<br>        &lt;line own="right" target="right"/&gt;<br>        &lt;line own="bottom" target="bottom"/&gt;<br>        &lt;/anchors&gt;<br>    &lt;/gz-gui&gt;<br>    &lt;sim_time&gt;true&lt;/sim_time&gt;<br>    &lt;real_time&gt;true&lt;/real_time&gt;<br>    &lt;real_time_factor&gt;true&lt;/real_time_factor&gt;<br>    &lt;iterations&gt;true&lt;/iterations&gt;<br>    &lt;topic&gt;/world/world_demo/stats&lt;/topic&gt;<br>&lt;/plugin&gt;</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Launchers/simple_circuit_obstacles_followingcam.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/simple_circuit_obstacles_followingcam.launch.py
         </strong></p>
         <p>
             Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
             cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
             Harmonic y modificar únicamente las líneas correspondientes a las 
-            variables "robot_launch_dir" y "world_file_name", correspondientes a las rutas en 
-            las que se encuentran el directorio que almacena el fichero "spawn_robot.launch.py" 
-            y el fichero del mundo que utiliza este ejercicio.
+            variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
+            correspondientes a las rutas en las que se encuentran el directorio que almacena el 
+            fichero <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza 
+            este ejercicio.
         </p>
         <pre><code>robot_launch_dir = "/opt/jderobot/Launchers/obstacle_avoidance"<br>world_file_name = "simple_circuit_obstacles_followingcam.world"</code></pre>
         <p>
             <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
-            "obstacle_avoidance/" el fichero "robot_state_publisher.launch.py", es obligatorio 
-            comentar y/o eliminar del código todo lo relacionado con la variable 
-            "robot_state_publisher_cmd".
+            <strong>obstacle_avoidance/</strong> el fichero 
+            <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
+            y/o eliminar del código todo lo relacionado con la variable 
+            <strong>robot_state_publisher_cmd</strong>.
         </p>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/Worlds/simple_circuit_obstacles_followingcam.world
+            FICHERO RoboticsInfrastructure/Worlds/simple_circuit_obstacles_followingcam.world
         </strong></p>
         <p>
             En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
@@ -674,18 +697,19 @@
             Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
             aquellos que aparezcan en la versión nueva.
         </p>
-        <pre><code><?xml version="1.0" ?><br><br><sdf version="1.9"><br>  <world name="default"><br>    <plugin<br>      filename="gz-sim-physics-system"<br>      name="gz::sim::systems::Physics"><br>    </plugin><br>    <plugin<br>      filename="gz-sim-scene-broadcaster-system"<br>      name="gz::sim::systems::SceneBroadcaster"><br>    </plugin><br>    <plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"><br>      <render_engine>ogre2</render_engine><br>    </plugin><br><br>    <scene><br>      <shadows>false</shadows><br>    </scene><br><br>    <light type="directional" name="sun"><br>      <!-- <cast_shadows>true</cast_shadows> --><br>      <pose>0 0 20 -1.3 0 0.5</pose><br>      <diffuse>0.8 0.8 0.8 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <intensity>2</intensity><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light"><br>      <pose>0.73 0.09 8.77 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_02"></light><br>      <pose>0.13 0.46 11.60 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.2</linear><br>        <constant>0.5</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_03"><br>      <pose>4.27 -1.27 11.21 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_04"><br>      <pose>-0.31 -3.78 8.61 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>.01 .01 .01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br><br>    <include><br>      <uri>model://simple_circuit</uri><br>	    <pose>-53.46 11.50 0 0 0 0</pose><br>    </include><br>    <include><br>      <uri>model://f1_renault_laser_no_cam</uri><br>      <pose>0.04 0.68 0 0 0 -1.57</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_1</name><br>      <pose>-0.1 -33 0 0 0 0</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_2</name><br>      <pose>-7 -40 0 0 0 -1.67</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_3</name><br>      <pose>-13.2 -18.8 0 0 0 -3</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_4</name><br>      <pose>-40 -11.5 0 0 0 -1.57</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_5</name><br>      <pose>-66.83 -34.15 0 0 0 -1.03</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_6</name><br>      <pose>-70.8 -34.2 0 0 0 -1.33</pose><br>    </include><br>	  <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_7</name><br>      <pose>-103 14.6 0 0 0 2.47</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_8</name><br>      <pose>-52.76 42.3 0 0 0 2.15</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_9</name><br>      <pose>-33.4 57.3 0 0 0 0</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_10</name><br>      <pose>-3.5 59 0 0 0 0.785</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_11</name><br>      <pose>1 26.2 0 0 0 0</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_11</name><br>      <pose>1 26.2 0 0 0 0</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy</uri><br>      <name>f1_dummy_12</name><br>      <pose>-1 24.5 0 0 0 0</pose><br>    </include><br><br>  </world><br></sdf></code></pre>
+        <pre><code>&lt;?xml version="1.0" ?&gt;<br><br>&lt;sdf version="1.9"&gt;<br>  &lt;world name="default"&gt;<br>    &lt;plugin<br>      filename="gz-sim-physics-system"<br>      name="gz::sim::systems::Physics"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-scene-broadcaster-system"<br>      name="gz::sim::systems::SceneBroadcaster"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"&gt;<br>      &lt;render_engine&gt;ogre2&lt;/render_engine&gt;<br>    &lt;/plugin&gt;<br><br>    &lt;scene&gt;<br>      &lt;shadows&gt;false&lt;/shadows&gt;<br>    &lt;/scene&gt;<br><br>    &lt;light type="directional" name="sun"&gt;<br>      &lt;!-- <cast_shadows>true</cast_shadows> --&gt;<br>      &lt;pose&gt;0 0 20 -1.3 0 0.5&lt;/pose&gt;<br>      &lt;diffuse&gt;0.8 0.8 0.8 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;intensity&gt;2&lt;/intensity&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light"&gt;<br>      &lt;pose&gt;0.73 0.09 8.77 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_02"&gt;<br>      &lt;pose&gt;0.13 0.46 11.60 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.2&lt;/linear&gt;<br>        &lt;constant&gt;0.5&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_03"&gt;<br>      &lt;pose&gt;4.27 -1.27 11.21 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_04"&gt;<br>      &lt;pose&gt;-0.31 -3.78 8.61 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;.01 .01 .01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br><br>    &lt;include&gt;<br>      &lt;uri&gt;model://simple_circuit&lt;/uri&gt;<br>      &lt;pose&gt;-53.46 11.50 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_renault_laser_no_cam&lt;/uri&gt;<br>      &lt;pose&gt;0.04 0.68 0 0 0 -1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_1&lt;/name&gt;<br>      &lt;pose&gt;-0.1 -33 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_2&lt;/name&gt;<br>      &lt;pose&gt;-7 -40 0 0 0 -1.67&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_3&lt;/name&gt;<br>      &lt;pose&gt;-13.2 -18.8 0 0 0 -3&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_4&lt;/name&gt;<br>      &lt;pose&gt;-40 -11.5 0 0 0 -1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_5&lt;/name&gt;<br>      &lt;pose&gt;-66.83 -34.15 0 0 0 -1.03&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_6&lt;/name&gt;<br>      &lt;pose&gt;-70.8 -34.2 0 0 0 -1.33&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_7&lt;/name&gt;<br>      &lt;pose&gt;-103 14.6 0 0 0 2.47&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_8&lt;/name&gt;<br>      &lt;pose&gt;-52.76 42.3 0 0 0 2.15&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_9&lt;/name&gt;<br>      &lt;pose&gt;-33.4 57.3 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_10&lt;/name&gt;<br>      &lt;pose&gt;-3.5 59 0 0 0 0.785&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_11&lt;/name&gt;<br>      &lt;pose&gt;1 26.2 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_11&lt;/name&gt;<br>      &lt;pose&gt;1 26.2 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_12&lt;/name&gt;<br>      &lt;pose&gt;-1 24.5 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>  &lt;/world&gt;<br>&lt;/sdf&gt;</code></pre>
 
         <p><strong>
-            Fichero RoboticsInfrastructure/database/universes.sql
+            FICHERO RoboticsInfrastructure/database/universes.sql
         </strong></p>
         <p>
             Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
             Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
             Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y tener en cuenta lo 
-            siguiente: Cambiar el valor de la columna "type" de "gazebo" a "gz", y el campo de 
-            la tercera columna, en el que inicialmente aparece None, sustituirlo por la ruta al 
-            fichero "simple_circuit_obstacles_followingcam.config" creado anteriormente:
+            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
+            <strong>gazebo</strong> a <strong>gz</strong>, y el campo de la tercera columna, 
+            en el que inicialmente aparece None, sustituirlo por la ruta al fichero 
+            <strong>simple_circuit_obstacles_followingcam.config</strong> creado anteriormente:
         </p>
         <pre><code># GAZEBO 11<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
         <pre><code># GAZEBO HARMONIC<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/simple_circuit_obstacles_followingcam.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
@@ -693,8 +717,8 @@
         <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
             he hecho commit y push en una nueva rama que he creado y publicado llamada 
-            "obstacle-avoidance-harmonic". Es importante hacer esto siempre para así 
-            evitar cualquier tipo de conflicto con la rama principal.
+            <strong>obstacle-avoidance-harmonic</strong>. Es importante hacer esto siempre para 
+            así evitar cualquier tipo de conflicto con la rama principal.
         </p>
 
         <p>
@@ -706,19 +730,21 @@
         <pre><code>./build.sh -i obstacle-avoidance-harmonic</code></pre>
 
         <p>
-            Una vez finalizada la ejecución del script build.sh, se debe regresar al repositorio
-            principal:
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
         </p>
         <pre><code>cd ../..</code></pre>
 
         <p>
-            Pero antes de ejecutar el script develop_academy.sh, hay que modificar la siguiente 
-            línea del fichero RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml:
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
         </p>
         <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
 
         <p>
-            Con este cambio ya realizado, ya se puede lanzar el script develop_academy.sh:
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
         </p>
         <pre><code>./scripts/develop_academy.sh</code></pre>
 
@@ -729,11 +755,11 @@
         </p>
 
         <p>
-            A continuación se muestra cómo se ve el ejercicio "Obstacle Avoidance" al 
-            lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+            A continuación se muestra cómo se ve el ejercicio <strong>Obstacle Avoidance</strong> 
+            al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
         </p>
         <p>
-            IMAGEN UNIBOTICS GAZEBO OBSTACLE AVOIDANCE
+            <strong>IMAGEN UNIBOTICS GAZEBO OBSTACLE AVOIDANCE</strong>
         </p>
         <p>
             Además, para verificar que tanto el escenario como el coche han sido migrados 
@@ -741,7 +767,7 @@
             recta para verificar que todo el proceso se ha realizado correctamente:
         </p>
         <p>
-            VÍDEO / GIF COCHE MOVIÉNDOSE POR EL ESCENARIO
+            <strong>VÍDEO / GIF COCHE MOVIÉNDOSE POR EL ESCENARIO</strong>
         </p>
     </div>
 
