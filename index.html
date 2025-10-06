@@ -715,6 +715,23 @@
         <pre><code># GAZEBO HARMONIC<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/simple_circuit_obstacles_followingcam.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
 
         <p>
+            <strong>[LA MIGRACIÓN DEL EJERCICIO OBSTACLE AVOIDANCE A GAZEBO HARMONIC CONTINÚA
+                    EN LA SEMANA 03 ...]
+            </strong>
+        </p>
+    </div>
+
+    <!-- Entrada de blog (semana 03) -->
+    <div id="entry-3" class="entry">
+        <p class="date">SEMANA 03: 06-10-2025 al 10-10-2025</p>
+
+        <p>
+            <strong>[LA MIGRACIÓN DEL EJERCICIO OBSTACLE AVOIDANCE A GAZEBO HARMONIC CONTINÚA
+                    EN LA SEMANA 03 ...]
+            </strong>
+        </p>
+
+        <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
             he hecho commit y push en una nueva rama que he creado y publicado llamada 
             <strong>obstacle-avoidance-harmonic</strong>. Es importante hacer esto siempre para 
@@ -769,14 +786,193 @@
         <p>
             <strong>VÍDEO / GIF COCHE MOVIÉNDOSE POR EL ESCENARIO</strong>
         </p>
-    </div>
 
-    <!-- Entrada de blog (semana 03) -->
-    <div id="entry-3" class="entry">
-        <p class="date">SEMANA 03: 06-10-2025 al 10-10-2025</p>
+        <h1>
+            Migración del ejercicio Global Navigation a Gazebo Harmonic
+        </h1>
+
         <p>
-            ...
+            Con el ejercicio de Obstacle Avoidance ya migrado por completo a Gazebo Harmonic, 
+            se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
+            segundo ejercicio, en este caso, <strong>Global Navigation</strong>, que introduce 
+            de forma práctica la navegación global mediante el uso y la implementación de la 
+            lógica del algoritmo de planificación de ruta del gradiente (GPP, Gradient Path 
+            Planning).
         </p>
+
+        <div style="place-items: center">
+            <img src="images/semana03/global_navigation_exercise.png" alt="Global Navigation Exercise" class="screenshot">
+        </div>
+        <p><strong>ENLACE AL ENUNCIADO DEL EJERCICIO</strong>: <a href="https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/global_navigation/">https://jderobot.github.io/RoboticsAcademy/exercises/AutonomousCars/global_navigation/</a></p>
+
+        <p>
+            A continuación, se encuentran todos los ficheros que se han modificado y/o creado
+            (y de qué forma) para poder llevar a cabo la migración completa de este ejercicio
+            de Gazebo 11 a Gazebo Harmonic:
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+        </strong></p>
+        <p>
+            En este fichero se han modificado las partes correspondientes a las etiquetas
+            &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
+            del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
+            versión los plugins correspondientes al <strong>diff-drive-system</strong> y al 
+            <strong>odometry-publisher-system</strong>:
+        </p>
+        <pre><code># GAZEBO 11<br>...</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/&lt;robot_model_name&gt;.yaml
+        </strong></p>
+        <p>
+            Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
+            cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
+            En este caso, sólo se añaden los topics correspondientes al ...:
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+        </strong></p>
+        <p>
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea ... para que el fichero que se acaba de 
+            crear (...) se tenga en cuenta a la hora de lanzar el Docker:
+        </p>
+        <pre><code># GAZEBO 11<br>...</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/obstacle_avoidance/spawn_robot.launch.py
+        </strong></p>
+        <p>
+            Una vez creado el directorio <strong>global_navigation/</strong>, y a su vez dentro 
+            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
+            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
+            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
+            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
+            el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
+            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+        </p>
+        <pre><code># GAZEBO 11<br>...</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/visualization/&lt;universe_name&gt;.config
+        </strong></p>
+        <p>
+            El contenido de este fichero es idéntico al del resto de ficheros con el mismo 
+            formato de nombre (&lt;universe_name&gt;.config), por lo que lo único que habría que 
+            hacer es crear este nuevo fichero y rellenar su contenido con un simple Ctrl+C Ctrl+V 
+            de otro fichero que se encuentre en el mismo directorio con el mismo formato de 
+            nombre.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/&lt;universe_name&gt;.launch.py
+        </strong></p>
+        <p>
+            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y modificar únicamente las líneas correspondientes a las 
+            variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
+            correspondientes a las rutas en las que se encuentran el directorio que almacena el 
+            fichero <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza 
+            este ejercicio.
+        </p>
+        <pre><code>CODE</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
+            <strong>global_navigation/</strong> el fichero 
+            <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
+            y/o eliminar del código todo lo relacionado con la variable 
+            <strong>robot_state_publisher_cmd</strong>.
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Worlds/&lt;universe_name&gt;.world
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
+            aquellos que aparezcan en la versión nueva.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/database/universes.sql
+        </strong></p>
+        <p>
+            Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
+            Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
+            Gazebo 11 a Gazebo Harmonic (en este caso, Global Navigation) y tener en cuenta lo 
+            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
+            <strong>gazebo</strong> a <strong>gz</strong>, y el campo de la tercera columna, 
+            en el que inicialmente aparece None, sustituirlo por la ruta al fichero 
+            <strong>&lt;universe_name&gt;.config</strong> creado anteriormente:
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p>
+            Una vez realizados todos estos cambios en todos los ficheros mencionados, 
+            he hecho commit y push en una nueva rama que he creado y publicado llamada 
+            <strong>global-navigation-harmonic</strong>. Es importante hacer esto siempre para 
+            así evitar cualquier tipo de conflicto con la rama principal.
+        </p>
+
+        <p>
+            Como todos los cambios se han realizado en ficheros que se encuentran dentro de 
+            RoboticsInfrastructure, es obligatorio generar un nuevo RADI. Para ello, se deben 
+            ejecutar los siguientes comandos en la terminal:
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <pre><code>./build.sh -i global-navigation-harmonic</code></pre>
+
+        <p>
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
+        </p>
+        <pre><code>cd ../..</code></pre>
+
+        <p>
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
+        </p>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
+
+        <p>
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <p>
+            Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que 
+            aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics 
+            en local y verificar que los cambios se han realizado correctamente.
+        </p>
+
+        <p>
+            A continuación se muestra cómo se ve el ejercicio <strong>Global Navigation</strong> 
+            al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+        </p>
+        <p>
+            <strong>IMAGEN UNIBOTICS GAZEBO GLOBAL NAVIGATION</strong>
+        </p>
+        <p>
+            Además, para verificar que tanto el escenario como el coche han sido migrados 
+            correctamente, se muestra una pequeña animación del coche moviéndose en línea 
+            recta para verificar que todo el proceso se ha realizado correctamente:
+        </p>
+        <p>
+            <strong>VÍDEO / GIF COCHE MOVIÉNDOSE POR EL ESCENARIO</strong>
     </div>
     
     <!-- Entrada de blog (semana 04) -->
