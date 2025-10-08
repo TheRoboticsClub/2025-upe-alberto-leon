@@ -840,16 +840,16 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/taxi_navigator/models/taxi_holo_ROS_harmonic/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/taxi_navigator/models/taxi_holo_ROS/model.sdf
         </strong></p>
         <p>
             En este caso, no ha sido llevar a cabo ninguna modificación en este fichero, ya que el 
             taxi utilizado para esta versión ya se encuentra migrado a Gazebo Harmonic:
         </p>
-        <pre><code>&lt;?xml version="1.0"?&gt;<br>&lt;sdf version="1.9"&gt;<br>  &lt;model name="taxi_holo_ROS_harmonic"&gt;<br>    &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;static&gt;false&lt;/static&gt;<br><br>    &lt;!-- Chassis link --&gt;<br>    &lt;link name="taxi_holo"&gt;<br>      &lt;inertial&gt;<br>        &lt;mass&gt;750.0&lt;/mass&gt;<br>        &lt;inertia&gt;<br>          &lt;ixx&gt;1&lt;/ixx&gt;&lt;ixy&gt;0.0&lt;/ixy&gt;&lt;ixz&gt;0.0&lt;/ixz&gt;<br>          &lt;iyy&gt;1&lt;/iyy&gt;&lt;iyz&gt;0.0&lt;/iyz&gt;<br>          &lt;izz&gt;1&lt;/izz&gt;<br>        &lt;/inertia&gt;<br>      &lt;/inertial&gt;<br><br>      &lt;!-- collision & visual both use the same mesh --&gt;<br>      &lt;collision name="collision"&gt;<br>        &lt;geometry&gt;<br>          &lt;mesh&gt;<br>            &lt;uri&gt;model://taxi_holo_ROS_harmonic/meshes/taxi_holo.obj&lt;/uri&gt;<br>          &lt;/mesh&gt;<br>        &lt;/geometry&gt;<br>      &lt;/collision&gt;<br>      &lt;visual name="visual"&gt;<br>        &lt;geometry&gt;<br>          &lt;mesh&gt;<br>            &lt;uri&gt;model://taxi_holo_ROS_harmonic/meshes/taxi_holo.obj&lt;/uri&gt;<br>          &lt;/mesh&gt;<br>        &lt;/geometry&gt;<br>      &lt;/visual&gt;<br>    &lt;/link&gt;<br><br>    &lt;!-- VelocityControl plugin: applies Twist directly to the chassis link --&gt;<br>    &lt;plugin<br><br>      filename="gz-sim-velocity-control-system"<br>      name="gz::sim::systems::VelocityControl"&gt;<br><br>      &lt;topic&gt;/taxi_holo/cmd_vel&lt;/topic&gt;<br><br>    &lt;/plugin&gt;<br><br>    &lt;plugin<br>      filename="gz-sim-odometry-publisher-system"<br>      name="gz::sim::systems::OdometryPublisher"&gt;<br>      &lt;odom_topic&gt;/taxi_holo/odom&lt;/odom_topic&gt;<br>      &lt;robot_base_frame&gt;taxi_holo&lt;/robot_base_frame&gt;<br>      &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>      &lt;odom_publish_frequency&gt;20&lt;/odom_publish_frequency&gt;<br>      &lt;dimensions&gt;3&lt;/dimensions&gt;<br>    &lt;/plugin&gt;<br><br>  &lt;/model&gt;<br>&lt;/sdf&gt;</code></pre>
+        <pre><code>&lt;?xml version="1.0"?&gt;<br>&lt;sdf version="1.9"&gt;<br>  &lt;model name="taxi_holo_ROS"&gt;<br>    &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;static&gt;false&lt;/static&gt;<br><br>    &lt;!-- Chassis link --&gt;<br>    &lt;link name="taxi_holo"&gt;<br>      &lt;inertial&gt;<br>        &lt;mass&gt;750.0&lt;/mass&gt;<br>        &lt;inertia&gt;<br>          &lt;ixx&gt;1&lt;/ixx&gt;&lt;ixy&gt;0.0&lt;/ixy&gt;&lt;ixz&gt;0.0&lt;/ixz&gt;<br>          &lt;iyy&gt;1&lt;/iyy&gt;&lt;iyz&gt;0.0&lt;/iyz&gt;<br>          &lt;izz&gt;1&lt;/izz&gt;<br>        &lt;/inertia&gt;<br>      &lt;/inertial&gt;<br><br>      &lt;!-- collision & visual both use the same mesh --&gt;<br>      &lt;collision name="collision"&gt;<br>        &lt;geometry&gt;<br>          &lt;mesh&gt;<br>            &lt;uri&gt;model://taxi_holo_ROS_harmonic/meshes/taxi_holo.obj&lt;/uri&gt;<br>          &lt;/mesh&gt;<br>        &lt;/geometry&gt;<br>      &lt;/collision&gt;<br>      &lt;visual name="visual"&gt;<br>        &lt;geometry&gt;<br>          &lt;mesh&gt;<br>            &lt;uri&gt;model://taxi_holo_ROS_harmonic/meshes/taxi_holo.obj&lt;/uri&gt;<br>          &lt;/mesh&gt;<br>        &lt;/geometry&gt;<br>      &lt;/visual&gt;<br>    &lt;/link&gt;<br><br>    &lt;!-- VelocityControl plugin: applies Twist directly to the chassis link --&gt;<br>    &lt;plugin<br><br>      filename="gz-sim-velocity-control-system"<br>      name="gz::sim::systems::VelocityControl"&gt;<br><br>      &lt;topic&gt;/taxi_holo/cmd_vel&lt;/topic&gt;<br><br>    &lt;/plugin&gt;<br><br>    &lt;plugin<br>      filename="gz-sim-odometry-publisher-system"<br>      name="gz::sim::systems::OdometryPublisher"&gt;<br>      &lt;odom_topic&gt;/taxi_holo/odom&lt;/odom_topic&gt;<br>      &lt;robot_base_frame&gt;taxi_holo&lt;/robot_base_frame&gt;<br>      &lt;odom_frame&gt;odom&lt;/odom_frame&gt;<br>      &lt;odom_publish_frequency&gt;20&lt;/odom_publish_frequency&gt;<br>      &lt;dimensions&gt;3&lt;/dimensions&gt;<br>    &lt;/plugin&gt;<br><br>  &lt;/model&gt;<br>&lt;/sdf&gt;</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/taxi_navigator/params/taxi_holo_ROS_harmonic.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/taxi_navigator/params/taxi_holo_ROS.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -867,7 +867,7 @@
             En este caso, la única modificación realizada en este fichero es la 
             adición de las líneas <strong>taxi_navigator/launch</strong>,
             <strong>taxi_navigator/params</strong> y <strong>taxi_navigator/worlds</strong>, 
-            para que el fichero que se acaba de crear (<strong>taxi_holo_ROS_harmonic.yaml</strong>),
+            para que el fichero que se acaba de crear (<strong>taxi_holo_ROS.yaml</strong>),
             se tenga en cuenta a la hora de lanzar el Docker:
         </p>
         <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # GLOBAL_NAVIGATION<br>    taxi_navigator/models<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
@@ -887,7 +887,7 @@
             <strong>&lt;robot_model_name&gt;.yaml</strong>):
         </p>
         <pre><code># GAZEBO 11<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "robot_params.yaml"<br>    )</code></pre>
-        <pre><code># GAZEBO HARMONIC<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "taxi_holo_ROS_harmonic.yaml"<br>    )</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "taxi_holo_ROS.yaml"<br>    )</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/visualization/taxi_navigator.config
