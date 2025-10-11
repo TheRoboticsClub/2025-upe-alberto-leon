@@ -229,12 +229,11 @@
         </p></strong>
         <pre><code>sudo ./scripts/develop_academy.sh</code></pre>
         <p>
-            <strong>IMPORTANTE</strong>: Al ejecutar el comando con sudo, todo se ejecuta 
-            correctamente.
+            <strong>IMPORTANTE</strong>: Hay que ejecutar el comando con sudo.
         </p>
 
         <h1>
-            Configuración y uso del Docker en Visual Studio Code
+            Configuración y uso de Docker en Visual Studio Code
         </h1>
 
         <p><strong>
@@ -287,7 +286,7 @@
         <pre><code>cd ../..</code></pre>
         <p>
             - Cambiar la siguiente línea del fichero 
-            <strong>compose_cfg/dev_humble_cpu.yaml</strong>.
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>.
         </p>
         <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
         <p>
@@ -325,7 +324,7 @@
             PASO 2
         </p></strong>
         <p>
-            Se deja ejecutando el comando anterior en la terminal y se accede a la 
+            Se deja ejecutando el comando anterior ejecutando en la terminal y se accede a la 
             <a href="https://unibotics.org/">página web de Unibotics</a>.
         </p>
 
@@ -349,7 +348,7 @@
             PASO 4
         </p></strong>
         <p>
-            Verificar que, tanto la simulación en Gazebo como la terminal, se han lanzado 
+            Verificar que, tanto la simulación en Gazebo como en la terminal, se han lanzado 
             correctamente.
         </p>
         <div style="place-items: center">
@@ -404,7 +403,7 @@
             PASO 3
         </strong></p>
         <p>
-            Por último, para comprobar que todos los Dockers que se van a utilizar se han 
+            Por último, para comprobar que todos los Dockers que se van a utilizar se hayan 
             descargado y configurado correctamente, se debe ejecutar el siguiente comando
             en la terminal:
         </p>
@@ -422,7 +421,7 @@
         </h1>
 
         <p>
-            Para ir familiarizándonos con el software de RoboticsInfrastructure, se me ha 
+            Para ir familiarizándome con el software de RoboticsInfrastructure, se me ha 
             pedido como primer ejercicio cambiar el mundo de Gazebo de uno de los ejercicios 
             que ya se haya migrado a Gazebo Harmonic.
         </p>
@@ -651,7 +650,7 @@
             Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
             aquellos que aparezcan en la versión nueva.
         </p>
-        <pre><code><?xml version="1.0" ?><br><br><sdf version="1.9"><br>  <world name="default"><br><br>    <plugin<br>      filename="gz-sim-physics-system"<br>      name="gz::sim::systems::Physics"><br>    </plugin><br>    <plugin<br>      filename="gz-sim-scene-broadcaster-system"<br>      name="gz::sim::systems::SceneBroadcaster"><br>    </plugin><br>    <plugin<br>      filename="gz-sim-user-commands-system"<br>      name="gz::sim::systems::UserCommands"><br>    </plugin><br>    <plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"><br>      <render_engine>ogre2</render_engine><br>    </plugin><br><br>    <scene><br>      <shadows>false</shadows><br>    </scene><br><br>    <light type="directional" name="sun"><br>      <!-- <cast_shadows>true</cast_shadows> --><br>      <pose>0 0 20 -1.3 0 0.5</pose><br>      <diffuse>0.8 0.8 0.8 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <intensity>2</intensity><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light"><br>      <pose>0.73 0.09 8.77 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>.01 .01 .01 1</specular><br>      <attenuation><br>        <range>20</range><br>        <linear>0.2</linear><br>        <constant>0.8</constant><br>        <quadratic>0.01</quadratic><br>      </attenuation><br>      <!-- <cast_shadows>true</cast_shadows> --><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_01"><br>      <pose>3.482 -4.28 8.87 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_02"><br>      <pose>0.13 0.46 11.60 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.2</linear><br>        <constant>0.5</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_03"><br>      <pose>4.27 -1.27 11.21 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>0.01 0.01 0.01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br>    <light type="point" name="point_light_04"><br>      <pose>-0.31 -3.78 8.61 0 0 0</pose><br>      <diffuse>1 1 1 1</diffuse><br>      <specular>.01 .01 .01 1</specular><br>      <attenuation><br>        <range>10</range><br>        <linear>0.5</linear><br>        <constant>0.8</constant><br>        <quadratic>0.001</quadratic><br>      </attenuation><br>      <cast_shadows>false</cast_shadows><br>      <visualize>false</visualize><br>    </light><br><br>    <model name='ground_plane'><br>      <static>true</static><br>      <link name='link'><br>        <collision name='collision'><br>          <geometry><br>            <plane><br>              <normal>0.0 0.0 1</normal><br>              <size>1000 1000</size><br>            </plane><br>          </geometry><br>        </collision><br>      </link><br>      <pose>0 0 0 0 0 0</pose><br>    </model><br>    <include><br>      <uri>model://simple_circuit</uri><br>	    <pose>-53.46 11.50 0 0 0 0</pose><br>    </include><br>    <include><br>      <uri>model://f1_renault_laser_no_cam</uri><br>      <pose>0.04 0.68 0 0 0 -1.57</pose><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_1</name><br>      <pose>-0.1 -33 0 0 0 0</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_2</name><br>      <pose>-7 -40 0 0 0 -1.67</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_3</name><br>      <pose>-13.2 -18.8 0 0 0 -3</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_4</name><br>      <pose>-40 -11.5 0 0 0 -1.57</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_5</name><br>      <pose>-66.83 -34.15 0 0 0 -1.03</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_6</name><br>      <pose>-70.8 -34.2 0 0 0 -1.33</pose><br>      <static>true</static><br>    </include><br>	  <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_7</name><br>      <pose>-103 14.6 0 0 0 2.47</pose><br>      <static>true</static><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_8</name><br>      <pose>-52.76 42.3 0 0 0 2.15</pose><br>      <static>true</static><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_9</name><br>      <pose>-33.4 57.3 0 0 0 0</pose><br>      <static>true</static><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_10</name><br>      <pose>-3.5 59 0 0 0 0.785</pose><br>      <static>true</static><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_11</name><br>      <pose>1 26.2 0 0 0 0</pose><br>      <static>true</static><br>    </include><br>    <include><br>      <uri>model://f1_dummy_harmonic</uri><br>      <name>f1_dummy_12</name><br>      <pose>-1 24.5 0 0 0 0</pose><br>      <static>true</static><br>    </include><br><br>  </world><br></sdf></code></pre>
+        <pre><code>&lt;?xml version="1.0" ?&gt;<br><br>&lt;sdf version="1.9"&gt;<br>  &lt;world name="default"&gt;<br><br>    &lt;plugin<br>      filename="gz-sim-physics-system"<br>      name="gz::sim::systems::Physics"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-scene-broadcaster-system"<br>      name="gz::sim::systems::SceneBroadcaster"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-user-commands-system"<br>      name="gz::sim::systems::UserCommands"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"&gt;<br>      &lt;render_engine&gt;ogre2&lt;/render_engine&gt;<br>    &lt;/plugin&gt;<br><br>    &lt;scene&gt;<br>      &lt;shadows&gt;false&lt;/shadows&gt;<br>    &lt;/scene&gt;<br><br>    &lt;light type="directional" name="sun"&gt;<br>      &lt;!-- &lt;cast_shadows&gt;true&lt;/cast_shadows&gt; --&gt;<br>      &lt;pose&gt;0 0 20 -1.3 0 0.5&lt;/pose&gt;<br>      &lt;diffuse&gt;0.8 0.8 0.8 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;intensity&gt;2&lt;/intensity&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light"&gt;<br>      &lt;pose&gt;0.73 0.09 8.77 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;.01 .01 .01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;20&lt;/range&gt;<br>        &lt;linear&gt;0.2&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.01&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;!-- &lt;cast_shadows&gt;true&lt;/cast_shadows&gt; --&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_01"&gt;<br>      &lt;pose&gt;3.482 -4.28 8.87 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_02"&gt;<br>      &lt;pose&gt;0.13 0.46 11.60 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.2&lt;/linear&gt;<br>        &lt;constant&gt;0.5&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_03"&gt;<br>      &lt;pose&gt;4.27 -1.27 11.21 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.01 0.01 0.01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br>    &lt;light type="point" name="point_light_04"&gt;<br>      &lt;pose&gt;-0.31 -3.78 8.61 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;1 1 1 1&lt;/diffuse&gt;<br>      &lt;specular&gt;.01 .01 .01 1&lt;/specular&gt;<br>      &lt;attenuation&gt;<br>        &lt;range&gt;10&lt;/range&gt;<br>        &lt;linear&gt;0.5&lt;/linear&gt;<br>        &lt;constant&gt;0.8&lt;/constant&gt;<br>        &lt;quadratic&gt;0.001&lt;/quadratic&gt;<br>      &lt;/attenuation&gt;<br>      &lt;cast_shadows&gt;false&lt;/cast_shadows&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br><br>    &lt;model name='ground_plane'&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>      &lt;link name='link'&gt;<br>        &lt;collision name='collision'&gt;<br>          &lt;geometry&gt;<br>            &lt;plane&gt;<br>              &lt;normal&gt;0.0 0.0 1&lt;/normal&gt;<br>              &lt;size&gt;1000 1000&lt;/size&gt;<br>            &lt;/plane&gt;<br>          &lt;/geometry&gt;<br>        &lt;/collision&gt;<br>      &lt;/link&gt;<br>      &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;/model&gt;<br><br>    &lt;include&gt;<br>      &lt;uri&gt;model://simple_circuit&lt;/uri&gt;<br>      &lt;pose&gt;-53.46 11.50 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_renault_laser_no_cam&lt;/uri&gt;<br>      &lt;pose&gt;0.04 0.68 0 0 0 -1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_1&lt;/name&gt;<br>      &lt;pose&gt;-0.1 -33 0 0 0 0&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_2&lt;/name&gt;<br>      &lt;pose&gt;-7 -40 0 0 0 -1.67&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_3&lt;/name&gt;<br>      &lt;pose&gt;-13.2 -18.8 0 0 0 -3&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_4&lt;/name&gt;<br>      &lt;pose&gt;-40 -11.5 0 0 0 -1.57&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_5&lt;/name&gt;<br>      &lt;pose&gt;-66.83 -34.15 0 0 0 -1.03&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_6&lt;/name&gt;<br>      &lt;pose&gt;-70.8 -34.2 0 0 0 -1.33&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_7&lt;/name&gt;<br>      &lt;pose&gt;-103 14.6 0 0 0 2.47&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_8&lt;/name&gt;<br>      &lt;pose&gt;-52.76 42.3 0 0 0 2.15&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_9&lt;/name&gt;<br>      &lt;pose&gt;-33.4 57.3 0 0 0 0&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_10&lt;/name&gt;<br>      &lt;pose&gt;-3.5 59 0 0 0 0.785&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_11&lt;/name&gt;<br>      &lt;pose&gt;1 26.2 0 0 0 0&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://f1_dummy_harmonic&lt;/uri&gt;<br>      &lt;name&gt;f1_dummy_12&lt;/name&gt;<br>      &lt;pose&gt;-1 24.5 0 0 0 0&lt;/pose&gt;<br>      &lt;static&gt;true&lt;/static&gt;<br>    &lt;/include&gt;<br><br>  &lt;/world&gt;<br>&lt;/sdf&gt;</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/database/universes.sql
@@ -659,9 +658,8 @@
         <p>
             Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
             Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
-            Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y tener en cuenta lo 
-            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
-            <strong>gazebo</strong> a <strong>gz</strong>:
+            Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y cambiar el valor de
+            la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
         <pre><code># GAZEBO 11<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
         <pre><code># GAZEBO HARMONIC<br>19	Obstacle Avoidance Default	/opt/jderobot/Launchers/simple_circuit_obstacles_followingcam.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
@@ -764,8 +762,9 @@
             FICHERO RoboticsInfrastructure/CustomRobots/taxi_navigator/models/taxi_holo_ROS_harmonic/model.sdf
         </strong></p>
         <p>
-            En este caso, no ha sido llevar a cabo ninguna modificación en este fichero, ya que el 
-            taxi utilizado para esta versión ya se encuentra migrado a Gazebo Harmonic:
+            En este caso, no ha sido necesario llevar a cabo ninguna modificación en este 
+            fichero, ya que el coche utilizado para esta versión ya se encuentra migrado a 
+            Gazebo Harmonic:
         </p>
         <pre><code>CODE</code></pre>
 
@@ -805,7 +804,7 @@
             lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
             <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
             el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
-            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+            <strong>taxi_holo_ROS_harmonic.yaml</strong>):
         </p>
         <pre><code>CODE</code></pre>
 
@@ -847,9 +846,8 @@
         <p>
             Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
             Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
-            Gazebo 11 a Gazebo Harmonic (en este caso, Global Navigation) y tener en cuenta lo 
-            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
-            <strong>gazebo</strong> a <strong>gz</strong>:
+            Gazebo 11 a Gazebo Harmonic (en este caso, Global Navigation) y cambiar el valor de 
+            la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
         <pre><code># GAZEBO 11<br>8	City Large	/opt/jderobot/Launchers/taxi_navigator.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
         <pre><code># GAZEBO HARMONIC<br>8	City Large	/opt/jderobot/Launchers/taxi_navigator.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
@@ -948,16 +946,17 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
         </strong></p>
         <p>
-            En este caso, no ha sido llevar a cabo ninguna modificación en este fichero, ya que el 
-            taxi utilizado para esta versión ya se encuentra migrado a Gazebo Harmonic:
+            En este caso, no ha sido necesario llevar a cabo ninguna modificación en este 
+            fichero, ya que el coche utilizado para esta versión ya se encuentra migrado a 
+            Gazebo Harmonic:
         </p>
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/&lt;robot_name&gt;.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -974,7 +973,7 @@
         <p>
             En este caso, la única modificación realizada en este fichero es la 
             adición de las líneas [...], 
-            para que el fichero que se acaba de crear (<strong>&lt;robot_name&gt;.yaml</strong>),
+            para que el fichero que se acaba de crear (<strong>&lt;robot_model_name&gt;.yaml</strong>),
             se tenga en cuenta a la hora de lanzar el Docker:
         </p>
         <pre><code>CODE</code></pre>
@@ -995,7 +994,7 @@
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;robot_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/&lt;robot_model_name&gt;.launch.py
         </strong></p>
         <p>
             Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
@@ -1032,9 +1031,8 @@
         <p>
             Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
             Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
-            Gazebo 11 a Gazebo Harmonic (en este caso, Autoparking) y tener en cuenta lo 
-            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
-            <strong>gazebo</strong> a <strong>gz</strong>:
+            Gazebo 11 a Gazebo Harmonic (en este caso, Autoparking) y cambiar el valor de la 
+            columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
         <pre><code>CODE</code></pre>
 
@@ -1117,7 +1115,7 @@
             Con el ejercicio de Autoparking ya migrado por completo a Gazebo Harmonic, 
             se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
             cuarto ejercicio, en este caso, <strong>Follow Line</strong>, que consiste en la 
-            implementación de un controlador PID reactivo capaz de seguir la línea roja 
+            implementación de un controlador PID reactivo que sea capaz de seguir la línea roja 
             pintada en el suelo del circuito de carreras.
         </p>
 
@@ -1133,16 +1131,17 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/models/&lt;robot_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
         </strong></p>
         <p>
-            En este caso, no ha sido llevar a cabo ninguna modificación en este fichero, ya que el 
-            taxi utilizado para esta versión ya se encuentra migrado a Gazebo Harmonic:
+            En este caso, no ha sido necesario llevar a cabo ninguna modificación en este 
+            fichero, ya que el coche utilizado para esta versión ya se encuentra migrado a 
+            Gazebo Harmonic:
         </p>
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_name&gt;/params/&lt;robot_name&gt;.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -1159,7 +1158,7 @@
         <p>
             En este caso, la única modificación realizada en este fichero es la 
             adición de las líneas [...], 
-            para que el fichero que se acaba de crear (<strong>&lt;robot_name&gt;.yaml</strong>),
+            para que el fichero que se acaba de crear (<strong>&lt;robot_model_name&gt;.yaml</strong>),
             se tenga en cuenta a la hora de lanzar el Docker:
         </p>
         <pre><code>CODE</code></pre>
@@ -1180,7 +1179,7 @@
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;robot_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/&lt;robot_model_name&gt;.launch.py
         </strong></p>
         <p>
             Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
@@ -1217,9 +1216,8 @@
         <p>
             Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
             Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
-            Gazebo 11 a Gazebo Harmonic (en este caso, Follow Line) y tener en cuenta lo 
-            siguiente: Cambiar el valor de la columna <strong>type</strong> de 
-            <strong>gazebo</strong> a <strong>gz</strong>:
+            Gazebo 11 a Gazebo Harmonic (en este caso, Follow Line) y cambiar el valor de la 
+            columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
         <pre><code>CODE</code></pre>
 
