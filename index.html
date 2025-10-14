@@ -947,7 +947,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/models/waymo/model.sdf
         </strong></p>
         <p>
             En este caso, no ha sido necesario llevar a cabo ninguna modificación en este 
@@ -957,7 +957,7 @@
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/params/waymo.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -973,32 +973,36 @@
         </strong></p>
         <p>
             En este caso, la única modificación realizada en este fichero es la 
-            adición de las líneas [...], 
-            para que el fichero que se acaba de crear (<strong>&lt;robot_model_name&gt;.yaml</strong>),
+            adición de las líneas <strong>autopark_harmonic/models</strong>, 
+            <strong>autopark_harmonic/params</strong> y <strong>autopark_harmonic/worlds</strong>
+            para que el fichero que se acaba de crear (<strong>waymo.yaml</strong>),
             se tenga en cuenta a la hora de lanzar el Docker:
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # AUTOPARK_HARMONIC<br>    autopark_harmonic/models<br>    autopark_harmonic/params<br>    autopark_harmonic/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;exercise_name&gt;/spawn_robot.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/autopark_line/spawn_robot.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_battery/spawn_robot.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_sideways/spawn_robot.launch.py
         </strong></p>
         <p>
-            Una vez creado el directorio <strong>&lt;exercise_name&gt;/</strong>, y a su vez dentro 
-            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
-            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
-            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
-            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            Una vez creados los directorios <strong>autopark_line/</strong>,
+            <strong>autopark_battery/</strong> y <strong>autopark_sideways/</strong>, y a su vez 
+            dentro de cada uno de ellos el mismo fichero <strong>spawn_robot.launch.py</strong>, 
+            lo único que habría que hacer es coger cualquier fichero con el mismo nombre de otro 
+            ejercicio que ya esté migrado a Gazebo Harmonic, copiar su contenido y sólamente 
+            habría que comentar todo lo relativo a las variables 
+            <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
             <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
             el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
-            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+            <strong>waymo.yaml</strong>):
         </p>
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;robot_model_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/autopark_line.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_battery.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_sideways.launch.py
         </strong></p>
         <p>
-            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            Para estos ficheros, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
             cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
             Harmonic y modificar únicamente las líneas correspondientes a las 
             variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
@@ -1008,18 +1012,19 @@
         </p>
         <pre><code>CODE</code></pre>
         <p>
-            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
-            <strong>&lt;exercise_name&gt;/</strong> el fichero 
+            <strong>IMPORTANTE</strong>: En caso de que no se hayan creado dentro de los 
+            directorios <strong>autopark_line/</strong>, <strong>autopark_battery/</strong> y
+            <strong>autopark_sideways/</strong> el fichero 
             <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
             y/o eliminar del código todo lo relacionado con la variable 
             <strong>robot_state_publisher_cmd</strong>.
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Worlds/&lt;world_name&gt;.world
+            FICHERO RoboticsInfrastructure/Worlds/autopark_line.world<br>FICHERO RoboticsInfrastructure/Worlds/autopark_battery.world<br>FICHERO RoboticsInfrastructure/Worlds/autopark_sideways.world
         </strong></p>
         <p>
-            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            En estos ficheros, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
             cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
             Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
             aquellos que aparezcan en la versión nueva.
@@ -1035,7 +1040,8 @@
             Gazebo 11 a Gazebo Harmonic (en este caso, Autoparking) y cambiar el valor de la 
             columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># GAZEBO 11<br>39	Autopark_line	/opt/jderobot/Launchers/autopark_line.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}<br>40	Autopark_battery	/opt/jderobot/Launchers/autopark_battery.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}<br>41	Autopark_sideways	/opt/jderobot/Launchers/autopark_sideways.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>39	Autopark_line	/opt/jderobot/Launchers/autopark_line.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>40	Autopark_battery	/opt/jderobot/Launchers/autopark_battery.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}<br>41	Autopark_sideways	/opt/jderobot/Launchers/autopark_sideways.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
 
         <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
