@@ -973,13 +973,13 @@
         </strong></p>
         <p>
             En este caso, la única modificación realizada en este fichero es la 
-            adición de las líneas <strong>autopark_harmonic/models</strong>, 
-            <strong>autopark_harmonic/params</strong> y <strong>autopark_harmonic/worlds</strong>
-            para que el fichero que se acaba de crear (<strong>waymo.yaml</strong>),
-            se tenga en cuenta a la hora de lanzar el Docker:
+            adición de las líneas <strong>autopark_harmonic/launch</strong>, 
+            <strong>autopark_harmonic/models</strong>, <strong>autopark_harmonic/params</strong> 
+            y <strong>autopark_harmonic/worlds</strong>para que el fichero que se acaba de crear
+            (<strong>waymo.yaml</strong>), se tenga en cuenta a la hora de lanzar el Docker:
         </p>
         <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
-        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # AUTOPARK_HARMONIC<br>    autopark_harmonic/models<br>    autopark_harmonic/params<br>    autopark_harmonic/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # AUTOPARK_HARMONIC<br>    autopark_harmonic/launch<br>    autopark_harmonic/models<br>    autopark_harmonic/params<br>    autopark_harmonic/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/autopark_line/spawn_robot.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_battery/spawn_robot.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/autopark_sideways/spawn_robot.launch.py
