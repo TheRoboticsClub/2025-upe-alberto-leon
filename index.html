@@ -958,7 +958,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/models/prius_autoparking_3laser_harmonic/model.sdf<br>FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/models/prius_autoparking_lidar/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/models/prius_autoparking_3laser_harmonic/model.sdf
         </strong></p>
         <p>
             En este caso, no ha sido necesario llevar a cabo ninguna modificación en este 
@@ -967,26 +967,23 @@
         </p>
         <p>
             <strong>IMPORTANTE</strong>: Dada la gran extensión en cuanto a líneas se refiere 
-            de estos ficheros, adjunto a continuación un enlace a dichos ficheros en los que se 
+            de este fichero, adjunto a continuación un enlace a dicho fichero en el que se 
             puede visualizar todo su contenido.
         </p>
         <p>
-            <p><strong>ENLACE (MODELO ANTÍGUO)</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/old_model.sdf">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/old_model.sdf</a></p>
-            <p><strong>ENLACE (MODELO NUEVO)</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/new_model.sdf">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/new_model.sdf</a></p>
+            <p><strong>ENLACE</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/model.sdf">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/images/semana05/model.sdf</a></p>
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/params/prius_autoparking_3laser_harmonic.yaml<br>FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/params/prius_autoparking_lidar.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/autopark_harmonic/params/prius_autoparking_3laser_harmonic.yaml
         </strong></p>
         <p>
             Estos ficheros se crean de cero en la ruta especificada, aunque se puede coger 
             cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
             En este caso, se añaden los topics correspondientes al plugin subscriptor del 
-            DiffDrive, y los plugin publicadores del DiffDrive y de los 3 sensores láser LIDAR
-            (los 3 láseres se unifican en uno en el nuevo modelo).
+            DiffDrive, y los plugin publicadores del DiffDrive y de los 3 sensores láser LIDAR.
         </p>
         <pre><code># gz topic published by DiffDrive plugin<br>- ros_topic_name: "/prius_autoparking/odom"<br>  gz_topic_name: "/prius_autoparking/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "/prius_autoparking/cmd_vel"<br>  gz_topic_name: "/prius_autoparking/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/prius_autoparking/scan_front"<br>  gz_topic_name: "/prius_autoparking/scan_front"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/prius_autoparking/scan_side"<br>  gz_topic_name: "/prius_autoparking/scan_side"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/prius_autoparking/scan_back"<br>  gz_topic_name: "/prius_autoparking/scan_back"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS</code></pre>
-        <pre><code># gz topic published by DiffDrive plugin<br>- ros_topic_name: "/prius_autoparking/odom"<br>  gz_topic_name: "/prius_autoparking/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "/prius_autoparking/cmd_vel"<br>  gz_topic_name: "/prius_autoparking/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/prius_autoparking/pc2"<br>  gz_topic_name: "/prius_autoparking/pc2/points"<br>  ros_type_name: "sensor_msgs/msg/PointCloud2"<br>  gz_type_name: "gz.msgs.PointCloudPacked"<br>  direction: GZ_TO_ROS</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
@@ -1074,8 +1071,7 @@
         <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
             he hecho commit y push en una nueva rama que he creado y publicado llamada 
-            <strong>autopark_harmonic</strong> para el modelo de coche antíguo, y 
-            <strong>lidar_autopark</strong> para el modelo nuevo. Es importante hacer esto 
+            <strong>autopark_harmonic</strong>. Es importante hacer esto 
             siempre para así evitar cualquier tipo de conflicto con la rama principal.
         </p>
 
@@ -1085,7 +1081,7 @@
             ejecutar los siguientes comandos en la terminal:
         </p>
         <pre><code>cd scripts/RADI/</code></pre>
-        <pre><code>./build.sh -i [ autopark_harmonic | lidar_autopark ]</code></pre>
+        <pre><code>./build.sh -i autopark_harmonic</code></pre>
         <p>
             <strong>IMPORTANTE</strong>: Cada vez que se genera un nuevo RADI no se borra el 
             anterior, por lo que el espacio disponible en disco se irá llenando y llenando 
