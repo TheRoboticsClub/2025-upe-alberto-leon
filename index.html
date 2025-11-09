@@ -758,6 +758,7 @@
         <video width="960" height="540" controls style="display: block; margin: 0 auto;" poster="images/semana06/obstacle_avoidance_image.png">
             <source src="videos/semana06/obstacle_avoidance_video.mp4" type="video/mp4">
         </video>
+
     </div>
 
     <!-- Entrada de blog (semana 07): Migración del ejercicio Global Navigation a Gazebo Harmonic -->
@@ -1498,17 +1499,418 @@
     <!-- Entrada de blog (semana 10): Migración del ejercicio Vacum Cleaner a Gazebo Harmonic -->
     <div id="entry-10" class="entry">
         <p class="date">SEMANA 10: 24-11-2025 al 28-11-2025</p>
+
+        <h1>
+            Migración del ejercicio Vacum Cleaner a Gazebo Harmonic
+        </h1>
+
         <p>
-            ...
+            Con el ejercicio de Follow Line ya migrado por completo a Gazebo Harmonic, 
+            se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
+            quinto ejercicio, en este caso, <strong>Vacum Cleaner</strong>, que consiste en la 
+            implementación de la lógica de un algoritmo de navegación para una aspiradora
+            autónoma, cuyo objetivo principal será cubrir la mayor superficie posible de una casa 
+            utilizando el algoritmo programado.
         </p>
+
+        <div style="place-items: center">
+            <img src="images/semana10/vacum_cleaner_exercise.png" alt="Vacum Cleaner Exercise" class="screenshot">
+        </div>
+        <p><strong>ENLACE AL ENUNCIADO DEL EJERCICIO</strong>: <a href="https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner">https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner</a></p>
+
+        <p>
+            A continuación, se encuentran todos los ficheros que se han modificado y/o creado
+            (y de qué forma) para poder llevar a cabo la migración completa de este ejercicio
+            de Gazebo 11 a Gazebo Harmonic:
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+        </strong></p>
+        <p>
+            En este fichero se han modificado las partes correspondientes a las etiquetas
+            &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
+            del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
+            versión los plugins correspondientes al <strong>diff-drive-system</strong> y al 
+            <strong>odometry-publisher-system</strong>:
+        </p>
+        <p>
+            <strong>IMPORTANTE</strong>: Dada la gran extensión en cuanto a líneas se refiere 
+            de este fichero, adjunto a continuación un enlace a dicho fichero en el que se 
+            puede visualizar todo su contenido.
+        </p>
+        <p>
+            <p><strong>ENLACE</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana10/model.sdf">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana10/model.sdf</a></p>
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
+        </strong></p>
+        <p>
+            Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
+            cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
+            En este caso, sólo se añaden los topics correspondientes al publicador y al 
+            subscriptor del plugin del diff-drive-system y aquellos relativos al publicador 
+            del plugin del láser:
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+        </strong></p>
+        <p>
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea <strong>&lt;robot_model_name&gt;/params</strong> para que el fichero que se acaba de 
+            crear (<strong>&lt;robot_model_name&gt;.yaml</strong>) se tenga en cuenta a la hora de 
+            lanzar el Docker:
+        </p>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    &lt;robot_model_name&gt;/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/vacum_cleaner/spawn_robot.launch.py
+        </strong></p>
+        <p>
+            Una vez creado el directorio <strong>vacum_cleaner/</strong>, y a su vez dentro 
+            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
+            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
+            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
+            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
+            el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
+            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/&lt;world_name&gt;.launch.py
+        </strong></p>
+        <p>
+            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y modificar únicamente las líneas correspondientes a las 
+            variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
+            correspondientes a las rutas en las que se encuentran el directorio que almacena el 
+            fichero <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza 
+            este ejercicio.
+        </p>
+        <pre><code>CODE</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
+            <strong>vacum_cleaner/</strong> el fichero 
+            <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
+            y/o eliminar del código todo lo relacionado con la variable 
+            <strong>robot_state_publisher_cmd</strong>.
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Worlds/&lt;world_name&gt;.world
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
+            aquellos que aparezcan en la versión nueva.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/visualization/vacum_cleaner.config
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic, ya que el contenido de todos los ficheros existentes en este directorio y 
+            de este formato son exactamente iguales.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/database/universes.sql
+        </strong></p>
+        <p>
+            Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
+            Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
+            Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y cambiar el valor de
+            la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
+        </p>
+        <pre><code># GAZEBO 11<br>...</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+
+        <p>
+            Una vez realizados todos estos cambios en todos los ficheros mencionados, 
+            he hecho commit y push en una nueva rama que he creado y publicado llamada 
+            <strong>vacum-cleaner-harmonic</strong>. Es importante hacer esto siempre para 
+            así evitar cualquier tipo de conflicto con la rama principal.
+        </p>
+
+        <p>
+            Como todos los cambios se han realizado en ficheros que se encuentran dentro de 
+            RoboticsInfrastructure, es obligatorio generar un nuevo RADI. Para ello, se deben 
+            ejecutar los siguientes comandos en la terminal:
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <pre><code>./build.sh -i vacum-cleaner-harmonic</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Cada vez que se genera un nuevo RADI no se borra el 
+            anterior, por lo que el espacio disponible en disco se irá llenando y llenando 
+            cada vez que se genere un nuevo RADI hasta que no quede espacio disponible en disco.
+            Para evitar que esto ocurra, se debe ejecutar el siguiente comando en la terminal, 
+            el cual se encargará de borrar todo el espacio de memoria que se ha ido llenando por 
+            cada RADI generado:
+        </p>
+        <pre><code>docker system prune -af</code></pre>
+
+        <p>
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
+        </p>
+        <pre><code>cd ../..</code></pre>
+
+        <p>
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
+        </p>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
+
+        <p>
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <p>
+            Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que 
+            aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics 
+            en local y verificar que los cambios se han realizado correctamente.
+        </p>
+
+        <p>
+            A continuación se muestra cómo se ve el ejercicio <strong>Obstacle Avoidance</strong> 
+            al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana10/vacum_cleaner_image.png" alt="Vacum Cleaner Image" class="screenshot">
+        </div>
+        <p>
+            Además, para verificar que tanto el escenario como el coche han sido migrados 
+            correctamente, se muestra una pequeña animación del coche moviéndose en línea 
+            recta para verificar que todo el proceso se ha realizado correctamente:
+        </p>
+        <video width="960" height="540" controls style="display: block; margin: 0 auto;" poster="images/semana10/vacum_cleaner_image.png">
+            <source src="videos/semana10/vacum_cleaner_video.mp4" type="video/mp4">
+        </video>
+
     </div>
 
     <!-- Entrada de blog (semana 11): Migración del ejercicio Localized Vacuum Cleaner a Gazebo Harmonic -->
     <div id="entry-11" class="entry">
         <p class="date">SEMANA 11: 01-12-2025 al 05-12-2025</p>
+
+        <h1>
+            Migración del ejercicio Localized Vacuum Cleaner a Gazebo Harmonic
+        </h1>
+
         <p>
-            ...
+            Con el ejercicio de Vacum Cleaner ya migrado por completo a Gazebo Harmonic, 
+            se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
+            sexto ejercicio, en este caso, <strong>Localized Vacuum Cleaner</strong>, que consiste en 
+            implementar la lógica de un algoritmo de navegación para una aspiradora autónoma utilizando
+            la ubicación del robot. El robot está equipado con un mapa y conoce su ubicación actual en
+            él, cuyo objetivo principal será cubrir la mayor superficie posible de una casa utilizando 
+            el algoritmo programado.
         </p>
+
+        <div style="place-items: center">
+            <img src="images/semana11/localized_vacuum_cleaner_exercise.png" alt="Localized Vacuum Cleaner Exercise" class="screenshot">
+        </div>
+        <p><strong>ENLACE AL ENUNCIADO DEL EJERCICIO</strong>: <a href="https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner_loc">https://jderobot.github.io/RoboticsAcademy/exercises/MobileRobots/vacuum_cleaner_loc</a></p>
+
+        <p>
+            A continuación, se encuentran todos los ficheros que se han modificado y/o creado
+            (y de qué forma) para poder llevar a cabo la migración completa de este ejercicio
+            de Gazebo 11 a Gazebo Harmonic:
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+        </strong></p>
+        <p>
+            En este fichero se han modificado las partes correspondientes a las etiquetas
+            &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
+            del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
+            versión los plugins correspondientes al <strong>diff-drive-system</strong> y al 
+            <strong>odometry-publisher-system</strong>:
+        </p>
+        <p>
+            <strong>IMPORTANTE</strong>: Dada la gran extensión en cuanto a líneas se refiere 
+            de este fichero, adjunto a continuación un enlace a dicho fichero en el que se 
+            puede visualizar todo su contenido.
+        </p>
+        <p>
+            <p><strong>ENLACE</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana11/model.sdf">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana11/model.sdf</a></p>
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
+        </strong></p>
+        <p>
+            Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
+            cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
+            En este caso, sólo se añaden los topics correspondientes al publicador y al 
+            subscriptor del plugin del diff-drive-system y aquellos relativos al publicador 
+            del plugin del láser:
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+        </strong></p>
+        <p>
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea <strong>&lt;robot_model_name&gt;/params</strong> para que el fichero que se acaba de 
+            crear (<strong>&lt;robot_model_name&gt;.yaml</strong>) se tenga en cuenta a la hora de 
+            lanzar el Docker:
+        </p>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    &lt;robot_model_name&gt;/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/localized_vacuum_cleaner/spawn_robot.launch.py
+        </strong></p>
+        <p>
+            Una vez creado el directorio <strong>localized_vacuum_cleaner/</strong>, y a su vez dentro 
+            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
+            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
+            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
+            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
+            el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
+            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/&lt;world_name&gt;.launch.py
+        </strong></p>
+        <p>
+            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y modificar únicamente las líneas correspondientes a las 
+            variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
+            correspondientes a las rutas en las que se encuentran el directorio que almacena el 
+            fichero <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza 
+            este ejercicio.
+        </p>
+        <pre><code>CODE</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
+            <strong>localized_vacuum_cleaner/</strong> el fichero 
+            <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
+            y/o eliminar del código todo lo relacionado con la variable 
+            <strong>robot_state_publisher_cmd</strong>.
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Worlds/&lt;world_name&gt;.world
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
+            aquellos que aparezcan en la versión nueva.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/visualization/localized_vacuum_cleaner.config
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic, ya que el contenido de todos los ficheros existentes en este directorio y 
+            de este formato son exactamente iguales.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/database/universes.sql
+        </strong></p>
+        <p>
+            Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
+            Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
+            Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y cambiar el valor de
+            la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
+        </p>
+        <pre><code># GAZEBO 11<br>...</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+
+        <p>
+            Una vez realizados todos estos cambios en todos los ficheros mencionados, 
+            he hecho commit y push en una nueva rama que he creado y publicado llamada 
+            <strong>localized-vacuum-cleaner-harmonic</strong>. Es importante hacer esto siempre para 
+            así evitar cualquier tipo de conflicto con la rama principal.
+        </p>
+
+        <p>
+            Como todos los cambios se han realizado en ficheros que se encuentran dentro de 
+            RoboticsInfrastructure, es obligatorio generar un nuevo RADI. Para ello, se deben 
+            ejecutar los siguientes comandos en la terminal:
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <pre><code>./build.sh -i localized-vacuum-cleaner-harmonic</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Cada vez que se genera un nuevo RADI no se borra el 
+            anterior, por lo que el espacio disponible en disco se irá llenando y llenando 
+            cada vez que se genere un nuevo RADI hasta que no quede espacio disponible en disco.
+            Para evitar que esto ocurra, se debe ejecutar el siguiente comando en la terminal, 
+            el cual se encargará de borrar todo el espacio de memoria que se ha ido llenando por 
+            cada RADI generado:
+        </p>
+        <pre><code>docker system prune -af</code></pre>
+
+        <p>
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
+        </p>
+        <pre><code>cd ../..</code></pre>
+
+        <p>
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
+        </p>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
+
+        <p>
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <p>
+            Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que 
+            aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics 
+            en local y verificar que los cambios se han realizado correctamente.
+        </p>
+
+        <p>
+            A continuación se muestra cómo se ve el ejercicio <strong>Obstacle Avoidance</strong> 
+            al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana11/localized_vacuum_cleaner_image.png" alt="Localized Vacuum Cleaner Image" class="screenshot">
+        </div>
+        <p>
+            Además, para verificar que tanto el escenario como el coche han sido migrados 
+            correctamente, se muestra una pequeña animación del coche moviéndose en línea 
+            recta para verificar que todo el proceso se ha realizado correctamente:
+        </p>
+        <video width="960" height="540" controls style="display: block; margin: 0 auto;" poster="images/semana11/localized_vacuum_cleaner_image.png">
+            <source src="videos/semana11/localized_vacuum_cleaner_video.mp4" type="video/mp4">
+        </video>
+
     </div>
     
     <!-- Entrada de blog (semana 12) -->
