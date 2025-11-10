@@ -1525,7 +1525,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/roomba_robot/models/roombaROS(_harmonic)/model.sdf
         </strong></p>
         <p>
             En este fichero se han modificado las partes correspondientes a las etiquetas
@@ -1544,7 +1544,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/roomba_robot/params/roombaROS(_harmonic).yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -1560,12 +1560,12 @@
         </strong></p>
         <p>
             En este caso, la única modificación realizada en este fichero es la 
-            adición de la línea <strong>&lt;robot_model_name&gt;/params</strong> para que el fichero que se acaba de 
-            crear (<strong>&lt;robot_model_name&gt;.yaml</strong>) se tenga en cuenta a la hora de 
-            lanzar el Docker:
+            adición de la línea <strong>roomba_robot/params</strong> para que el 
+            fichero que se acaba de crear (<strong>roombaROS(_harmonic).yaml</strong>) 
+            se tenga en cuenta a la hora de lanzar el Docker:
         </p>
-        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
-        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    &lt;robot_model_name&gt;/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # ROOMBA<br>    roomba_robot/models<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # ROOMBA<br>    roomba_robot/models<br>    roomba_robot/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/vacum_cleaner/spawn_robot.launch.py
@@ -1578,12 +1578,12 @@
             lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
             <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
             el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
-            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+            <strong>roombaROS(_harmonic).yaml</strong>):
         </p>
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;world_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/vacuum_cleaner.launch.py
         </strong></p>
         <p>
             Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
@@ -1604,7 +1604,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Worlds/&lt;world_name&gt;.world
+            FICHERO RoboticsInfrastructure/Worlds/roomba_1_house(_harmonic).world
         </strong></p>
         <p>
             En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
@@ -1634,8 +1634,8 @@
             Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y cambiar el valor de
             la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
-        <pre><code># GAZEBO 11<br>...</code></pre>
-        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+        <pre><code># GAZEBO 11<br>24	Vacuums House	/opt/jderobot/Launchers/vacuum_cleaner.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>24	Vacuums House	/opt/jderobot/Launchers/vacuum_cleaner.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
 
         <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
@@ -1715,11 +1715,11 @@
         <p>
             Con el ejercicio de Vacum Cleaner ya migrado por completo a Gazebo Harmonic, 
             se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
-            sexto ejercicio, en este caso, <strong>Localized Vacuum Cleaner</strong>, que consiste en 
-            implementar la lógica de un algoritmo de navegación para una aspiradora autónoma utilizando
-            la ubicación del robot. El robot está equipado con un mapa y conoce su ubicación actual en
-            él, cuyo objetivo principal será cubrir la mayor superficie posible de una casa utilizando 
-            el algoritmo programado.
+            sexto ejercicio, en este caso, <strong>Localized Vacuum Cleaner</strong>, que 
+            consiste en implementar la lógica de un algoritmo de navegación para una aspiradora 
+            autónoma utilizando la ubicación del robot. El robot está equipado con un mapa y 
+            conoce su ubicación actual en él, cuyo objetivo principal será cubrir la mayor 
+            superficie posible de una casa utilizando el algoritmo programado.
         </p>
 
         <div style="place-items: center">
@@ -1734,7 +1734,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/models/&lt;robot_model_name&gt;/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/roomba_robot/models/roombaROS(_harmonic)/model.sdf
         </strong></p>
         <p>
             En este fichero se han modificado las partes correspondientes a las etiquetas
@@ -1753,7 +1753,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/&lt;robot_model_name&gt;/params/&lt;robot_model_name&gt;.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/roomba_robot/params/roombaROS(_harmonic).yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
@@ -1769,12 +1769,12 @@
         </strong></p>
         <p>
             En este caso, la única modificación realizada en este fichero es la 
-            adición de la línea <strong>&lt;robot_model_name&gt;/params</strong> para que el fichero que se acaba de 
-            crear (<strong>&lt;robot_model_name&gt;.yaml</strong>) se tenga en cuenta a la hora de 
-            lanzar el Docker:
+            adición de la línea <strong>roomba_robot/params</strong> para que el 
+            fichero que se acaba de crear (<strong>roombaROS(_harmonic).yaml</strong>) 
+            se tenga en cuenta a la hora de lanzar el Docker:
         </p>
-        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
-        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # &lt;robot_model_name&gt;<br>    &lt;robot_model_name&gt;/models<br>    &lt;robot_model_name&gt;/launch<br>    &lt;robot_model_name&gt;/worlds<br>    &lt;robot_model_name&gt;/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # ROOMBA<br>    roomba_robot/models<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # ROOMBA<br>    roomba_robot/models<br>    roomba_robot/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/localized_vacuum_cleaner/spawn_robot.launch.py
@@ -1787,12 +1787,12 @@
             lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
             <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
             el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
-            <strong>&lt;robot_model_name&gt;.yaml</strong>):
+            <strong>roombaROS(_harmonic).yaml</strong>):
         </p>
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/&lt;world_name&gt;.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/vacuum_cleaner.launch.py
         </strong></p>
         <p>
             Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
@@ -1813,7 +1813,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Worlds/&lt;world_name&gt;.world
+            FICHERO RoboticsInfrastructure/Worlds/roomba_1_house(_harmonic).world
         </strong></p>
         <p>
             En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
@@ -1843,8 +1843,8 @@
             Gazebo 11 a Gazebo Harmonic (en este caso, Obstacle Avoidance) y cambiar el valor de
             la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
         </p>
-        <pre><code># GAZEBO 11<br>...</code></pre>
-        <pre><code># GAZEBO HARMONIC<br>...</code></pre>
+        <pre><code># GAZEBO 11<br>24	Vacuums House	/opt/jderobot/Launchers/vacuum_cleaner.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>24	Vacuums House	/opt/jderobot/Launchers/vacuum_cleaner.launch.py	None	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
 
         <p>
             Una vez realizados todos estos cambios en todos los ficheros mencionados, 
