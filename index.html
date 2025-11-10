@@ -1568,10 +1568,10 @@
         <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # ROOMBA<br>    roomba_robot/models<br>    roomba_robot/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/vacum_cleaner/spawn_robot.launch.py
+            FICHERO RoboticsInfrastructure/Launchers/basic_vacuum_cleaner/spawn_robot.launch.py
         </strong></p>
         <p>
-            Una vez creado el directorio <strong>vacum_cleaner/</strong>, y a su vez dentro 
+            Una vez creado el directorio <strong>basic_vacuum_cleaner/</strong>, y a su vez dentro 
             de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
             hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
             migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
@@ -1597,7 +1597,7 @@
         <pre><code>CODE</code></pre>
         <p>
             <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
-            <strong>vacum_cleaner/</strong> el fichero 
+            <strong>basic_vacuum_cleaner/</strong> el fichero 
             <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
             y/o eliminar del código todo lo relacionado con la variable 
             <strong>robot_state_publisher_cmd</strong>.
@@ -1615,7 +1615,7 @@
         <pre><code>CODE</code></pre>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/Launchers/visualization/vacum_cleaner.config
+            FICHERO RoboticsInfrastructure/Launchers/visualization/basic_vacuum_cleaner.config
         </strong></p>
         <p>
             En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
