@@ -1357,7 +1357,7 @@
             Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
             aquellos que aparezcan en la versión nueva.
         </p>
-        <pre><code>&lt;?xml version="1.0" ?&gt;<br>&lt;sdf version="1.10"&gt;<br>  &lt;world name="default"&gt;<br><br>    &lt;plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system"/&gt;<br>    &lt;plugin name="gz::sim::systems::SceneBroadcaster" filename="gz-sim-scene-broadcaster-system"/&gt;<br>    &lt;plugin<br>      filename="gz-sim-user-commands-system"<br>      name="gz::sim::systems::UserCommands"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"&gt;<br>      &lt;render_engine&gt;ogre2&lt;/render_engine&gt;<br>    &lt;/plugin&gt;<br><br>    &lt;gravity&gt;0 0 -9.8&lt;/gravity&gt;<br>    &lt;atmosphere type="adiabatic"/&gt;<br><br>    &lt;scene&gt;<br>      &lt;ambient&gt;0.4 0.4 0.4 1&lt;/ambient&gt;<br>      &lt;background&gt;0.7 0.7 0.7 1&lt;/background&gt;<br>      &lt;shadows&gt;true&lt;/shadows&gt;<br>    &lt;/scene&gt;<br><br>    &lt;gui fullscreen='1'&gt;<br>      &lt;camera name='user_camera'&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>        &lt;pose &gt;30.18 -31.55 0.50 0.00 0.01 -3.12&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>        &lt;pose &gt;30.18 -31.55 0.50 0.00 0.01 -3.12&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>        &lt;pose &gt;-194.14 -90.29 1.90 0.00 0.21 3.13&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>        &lt;pose &gt;-78.70 39.10 1.32 0.00 0.21 -0.37&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>        &lt;pose &gt;54.53 -6.12 1.35 0 0.31 -1.92&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>        &lt;pose&gt;134.98 -157.93 1.7 0.00 0.16 3.132&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>        &lt;pose&gt;134.98 -157.93 1.7 0.00 0.16 3.132&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>        &lt;pose&gt;-1005.67 -454.14 1.363872 0.00 0.1 -2.831999&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>        &lt;pose&gt;-372.48 189.37 1.9 0 0.14 -0.39&lt;/pose&gt;<br><br>        &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>        &lt;pose&gt;267.42 -52.384 1.65 0 0.31 -1.53&lt;/pose&gt;<br><br>        &lt;view_controller&gt;orbit&lt;/view_controller&gt;<br>        &lt;projection_type&gt;perspective&lt;/projection_type&gt;<br>      &lt;/camera&gt;<br>    &lt;/gui&gt;<br>    &lt;scene&gt;<br>      &lt;grid&gt;false&lt;/grid&gt;<br>      &lt;sky&gt;<br>        &lt;clouds&gt;<br>          &lt;speed&gt;12&lt;/speed&gt;<br>        &lt;/clouds&gt;<br>      &lt;/sky&gt;<br>    &lt;/scene&gt;<br><br>    &lt;!-- &lt;include&gt;<br>      &lt;uri&gt;model://sun&lt;/uri&gt;<br>      &lt;name&gt;sun_1&lt;/name&gt;<br>      &lt;pose&gt;0 0 1 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt; --&gt;<br><br>    &lt;!-- Circuito --&gt;<br>    &lt;include&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://monaco&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://montmelo_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://montreal_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://nurburgring_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;uri&gt;model://simple_circuit&lt;/uri&gt;<br><br>	    &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Coche --&gt;<br>    &lt;include&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;uri&gt;model://f1_renault_laser_no_cam&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;uri&gt;model://f1_renault_ackermann_harmonic_laser&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;pose&gt;1 -1.5 10 0 0 0&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;pose&gt;27.18 -31.55 0.00 0.00 0.01 -3.12&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;pose&gt;-200.88 -90.72 0.00 0.00 0.00 -2.83&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;pose&gt;-74.29 37.74 0 0 0 -0.51&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;pose&gt;53.462 -10.734 0.004 0 0 -1.57&lt;/pose&gt;<br><br>    &lt;/include&gt;<br><br>    &lt;!-- Luz --&gt;<br>    &lt;light name="sun" type="directional"&gt;<br>      &lt;pose&gt;0 0 10 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;0.8 0.8 0.8 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.2 0.2 0.2 1&lt;/specular&gt;<br>      &lt;direction&gt;-0.5 0.1 -0.9&lt;/direction&gt;<br>      &lt;cast_shadows&gt;true&lt;/cast_shadows&gt;<br>    &lt;/light&gt;<br><br>  &lt;/world&gt;<br>&lt;/sdf&gt;</code></pre>
+        <pre><code>&lt;?xml version="1.0" ?&gt;<br>&lt;sdf version="1.10"&gt;<br>  &lt;world name="default"&gt;<br><br>    &lt;plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system"/&gt;<br>    &lt;plugin name="gz::sim::systems::SceneBroadcaster" filename="gz-sim-scene-broadcaster-system"/&gt;<br>    &lt;plugin<br>      filename="gz-sim-user-commands-system"<br>      name="gz::sim::systems::UserCommands"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"&gt;<br>      &lt;render_engine&gt;ogre2&lt;/render_engine&gt;<br>    &lt;/plugin&gt;<br><br>    &lt;gravity&gt;0 0 -9.8&lt;/gravity&gt;<br>    &lt;atmosphere type="adiabatic"/&gt;<br><br>    &lt;scene&gt;<br>      &lt;ambient&gt;0.4 0.4 0.4 1&lt;/ambient&gt;<br>      &lt;background&gt;0.7 0.7 0.7 1&lt;/background&gt;<br>      &lt;shadows&gt;true&lt;/shadows&gt;<br>    &lt;/scene&gt;<br><br>    &lt;!-- Circuito --&gt;<br>    &lt;include&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://monaco&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://montmelo_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://montreal_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;uri&gt;model://nurburgring_line&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;uri&gt;model://simple_circuit&lt;/uri&gt;<br><br>	    &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Coche --&gt;<br>    &lt;include&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;uri&gt;model://f1_renault_laser_no_cam&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;uri&gt;model://f1_renault_ackermann_harmonic_laser&lt;/uri&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/monaco_line_ackermann.world --&gt;<br>      &lt;pose&gt;0 57 -9.1 0 0 0&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montmelo_line_ackermann.world --&gt;<br>      &lt;pose&gt;27.18 -31.55 0.00 0.00 0.01 -3.12&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/montreal_line_ackermann.world --&gt;<br>      &lt;pose&gt;-200.88 -90.72 0.00 0.00 0.00 -2.83&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/nurburgring_line_ackermann.world --&gt;<br>      &lt;pose&gt;-74.29 37.74 0 0 0 -0.51&lt;/pose&gt;<br><br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit.world --&gt;<br>      &lt;!-- FICHERO RoboticsInfrastructure/Worlds/simple_circuit_ackermann.world --&gt;<br>      &lt;pose&gt;53.462 -10.734 0.004 0 0 -1.57&lt;/pose&gt;<br><br>    &lt;/include&gt;<br><br>    &lt;!-- Luz --&gt;<br>    &lt;light name="sun" type="directional"&gt;<br>      &lt;pose&gt;0 0 10 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;0.8 0.8 0.8 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.2 0.2 0.2 1&lt;/specular&gt;<br>      &lt;direction&gt;-0.5 0.1 -0.9&lt;/direction&gt;<br>      &lt;cast_shadows&gt;true&lt;/cast_shadows&gt;<br>    &lt;/light&gt;<br><br>  &lt;/world&gt;<br>&lt;/sdf&gt;</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/visualization/follow_line.config
@@ -2402,9 +2402,210 @@
     <!-- Entrada de blog (semana 17) -->
     <div id="entry-17" class="entry">
         <p class="date">SEMANA 17: 12-01-2026 al 16-01-2026</p>
+
+        <h1>
+            Migración del ejercicio 3D Reconstruction a Gazebo Harmonic
+        </h1>
+
         <p>
-            ...
+            Con el ejercicio de Montecarlo Visual Localization ya migrado por completo a Gazebo Harmonic,
+            se me ha pedido realizar la migración completa de Gazebo 11 a Gazebo Harmonic de un 
+            noveno ejercicio, en este caso, <strong>3D Reconstruction</strong>, que 
+            consiste en programar la lógica necesaria para permitir que el robot kobuki genere 
+            una reconstrucción 3D de la escena que recibe a través de sus cámaras, tanto de la 
+            izquierda como de la derecha.
         </p>
+
+        <div style="place-items: center; display: grid;">
+            <a href="https://jderobot.github.io/RoboticsAcademy/exercises/ComputerVision/3d_reconstruction" target="_blank">
+                <img src="images/semana17/3d_reconstruction_exercise.png" alt="3D Reconstruction Exercise" class="screenshot" style="cursor: pointer;">
+            </a>
+        </div>
+
+        <p>
+            A continuación, se encuentran todos los ficheros que se han modificado y/o creado
+            (y de qué forma) para poder llevar a cabo la migración completa de este ejercicio
+            de Gazebo 11 a Gazebo Harmonic:
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/3d_reconstruction/models/turtlebotROS/model.sdf
+        </strong></p>
+        <p>
+            En este fichero se han modificado las partes correspondientes a las etiquetas
+            &lt;plugin&gt; y &lt;sensor&gt;, donde el plugin pasa de estar declarado dentro 
+            del sensor a integrarse en él. Además, es importante añadir al final de la nueva 
+            versión los plugins correspondientes al <strong>diff-drive-system</strong> y al 
+            <strong>odometry-publisher-system</strong>:
+        </p>
+        <p>
+            <strong>IMPORTANTE</strong>: Dada la gran extensión en cuanto a líneas se refiere 
+            de este fichero, adjunto a continuación un enlace a dicho fichero en el que se 
+            puede visualizar todo su contenido.
+        </p>
+        <p>
+            <p><strong>ENLACE</strong>: <a href="https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana17/model.sdf"  target="_blank">https://github.com/TheRoboticsClub/2025-upe-alberto-leon/blob/main/code/semana17/model.sdf</a></p>
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/3d_reconstruction/params/turtlebotROS.yaml
+        </strong></p>
+        <p>
+            Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
+            cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
+            En este caso, sólo se añaden los topics correspondientes al publicador y al 
+            subscriptor del plugin del diff-drive-system y aquellos relativos al publicador 
+            del plugin del láser:
+        </p>
+        <pre><code># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/turtlebotROS/laser/scan"<br>  gz_topic_name: "/turtlebotROS/laser/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br><br># gz topic published by Sensors plugin (Camera)<br>- ros_topic_name: "/cam_turtlebot_left/camera_info"<br>  gz_topic_name: "/cam_turtlebot_left/camera_info"<br>  ros_type_name: "sensor_msgs/msg/CameraInfo"<br>  gz_type_name: "gz.msgs.CameraInfo"<br>  direction: GZ_TO_ROS<br><br>- ros_topic_name: "/cam_turtlebot_right/camera_info"<br>  gz_topic_name: "/cam_turtlebot_right/camera_info"<br>  ros_type_name: "sensor_msgs/msg/CameraInfo"<br>  gz_type_name: "gz.msgs.CameraInfo"<br>  direction: GZ_TO_ROS</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
+        </strong></p>
+        <p>
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea <strong>3d_reconstruction/params</strong> para que el 
+            fichero que se acaba de crear (<strong>turtlebotROS.yaml</strong>) 
+            se tenga en cuenta a la hora de lanzar el Docker:
+        </p>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # 3D RECONSTRUCTION<br>    3d_reconstruction/models<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # 3D RECONSTRUCTION<br>    3d_reconstruction/models<br>    3d_reconstruction/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/3d_reconstruction/spawn_robot.launch.py
+        </strong></p>
+        <p>
+            Una vez creado el directorio <strong>3d_reconstruction/</strong>, y a su vez dentro 
+            de él el fichero <strong>spawn_robot.launch.py</strong>, lo único que habría que 
+            hacer es coger cualquier fichero con el mismo nombre de otro ejercicio que ya esté 
+            migrado a Gazebo Harmonic, copiar su contenido y sólamente habría que comentar todo 
+            lo relativo a las variables <strong>start_gazebo_ros_image_bridge_cmd</strong> y 
+            <strong>start_gazebo_ros_depth_bridge_cmd</strong>, y lo más importante, modificar 
+            el nombre del fichero que se le pasa como argumento a bridge_params (en este caso, 
+            <strong>turtlebotROS.yaml</strong>):
+        </p>
+        <pre><code># Copyright 2019 Open Source Robotics Foundation, Inc.<br>#<br># Licensed under the Apache License, Version 2.0 (the "License");<br># you may not use this file except in compliance with the License.<br># You may obtain a copy of the License at<br>#<br>#     http://www.apache.org/licenses/LICENSE-2.0<br>#<br># Unless required by applicable law or agreed to in writing, software<br># distributed under the License is distributed on an "AS IS" BASIS,<br># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br># See the License for the specific language governing permissions and<br># limitations under the License.<br><br>import os<br><br>from ament_index_python.packages import get_package_share_directory<br>from launch import LaunchDescription<br>from launch.actions import DeclareLaunchArgument<br>from launch.substitutions import LaunchConfiguration<br>from launch_ros.actions import Node<br><br><br>def generate_launch_description():<br>    # Get the urdf file<br>    model_folder = "turtlebotROS"<br>    urdf_path = os.path.join(<br>        get_package_share_directory("custom_robots"),<br>        "models",<br>        model_folder,<br>        "model.sdf",<br>    )<br><br>    # Launch configuration variables specific to simulation<br>    # x_pose = LaunchConfiguration('x_pose', default='1.0')<br>    # y_pose = LaunchConfiguration('y_pose', default='-1.5')<br>    # z_pose = LaunchConfiguration('z_pose', default='7.1')<br><br>    # Declare the launch arguments<br>    # declare_x_position_cmd = DeclareLaunchArgument(<br>    #     'x_pose', default_value='1.0',<br>    #     description='Specify namespace of the robot')<br><br>    # declare_y_position_cmd = DeclareLaunchArgument(<br>    #     'y_pose', default_value='-1.5',<br>    #     description='Specify namespace of the robot')<br><br>    # declare_z_position_cmd = DeclareLaunchArgument(<br>    #     'z_pose', default_value='7.1',<br>    #     description='Specify namespace of the robot')<br><br>    # start_gazebo_ros_spawner_cmd = Node(<br>    #     package='ros_gz_sim',<br>    #     executable='create',<br>    #     arguments=[<br>    #         '-name', 'waffle',<br>    #         '-file', urdf_path,<br>    #         '-x', x_pose,<br>    #         '-y', y_pose,<br>    #         '-z', z_pose<br>    #     ],<br>    #     output='screen',<br>    # )<br><br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "turtlebotROS.yaml"<br>    )<br><br>    start_gazebo_ros_bridge_cmd = Node(<br>        package="ros_gz_bridge",<br>        executable="parameter_bridge",<br>        arguments=[<br>            "--ros-args",<br>            "-p",<br>            f"config_file:={bridge_params}",<br>        ],<br>        output="screen",<br>    )<br><br>    start_gazebo_ros_image_bridge_cmd_left = Node(<br>        package="ros_gz_image",<br>        executable="image_bridge",<br>        arguments=["/cam_turtlebot_left/image_raw"],<br>        output="screen",<br>    )<br><br>    start_gazebo_ros_image_bridge_cmd_right = Node(<br>        package="ros_gz_image",<br>        executable="image_bridge",<br>        arguments=["/cam_turtlebot_right/image_raw"],<br>        output="screen",<br>    )<br><br>    # start_gazebo_ros_depth_bridge_cmd = Node(<br>    #     package="ros_gz_image",<br>    #     executable="image_bridge",<br>    #     arguments=["/turtlebot3/camera/depth"],<br>    #     output="screen",<br>    # )<br><br>    ld = LaunchDescription()<br><br>    # Declare the launch options<br>    # ld.add_action(declare_x_position_cmd)<br>    # ld.add_action(declare_y_position_cmd)<br>    # ld.add_action(declare_z_position_cmd)<br><br>    # Add any conditioned actions<br>    # ld.add_action(start_gazebo_ros_spawner_cmd)<br>    ld.add_action(start_gazebo_ros_bridge_cmd)<br>    ld.add_action(start_gazebo_ros_image_bridge_cmd_left)<br>    ld.add_action(start_gazebo_ros_image_bridge_cmd_right)<br>    # ld.add_action(start_gazebo_ros_image_bridge_cmd)<br>    # ld.add_action(start_gazebo_ros_depth_bridge_cmd)<br><br>    return ld</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/3d_reconstruction.launch.py
+        </strong></p>
+        <p>
+            Para este fichero, lo único que habría que hacer es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y modificar únicamente las líneas correspondientes a las 
+            variables <strong>robot_launch_dir</strong> y <strong>world_file_name</strong>, 
+            correspondientes a las rutas en las que se encuentran el directorio que almacena el 
+            fichero <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza 
+            este ejercicio.
+        </p>
+        <pre><code>import os<br><br>from ament_index_python.packages import get_package_share_directory<br><br>from launch import LaunchDescription<br>from launch.actions import (<br>    DeclareLaunchArgument,<br>    IncludeLaunchDescription,<br>    SetEnvironmentVariable,<br>    AppendEnvironmentVariable,<br>)<br>from launch.launch_description_sources import PythonLaunchDescriptionSource<br>from launch.substitutions import LaunchConfiguration, Command<br>from launch_ros.actions import Node<br>from launch.substitutions import LaunchConfiguration<br>from launch_ros.actions import Node<br><br><br>def generate_launch_description():<br><br>    x = LaunchConfiguration("x")<br>    y = LaunchConfiguration("y")<br>    z = LaunchConfiguration("z")<br>    roll = LaunchConfiguration("R")<br>    pitch = LaunchConfiguration("P")<br>    yaw = LaunchConfiguration("Y")<br><br>    package_dir = get_package_share_directory("custom_robots")<br>    ros_gz_sim = get_package_share_directory("ros_gz_sim")<br><br>    gazebo_models_path = os.path.join(package_dir, "models")<br><br>    robot_launch_dir = "/opt/jderobot/Launchers/3d_reconstruction"<br><br>    use_sim_time = LaunchConfiguration("use_sim_time", default="true")<br>    x_pose = LaunchConfiguration("x_pose", default="1.0")<br>    y_pose = LaunchConfiguration("y_pose", default="-1.5")<br>    z_pose = LaunchConfiguration("z_pose", default="7.1")<br>    world_file_name = "kobuki_1_reconstruction3d.world"<br>    worlds_dir = "/opt/jderobot/Worlds"<br>    world_path = os.path.join(worlds_dir, world_file_name)<br><br>    gazebo_server = IncludeLaunchDescription(<br>        PythonLaunchDescriptionSource(<br>            os.path.join(ros_gz_sim, "launch", "gz_sim.launch.py")<br>        ),<br>        launch_arguments={<br>            "gz_args": ["-r -s -v4 ", world_path],<br>            "on_exit_shutdown": "true",<br>        }.items(),<br>    )<br><br>    declare_x_cmd = DeclareLaunchArgument("x", default_value="1.0")<br><br>    declare_y_cmd = DeclareLaunchArgument("y", default_value="-1.5")<br><br>    declare_z_cmd = DeclareLaunchArgument("z", default_value="7.1")<br><br>    declare_roll_cmd = DeclareLaunchArgument("R", default_value="0.0")<br><br>    declare_pitch_cmd = DeclareLaunchArgument("P", default_value="0.0")<br><br>    declare_yaw_cmd = DeclareLaunchArgument("Y", default_value="1.57079")<br><br>    # robot_state_publisher_cmd = IncludeLaunchDescription(<br>    #     PythonLaunchDescriptionSource(<br>    #         os.path.join(robot_launch_dir, "robot_state_publisher.launch.py")<br>    #     ),<br>    #     launch_arguments={"use_sim_time": use_sim_time}.items(),<br>    # )<br><br>    spawn_robot_cmd = IncludeLaunchDescription(<br>        PythonLaunchDescriptionSource(<br>            os.path.join(robot_launch_dir, "spawn_robot.launch.py")<br>        ),<br>        launch_arguments={"x_pose": x_pose, "y_pose": y_pose, "z_pose": z_pose}.items(),<br>    )<br><br>    world_entity_cmd = Node(<br>        package="ros_gz_sim",<br>        executable="create",<br>        arguments=["-name", "world", "-file", world_path],<br>        output="screen",<br>    )<br><br>    ld = LaunchDescription()<br><br>    ld.add_action(SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", gazebo_models_path))<br>    set_env_vars_resources = AppendEnvironmentVariable(<br>        "GZ_SIM_RESOURCE_PATH", os.path.join(package_dir, "models")<br>    )<br>    ld.add_action(set_env_vars_resources)<br>    ld.add_action(gazebo_server)<br>    # ld.add_action(gazebo_client)<br>    ld.add_action(declare_x_cmd)<br>    ld.add_action(declare_y_cmd)<br>    ld.add_action(declare_z_cmd)<br>    ld.add_action(declare_roll_cmd)<br>    ld.add_action(declare_pitch_cmd)<br>    ld.add_action(declare_yaw_cmd)<br>    ld.add_action(world_entity_cmd)<br>    # ld.add_action(robot_state_publisher_cmd)<br>    ld.add_action(spawn_robot_cmd)<br><br>    return ld</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: En caso de que no se haya creado dentro del directorio 
+            <strong>3d_reconstruction/</strong> el fichero 
+            <strong>robot_state_publisher.launch.py</strong>, es obligatorio comentar 
+            y/o eliminar del código todo lo relacionado con la variable 
+            <strong>robot_state_publisher_cmd</strong>.
+        </p>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Worlds/kobuki_1_reconstruction3d.world
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic y sustituir todas aquellos flags &lt;include&gt; de la versión antigua por 
+            aquellos que aparezcan en la versión nueva.
+        </p>
+        <pre><code>&lt;?xml version="1.0" ?&gt;<br><br>&lt;sdf version="1.8"&gt;<br>  &lt;world name="default"&gt;<br>    &lt;plugin<br>      filename="gz-sim-physics-system"<br>      name="gz::sim::systems::Physics"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-user-commands-system"<br>      name="gz::sim::systems::UserCommands"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-scene-broadcaster-system"<br>      name="gz::sim::systems::SceneBroadcaster"&gt;<br>    &lt;/plugin&gt;<br>    &lt;plugin<br>      filename="gz-sim-sensors-system"<br>      name="gz::sim::systems::Sensors"&gt;<br>      &lt;render_engine&gt;ogre2&lt;/render_engine&gt;<br>    &lt;/plugin&gt;<br><br>    &lt;scene&gt;<br>      &lt;ambient&gt;0.4 0.4 0.4 1&lt;/ambient&gt;<br>      &lt;background&gt;0.7 0.7 0.7 1&lt;/background&gt;<br>      &lt;shadows&gt;true&lt;/shadows&gt;<br>      &lt;grid&gt;false&lt;/grid&gt;<br>    &lt;/scene&gt;<br><br>    &lt;light name='point_light1' type='point'&gt;<br>      &lt;pose frame=''&gt;-3.0 -2.0 4.0 0 0 0&lt;/pose&gt;<br>    &lt;/light&gt;<br><br>    &lt;light name='point_light2' type='point'&gt;<br>      &lt;pose frame=''&gt;-3.0 2.0 4.0 0 0 0&lt;/pose&gt;<br>    &lt;/light&gt;<br><br>    &lt;light name='point_light3' type='directional'&gt;<br>      &lt;pose frame=''&gt;0 0 1.0 0 -1.57 0&lt;/pose&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br><br>    &lt;include&gt;<br>      &lt;uri&gt;model://ground_plane_sincolor&lt;/uri&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Pioneer2dx model --&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://turtlebotROS&lt;/uri&gt;<br>      &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Duck --&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://duck&lt;/uri&gt;<br>       &lt;pose&gt;4.7 3 0  1.57 0 1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Cereales --&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://cereales&lt;/uri&gt;<br>       &lt;pose&gt;5.3 2.3 0 0 0 0&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- Blocks --&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://blocks&lt;/uri&gt;<br>       &lt;pose&gt;4.66 -4 0 0 0 1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;!-- charactersMario --&gt;<br>    &lt;include&gt;<br>      &lt;uri&gt;model://charactersMario&lt;/uri&gt;<br>       &lt;pose&gt;4.1 0.5 0 0 0 -1.57&lt;/pose&gt;<br>    &lt;/include&gt;<br><br>    &lt;light type="directional" name="sun"&gt;<br>      &lt;cast_shadows&gt;1&lt;/cast_shadows&gt;<br>      &lt;pose&gt;0 0 10 0 0 0&lt;/pose&gt;<br>      &lt;diffuse&gt;0.8 0.8 0.8 1&lt;/diffuse&gt;<br>      &lt;specular&gt;0.2 0.2 0.2 1&lt;/specular&gt;<br>      &lt;direction&gt;-0.5 0.1 -0.9&lt;/direction&gt;<br>      &lt;visualize&gt;false&lt;/visualize&gt;<br>    &lt;/light&gt;<br><br>  &lt;/world&gt;<br>&lt;/sdf&gt;</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/Launchers/visualization/3d_reconstruction.config
+        </strong></p>
+        <p>
+            En este fichero, lo único que habría que realizar es un Ctrl+C Ctrl+V de 
+            cualquier fichero con el mismo formato de nombre que ya haya sido migrado a Gazebo 
+            Harmonic, ya que el contenido de todos los ficheros existentes en este directorio y 
+            de este formato son exactamente iguales.
+        </p>
+        <pre><code>CODE</code></pre>
+
+        <p><strong>
+            FICHERO RoboticsInfrastructure/database/universes.sql
+        </strong></p>
+        <p>
+            Este es uno de los cambios más sencillos de realizar en todo el proceso de migración.
+            Lo único que habría que hacer es identificar el ejercicio que se quiere migrar de 
+            Gazebo 11 a Gazebo Harmonic (en este caso, 3D Reconstruction) y cambiar el valor de
+            la columna <strong>type</strong> de <strong>gazebo</strong> a <strong>gz</strong>:
+        </p>
+        <pre><code># GAZEBO 11<br>1	3d Reconstruction	/opt/jderobot/Launchers/3d_reconstruction.launch.py	None	ROS2	gazebo	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+        <pre><code># GAZEBO HARMONIC<br>1	3d Reconstruction	/opt/jderobot/Launchers/3d_reconstruction.launch.py	{"gzsim":"/opt/jderobot/Launchers/visualization/3d_reconstruction.config"}	ROS2	gz	{0.0,0.0,0.0,0.0,0.0,0.0}</code></pre>
+
+        <p>
+            Una vez realizados todos estos cambios en todos los ficheros mencionados, 
+            he hecho commit y push en una nueva rama que he creado y publicado llamada 
+            <strong>3d-reconstruction-harmonic</strong>. Es importante hacer esto siempre para 
+            así evitar cualquier tipo de conflicto con la rama principal.
+        </p>
+
+        <p>
+            Como todos los cambios se han realizado en ficheros que se encuentran dentro de 
+            RoboticsInfrastructure, es obligatorio generar un nuevo RADI. Para ello, se deben 
+            ejecutar los siguientes comandos en la terminal:
+        </p>
+        <pre><code>cd scripts/RADI/</code></pre>
+        <pre><code>./build.sh -i 3d-reconstruction-harmonic</code></pre>
+        <p>
+            <strong>IMPORTANTE</strong>: Cada vez que se genera un nuevo RADI no se borra el 
+            anterior, por lo que el espacio disponible en disco se irá llenando y llenando 
+            cada vez que se genere un nuevo RADI hasta que no quede espacio disponible en disco.
+            Para evitar que esto ocurra, se debe ejecutar el siguiente comando en la terminal, 
+            el cual se encargará de borrar todo el espacio de memoria que se ha ido llenando por 
+            cada RADI generado:
+        </p>
+        <pre><code>docker system prune -af</code></pre>
+
+        <p>
+            Una vez finalizada la ejecución del script <strong>build.sh</strong>, se debe 
+            regresar al repositorio principal:
+        </p>
+        <pre><code>cd ../..</code></pre>
+
+        <p>
+            Pero antes de ejecutar el script <strong>develop_academy.sh</strong>, hay que 
+            modificar la siguiente línea del fichero 
+            <strong>RoboticsAcademy/compose_cfg/dev_humble_cpu.yaml</strong>:
+        </p>
+        <pre><code># ANTES<br>  robotics-academy:<br>    image: jderobot/robotics-academy:latest<br><br># DESPUÉS<br>  robotics-academy:<br>    image: jderobot/robotics-academy:test</code></pre>
+
+        <p>
+            Con este cambio ya realizado, ya se puede lanzar el script 
+            <strong>develop_academy.sh</strong>:
+        </p>
+        <pre><code>./scripts/develop_academy.sh</code></pre>
+
+        <p>
+            Y por último, sólo quedaría acceder a la dirección web `http://0.0.0.0:7164/` que 
+            aparece en la terminal al ejecutar el comando anterior para poder entrar a Unibotics 
+            en local y verificar que los cambios se han realizado correctamente.
+        </p>
+
+        <p>
+            A continuación se muestra cómo se ve el ejercicio <strong>3D Reconstruction</strong> 
+            al lanzar el Docker de RoboticsAcademy con todos estos cambios realizados:
+        </p>
+        <div style="place-items: center">
+            <img src="images/semana17/3d_reconstruction_image.png" alt="3D Reconstruction Image" class="screenshot">
+        </div>
+        <p>
+            Además, para verificar que tanto el escenario como el coche han sido migrados 
+            correctamente, se muestra una pequeña animación del coche moviéndose en línea 
+            recta para verificar que todo el proceso se ha realizado correctamente:
+        </p>
+        <video width="960" height="540" controls style="display: block; margin: 0 auto;" poster="images/semana17/3d_reconstruction_image.png">
+            <source src="videos/semana17/3d_reconstruction_video.mp4" type="video/mp4">
+        </video>
+
     </div>
 
     <!-- Entrada de blog (semana 18) -->
