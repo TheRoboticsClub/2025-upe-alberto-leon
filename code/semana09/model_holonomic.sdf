@@ -1,12 +1,12 @@
 <?xml version='1.0'?>
 <sdf version="1.9">
 <model name="f1_renault">
-  <pose>0 0 0 0 0 0</pose> 
+  <pose>0 0 0 0 0 0</pose>
   <static>false</static>
 
     <link name="f1">
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
+    	<pose>0 0 0 0 0 0</pose>
+	    <inertial>
         <mass>10</mass>
         <inertia>
           <ixx>1</ixx>
@@ -17,63 +17,83 @@
           <izz>1.0</izz>
         </inertia>
       </inertial>
+
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://f1_renault_laser_no_cam/Renault/Car.obj</uri>
+            <uri>model://f1_renault/Renault/Car.obj</uri>
             <scale>0.2 0.2 0.2</scale>
           </mesh>
         </geometry>
       </collision>
+
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://f1_renault_laser_no_cam/Renault/Car.obj</uri>
+            <uri>model://f1_renault/Renault/Car.obj</uri>
             <scale>0.2 0.2 0.2</scale>
           </mesh>
         </geometry>
       </visual>
-    </link>
 
-    <link name="camera_link"/>
+      <visual name='left_cam'>
+        <pose>0.45000 0.040000 0.1000000 0.000000 -0.000000 0.0000000</pose>
+        <geometry>
+          <sphere>
+            <radius>.005</radius>
+          </sphere>
+        </geometry>
+      </visual>
 
-    <link name="camera_rgb_frame">
-      <inertial>
-        <pose>0.0138 -0.0094 0.0214 0 0 0</pose>
-        <inertia>
-          <ixx>0.001</ixx>
-          <ixy>0.000</ixy>
-          <ixz>0.000</ixz>
-          <iyy>0.001</iyy>
-          <iyz>0.000</iyz>
-          <izz>0.001</izz>
-        </inertia>
-        <mass>0.035</mass>
-      </inertial>
-
-      <!-- OLD POSE -->
-      <!-- <pose>0.0138 -0.0094 0.0214 0 0 0</pose> -->
-
-      <!-- NEW POSE -->
-      <pose>0.45000 0.040000 0.1000000 0.000000 -0.000000 0.0000000</pose>
-
-      <sensor name="camera" type="camera">
-        <always_on>true</always_on>
-        <visualize>true</visualize>
-        <update_rate>30</update_rate>
-        <topic>/cam_f1_left/image_raw</topic>
-        <gz_frame_id>camera_rgb_frame</gz_frame_id>
-        <camera name="intel_realsense_r200">
-          <camera_info_topic>/cam_f1_left/camera_info</camera_info_topic>
-          <horizontal_fov>1.02974</horizontal_fov>
+      <!-- <sensor name='cam_f1_left' type='camera'>
+        <pose>0.45000 0.040000 0.1000000 0.000000 -0.000000 0.0000000</pose>
+        <update_rate>20.000000</update_rate>
+        <camera name='cleft'>
+          <horizontal_fov>1.570000</horizontal_fov>
           <image>
-            <width>1920</width>
-            <height>1080</height>
+            <width>640</width>
+            <height>480</height>
             <format>R8G8B8</format>
           </image>
           <clip>
-            <near>0.02</near>
-            <far>300</far>
+            <near>0.100000</near>
+            <far>15.000000</far>
+          </clip>
+        </camera>
+        <plugin name="camera_controller_left" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>F1ROS/cameraL</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_top_body_left</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor> -->
+
+      <sensor name="cam_f1_left" type="camera">
+        <pose>0.45000 0.040000 0.1000000 0.000000 -0.000000 0.0000000</pose>
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <update_rate>20.000000</update_rate>
+        <topic>/cam_f1_left/image_raw</topic>
+        <!-- <gz_frame_id>camera_rgb_frame</gz_frame_id> -->
+        <camera name="cleft">
+          <camera_info_topic>/cam_f1_left/camera_info</camera_info_topic>
+          <horizontal_fov>1.570000</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.100000</near>
+            <far>15.000000</far>
           </clip>
           <noise>
             <type>gaussian</type>
@@ -85,25 +105,16 @@
           </noise>
         </camera> 
       </sensor>
+
     </link>
 
-    <joint name="camera_joint" type="fixed">
-      <parent>f1</parent>
-      <child>camera_link</child>
-      <pose>0.0128 -0.013 0.0188 0 0 0</pose>
-      <axis>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>
-
-    <joint name="camera_rgb_joint" type="fixed">
-      <parent>camera_link</parent>
-      <child>camera_rgb_frame</child>
-      <pose>0.001 0.0036 0.0026 0 0 0</pose>
-      <axis>
-        <xyz>0 0 1</xyz>
-      </axis>
-    </joint>
+    <!-- <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>F1ROS/cmd_vel</commandTopic>
+      <odometryTopic>F1ROS/odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>xf1</robotBaseFrame>
+    </plugin> -->
 
     <plugin filename="gz-sim-velocity-control-system" name="gz::sim::systems::VelocityControl">
       <topic>/F1ROS/cmd_vel</topic>
