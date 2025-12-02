@@ -2633,7 +2633,7 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/turtlebot3/models/turtlebot3_waffle/model.sdf
+            FICHERO RoboticsInfrastructure/CustomRobots/3d_reconstruction/models/turtlebotROS/model.sdf
         </strong></p>
         <p>
             En este fichero se han modificado las partes correspondientes a las etiquetas
@@ -2652,30 +2652,30 @@
         </p>
 
         <p><strong>
-            FICHERO RoboticsInfrastructure/CustomRobots/turtlebot3/params/turtlebot3_waffle.yaml
+            FICHERO RoboticsInfrastructure/CustomRobots/3d_reconstruction/params/turtlebotROS.yaml
         </strong></p>
         <p>
             Este fichero se crea de cero en la ruta especificada, aunque se puede coger 
             cualquier fichero del tipo <strong>robot_params.yaml</strong> como referencia. 
             En este caso, se añaden los topics correspondientes a los plugins 
-            publicadores y subscriptores del DiffDrive (<strong>turtlebot3/odom</strong> y 
-            <strong>turtlebot3/cmd_vel</strong>), del sensor láser LIDAR
-            (<strong>turtlebot3/laser/scan</strong>) y de la cámara 
-            (<strong>turtlebot3/camera/camera_info</strong>):
+            publicadores y subscriptores del DiffDrive (<strong>/odom</strong> y 
+            <strong>/cmd_vel</strong>), del sensor láser LIDAR
+            (<strong>/scan</strong>) y de la cámara 
+            (<strong>/depth_camera/camera_info</strong>):
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># gz topic published by DiffDrive plugin<br>- ros_topic_name: "odom"<br>  gz_topic_name: "/odom"<br>  ros_type_name: "nav_msgs/msg/Odometry"<br>  gz_type_name: "gz.msgs.Odometry"<br>  direction: GZ_TO_ROS<br><br># gz topic subscribed to by DiffDrive plugin<br>- ros_topic_name: "cmd_vel"<br>  gz_topic_name: "/cmd_vel"<br>  ros_type_name: "geometry_msgs/msg/Twist"<br>  gz_type_name: "gz.msgs.Twist"<br>  direction: ROS_TO_GZ<br><br># gz topic published by Sensors plugin (LIDAR)<br>- ros_topic_name: "/scan"<br>  gz_topic_name: "/scan"<br>  ros_type_name: "sensor_msgs/msg/LaserScan"<br>  gz_type_name: "gz.msgs.LaserScan"<br>  direction: GZ_TO_ROS<br><br># gz topic published by Sensors plugin (Camera)<br>- ros_topic_name: "/depth_camera/camera_info"<br>  gz_topic_name: "/depth_camera/camera_info"<br>  ros_type_name: "sensor_msgs/msg/CameraInfo"<br>  gz_type_name: "gz.msgs.CameraInfo"<br>  direction: GZ_TO_ROS</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/CustomRobots/CMakeLists.txt
         </strong></p>
         <p>
-            En este caso, no es necesario realizar ninguna modificación, ya que todos los
-            ficheros que se acaban de crear (entre ellos el fichero 
-            <strong>turtlebot3_waffle.yaml</strong>), ya se tienen en cuenta a la hora de 
-            lanzar el Docker:
+            En este caso, la única modificación realizada en este fichero es la 
+            adición de la línea <strong>3d_reconstruction/params</strong> para que el 
+            fichero que se acaba de crear (<strong>turtlebotROS.yaml</strong>) 
+            se tenga en cuenta a la hora de lanzar el Docker:
         </p>
-        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # MARKER VISUAL LOC<br>    marker_visual_loc/models<br>    turtlebot3/models<br>    turtlebot3/urdf<br>    turtlebot3/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
-        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # MARKER VISUAL LOC<br>    marker_visual_loc/models<br>    turtlebot3/models<br>    turtlebot3/urdf<br>    turtlebot3/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO 11<br><br>install(<br>  DIRECTORY<br>    ...<br>    # 3D RECONSTRUCTION<br>    3d_reconstruction/models<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
+        <pre><code># GAZEBO HARMONIC<br><br>install(<br>  DIRECTORY<br>    ...<br>    # 3D RECONSTRUCTION<br>    3d_reconstruction/models<br>    3d_reconstruction/params<br>    ...<br>  DESTINATION share/${PROJECT_NAME})</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/follow_person/spawn_robot.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/follow_person_teleop/spawn_robot.launch.py
@@ -2686,9 +2686,9 @@
             <strong>spawn_robot.launch.py</strong>, habría que coger cualquier fichero con el 
             mismo nombre de otro ejercicio que ya esté migrado a Gazebo Harmonic y copiar su 
             contenido, y lo más importante, modificar el nombre del fichero que se le pasa como 
-            argumento a bridge_params (en este caso, <strong>turtlebot3_waffle.yaml</strong>):
+            argumento a bridge_params (en este caso, <strong>turtlebotROS.yaml</strong>):
         </p>
-        <pre><code>CODE</code></pre>
+        <pre><code># Copyright 2019 Open Source Robotics Foundation, Inc.<br>#<br># Licensed under the Apache License, Version 2.0 (the "License");<br># you may not use this file except in compliance with the License.<br># You may obtain a copy of the License at<br>#<br>#     http://www.apache.org/licenses/LICENSE-2.0<br>#<br># Unless required by applicable law or agreed to in writing, software<br># distributed under the License is distributed on an "AS IS" BASIS,<br># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br># See the License for the specific language governing permissions and<br># limitations under the License.<br><br>import os<br><br>from ament_index_python.packages import get_package_share_directory<br>from launch import LaunchDescription<br>from launch.actions import DeclareLaunchArgument<br>from launch.substitutions import LaunchConfiguration<br>from launch_ros.actions import Node<br><br><br>def generate_launch_description():<br>    # Get the urdf file<br>    model_folder = "turtlebotROS"<br>    urdf_path = os.path.join(<br>        get_package_share_directory("custom_robots"),<br>        "models",<br>        model_folder,<br>        "model.sdf",<br>    )<br><br>    # Launch configuration variables specific to simulation<br>    # x_pose = LaunchConfiguration('x_pose', default='1.0')<br>    # y_pose = LaunchConfiguration('y_pose', default='-1.5')<br>    # z_pose = LaunchConfiguration('z_pose', default='7.1')<br><br>    # Declare the launch arguments<br>    # declare_x_position_cmd = DeclareLaunchArgument(<br>    #     'x_pose', default_value='1.0',<br>    #     description='Specify namespace of the robot')<br><br>    # declare_y_position_cmd = DeclareLaunchArgument(<br>    #     'y_pose', default_value='-1.5',<br>    #     description='Specify namespace of the robot')<br><br>    # declare_z_position_cmd = DeclareLaunchArgument(<br>    #     'z_pose', default_value='7.1',<br>    #     description='Specify namespace of the robot')<br><br>    # start_gazebo_ros_spawner_cmd = Node(<br>    #     package='ros_gz_sim',<br>    #     executable='create',<br>    #     arguments=[<br>    #         '-name', 'waffle',<br>    #         '-file', urdf_path,<br>    #         '-x', x_pose,<br>    #         '-y', y_pose,<br>    #         '-z', z_pose<br>    #     ],<br>    #     output='screen',<br>    # )<br><br>    bridge_params = os.path.join(<br>        get_package_share_directory("custom_robots"), "params", "turtlebotROS.yaml"<br>    )<br><br>    start_gazebo_ros_bridge_cmd = Node(<br>        package="ros_gz_bridge",<br>        executable="parameter_bridge",<br>        arguments=[<br>            "--ros-args",<br>            "-p",<br>            f"config_file:={bridge_params}",<br>        ],<br>        output="screen",<br>    )<br><br>    start_gazebo_ros_image_bridge_cmd_left = Node(<br>        package="ros_gz_image",<br>        executable="image_bridge",<br>        arguments=["/cam_turtlebot_left/image_raw"],<br>        output="screen",<br>    )<br><br>    start_gazebo_ros_image_bridge_cmd_right = Node(<br>        package="ros_gz_image",<br>        executable="image_bridge",<br>        arguments=["/cam_turtlebot_right/image_raw"],<br>        output="screen",<br>    )<br><br>    # start_gazebo_ros_depth_bridge_cmd = Node(<br>    #     package="ros_gz_image",<br>    #     executable="image_bridge",<br>    #     arguments=["/turtlebot3/camera/depth"],<br>    #     output="screen",<br>    # )<br><br>    ld = LaunchDescription()<br><br>    # Declare the launch options<br>    # ld.add_action(declare_x_position_cmd)<br>    # ld.add_action(declare_y_position_cmd)<br>    # ld.add_action(declare_z_position_cmd)<br><br>    # Add any conditioned actions<br>    # ld.add_action(start_gazebo_ros_spawner_cmd)<br>    ld.add_action(start_gazebo_ros_bridge_cmd)<br>    ld.add_action(start_gazebo_ros_image_bridge_cmd_left)<br>    ld.add_action(start_gazebo_ros_image_bridge_cmd_right)<br>    # ld.add_action(start_gazebo_ros_image_bridge_cmd)<br>    # ld.add_action(start_gazebo_ros_depth_bridge_cmd)<br><br>    return ld</code></pre>
 
         <p><strong>
             FICHERO RoboticsInfrastructure/Launchers/follow_person.launch.py<br>FICHERO RoboticsInfrastructure/Launchers/follow_person_teleop.launch.py
@@ -2702,8 +2702,7 @@
             <strong>spawn_robot.launch.py</strong> y el fichero del mundo que utiliza este 
             ejercicio.
         </p>
-        <pre><code>CODE</code></pre>
-        <pre><code>CODE</code></pre>
+        <pre><code>import os<br><br>from ament_index_python.packages import get_package_share_directory<br><br>from launch import LaunchDescription<br>from launch.actions import (<br>    DeclareLaunchArgument,<br>    IncludeLaunchDescription,<br>    SetEnvironmentVariable,<br>    AppendEnvironmentVariable,<br>)<br>from launch.launch_description_sources import PythonLaunchDescriptionSource<br>from launch.substitutions import LaunchConfiguration, Command<br>from launch_ros.actions import Node<br>from launch.substitutions import LaunchConfiguration<br>from launch_ros.actions import Node<br><br><br>def generate_launch_description():<br><br>    x = LaunchConfiguration("x")<br>    y = LaunchConfiguration("y")<br>    z = LaunchConfiguration("z")<br>    roll = LaunchConfiguration("R")<br>    pitch = LaunchConfiguration("P")<br>    yaw = LaunchConfiguration("Y")<br><br>    package_dir = get_package_share_directory("custom_robots")<br>    ros_gz_sim = get_package_share_directory("ros_gz_sim")<br><br>    gazebo_models_path = os.path.join(package_dir, "models")<br><br>    # FICHERO RoboticsInfrastructure/Launchers/follow_person.launch.py<br>    robot_launch_dir = "/opt/jderobot/Launchers/follow_person"<br><br>    # FICHERO RoboticsInfrastructure/Launchers/follow_person_teleop.launch.py<br>    robot_launch_dir = "/opt/jderobot/Launchers/follow_person_teleop"<br><br>    use_sim_time = LaunchConfiguration("use_sim_time", default="true")<br>    x_pose = LaunchConfiguration("x_pose", default="1.0")<br>    y_pose = LaunchConfiguration("y_pose", default="-1.5")<br>    z_pose = LaunchConfiguration("z_pose", default="7.1")<br><br>    # FICHERO RoboticsInfrastructure/Launchers/follow_person.launch.py<br>    world_file_name = "hospital_follow_person.world"<br><br>    # FICHERO RoboticsInfrastructure/Launchers/follow_person_teleop.launch.py<br>    world_file_name = "hospital_follow_person_teleop.world"<br><br>    worlds_dir = "/opt/jderobot/Worlds"<br>    world_path = os.path.join(worlds_dir, world_file_name)<br><br>    gazebo_server = IncludeLaunchDescription(<br>        PythonLaunchDescriptionSource(<br>            os.path.join(ros_gz_sim, "launch", "gz_sim.launch.py")<br>        ),<br>        launch_arguments={<br>            "gz_args": ["-r -s -v4 ", world_path],<br>            "on_exit_shutdown": "true",<br>        }.items(),<br>    )<br><br>    declare_x_cmd = DeclareLaunchArgument("x", default_value="1.0")<br><br>    declare_y_cmd = DeclareLaunchArgument("y", default_value="-1.5")<br><br>    declare_z_cmd = DeclareLaunchArgument("z", default_value="7.1")<br><br>    declare_roll_cmd = DeclareLaunchArgument("R", default_value="0.0")<br><br>    declare_pitch_cmd = DeclareLaunchArgument("P", default_value="0.0")<br><br>    declare_yaw_cmd = DeclareLaunchArgument("Y", default_value="1.57079")<br><br>    # robot_state_publisher_cmd = IncludeLaunchDescription(<br>    #     PythonLaunchDescriptionSource(<br>    #         os.path.join(robot_launch_dir, "robot_state_publisher.launch.py")<br>    #     ),<br>    #     launch_arguments={"use_sim_time": use_sim_time}.items(),<br>    # )<br><br>    spawn_robot_cmd = IncludeLaunchDescription(<br>        PythonLaunchDescriptionSource(<br>            os.path.join(robot_launch_dir, "spawn_robot.launch.py")<br>        ),<br>        launch_arguments={"x_pose": x_pose, "y_pose": y_pose, "z_pose": z_pose}.items(),<br>    )<br><br>    world_entity_cmd = Node(<br>        package="ros_gz_sim",<br>        executable="create",<br>        arguments=["-name", "world", "-file", world_path],<br>        output="screen",<br>    )<br><br>    ld = LaunchDescription()<br><br>    ld.add_action(SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", gazebo_models_path))<br>    set_env_vars_resources = AppendEnvironmentVariable(<br>        "GZ_SIM_RESOURCE_PATH", os.path.join(package_dir, "models")<br>    )<br>    ld.add_action(set_env_vars_resources)<br>    ld.add_action(gazebo_server)<br>    # ld.add_action(gazebo_client)<br>    ld.add_action(declare_x_cmd)<br>    ld.add_action(declare_y_cmd)<br>    ld.add_action(declare_z_cmd)<br>    ld.add_action(declare_roll_cmd)<br>    ld.add_action(declare_pitch_cmd)<br>    ld.add_action(declare_yaw_cmd)<br>    ld.add_action(world_entity_cmd)<br>    # ld.add_action(robot_state_publisher_cmd)<br>    ld.add_action(spawn_robot_cmd)<br><br>    return ld</code></pre>
         <p>
             <strong>NOTA</strong>: En caso de que no se haya creado dentro de los directorios 
             <strong>follow_person/</strong> y <strong>follow_person_teleop/</strong> el fichero 
@@ -2721,8 +2720,6 @@
             todos aquellos flags &lt;include&gt; de la versión antigua por aquellos que 
             aparezcan en la versión nueva.
         </p>
-        <pre><code>CODE</code></pre>
-        <pre><code>CODE</code></pre>
         <p>
             <strong>NOTA</strong>: Dada la gran extensión en cuanto a líneas se refiere 
             de estos ficheros, adjunto a continuación un enlace a dichos ficheros en el que se 
@@ -2749,7 +2746,7 @@
         </strong></p>
         <p>
             En este fichero, habría que identificar el ejercicio que se quiere migrar de 
-            Gazebo 11 a Gazebo Harmonic (en este caso, <exercise_name>) y cambiar
+            Gazebo 11 a Gazebo Harmonic (en este caso, Follow Person) y cambiar
             el valor de la columna <strong>type</strong> de <strong>gazebo</strong> a 
             <strong>gz</strong>:
         </p>
